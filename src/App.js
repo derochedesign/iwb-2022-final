@@ -1,5 +1,6 @@
 import 'main.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import All from 'sections/All';
 
 function App() {
   
@@ -8,8 +9,20 @@ function App() {
     height: window.innerHeight,
     width: document.body.clientWidth
   });
-  console.log(dimensions);
+
   
+  //scroll stuff
+  const [offY, setOffY] = useState(0);
+  const handleScroll = () => setOffY(window.pageYOffset);
+  
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, {passive:true});
+    
+    return () => window.removeEventListener("scroll", handleScroll);
+  },[]);
+  
+  
+  //resize + set dimensions
   useEffect(() => {
     let timeoutId = null;
     const handleResize = () => {
@@ -32,9 +45,8 @@ function App() {
   },[]);
   
   return (
-    <div className="App">
-      <main>
-      </main>
+    <div className='App'>
+      <All />
     </div>
   );
 }
