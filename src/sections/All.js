@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { WorldMap } from "components/WorldMap";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import { MarkerIcon, ProjectOneIcon } from "components/Icons";
-import DisasterCard from "components/DisasterCard";
-import { disasters } from "data/disastersCopy";
 import Landing from "./Landing";
 import SideProgress from "components/SideProgress";
+import { mainCopy } from "data/mainCopy";
+import MainSequence from "./MainSequence";
 
 const All = props => {
   
-  const ref = useRef(null);
+  const mapRef = useRef(null);
   const introRef = useRef(null);
   
   const titles = [
@@ -21,19 +21,43 @@ const All = props => {
     "resilient communities",
     "people"
   ];
-  const [currPos, setCurrPos] = useState(0);
-  const scrollDist = 1000;
+  const [currIntroPos, setIntroCurrPos] = useState(0);
+  const [sectionsPos, setSectionsPos] = useState([]);
   
-  const handleScroll = prog => {
+  const scrollDistIntro = 1500;
+  const scrollDistMain = 3000;
+  const [currMainPos, setMainCurrPos] = useState(0);
+  const [mainSeqStart, setMainSeqStart] = useState(false);
+  
+  const handleIntroScroll = prog => {
     const breaks = 1 / titles.length;
     
     titles.forEach((t, i) => {
       if (prog > i*breaks && prog < (i+1)*breaks) {
-        setCurrPos(i);
+        setIntroCurrPos(i);
         return;
       }
     })
   }
+  
+  const handleScroll = prog => {
+    setMainCurrPos(Math.round(prog*100));
+  }
+  
+  const scrollTo = val => {
+    window.scrollTo(0, val);
+  };
+  
+  const getScrollTop = ref => {
+    return ref.current.getBoundingClientRect().top;
+  }
+  
+  useEffect(() => {
+    let _sPos = [0];
+    _sPos.push(getScrollTop(introRef), getScrollTop(mapRef));
+    console.log(_sPos);
+    setSectionsPos(_sPos);
+  }, [props.screenDimensions, mapRef, introRef]);
   
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -43,12 +67,15 @@ const All = props => {
       const tl = gsap.timeline({
         delay: 1,
         scrollTrigger: {
-          trigger: ref.current,
+          trigger: mapRef.current,
           start: "center 50%",
-          end: () => "+=800",
+          end: () => `+=${scrollDistMain}`,
           pin: true,
           scrub: true,
-          markers: true
+          markers: true,
+          onUpdate: (e) => handleScroll(e.progress),
+          onEnter: () => setMainSeqStart(true),
+          onLeaveBack: () => setMainSeqStart(false)
         }
       });
       return tl;
@@ -59,11 +86,11 @@ const All = props => {
         scrollTrigger: {
           trigger: introRef.current,
           start: "top top",
-          end: () => `+=${scrollDist}`,
+          end: () => `+=${scrollDistIntro}`,
           pin: true,
           scrub: true,
           markers: false,
-          onUpdate: (e) => handleScroll(e.progress)
+          onUpdate: (e) => handleIntroScroll(e.progress)
         }
       });
       return tl;
@@ -78,13 +105,12 @@ const All = props => {
   
   return (
     <>
-      <SideProgress />
-      <Landing secRef={introRef} titles={titles} currPos={currPos}/>
-      <div className="map" ref={ref}>
-        <WorldMap />
+      <SideProgress sectionsPos={sectionsPos} scrollTo={scrollTo}/>
+      <Landing secRef={introRef} titles={titles} currPos={currIntroPos}/>
+      <div className="map" ref={mapRef}>
+        <MainSequence currPos={currMainPos} mainSeqStart={mainSeqStart} scrollDist={scrollDistMain}/>
       </div>
       <h2>testing</h2>
-      <DisasterCard data={disasters[0]} />
       <MarkerIcon />
     </>
   )

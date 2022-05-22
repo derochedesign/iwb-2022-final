@@ -6,7 +6,7 @@
   --colour-purple: #5514ac;
   --colour-purple-dark: #3f0b85;
   --colour-orange: #f65e31;
-  --colour-darkgrey: #262626;
+  --colour-darkgrey: #313131;
   --colour-grey: #5C5C5C;
   --colour-lightgrey: grey;
   
@@ -41,12 +41,10 @@
   --real-vh: 100vh;
   
   /* z-index */
-  --z-survey: 9999;
-  --z-topbar: 100;
-  --z-menu: 107;
+  --z-map-active: 104;
+  --z-map-inactive: -1;
   --z-sidebar: 101;
   --z-propop: 106;
-  --z-grain: 105;
 }
 
 * {
@@ -78,6 +76,9 @@ p {
 
 h1 {
   font: var(--med) 2.5em/1.1 var(--heading);
+}
+h1.hero {
+  font-size: 3.3em;
 }
 h1 span.i {
   font-style: italic;
@@ -136,9 +137,12 @@ main {
   height: var(--real-vh);
 }
 body {
-  height: 400vh;
   overflow-x: hidden;
   background-color: var(--colour-black);
+  scroll-behavior: smooth;
+}
+html {
+  scroll-behavior: smooth;
 }
 body.modal-active {
   overflow-y: hidden;
@@ -147,16 +151,29 @@ section {
   min-height: var(--real-vh);
 }
 
+svg {
+  width: 2em;
+  fill: var(--colour-text);
+}
+
+/* ________________SECTIONS__________________ */
+
 section.center-title {
-  text-align: center;
+  display: grid;
+  align-items: center;
+}
+section.center-title.center {
   display: grid;
   align-items: center;
   justify-items: center;
 }
-
-svg {
-  width: 2em;
-  fill: var(--colour-text);
+section.center-title .center-title-inner {
+  padding-left: var(--padding-large);
+  padding-right: var(--padding-large);
+}
+section.center-title .center-title-inner.large {
+  padding-left: calc(var(--padding-large) * 2);
+  padding-right: calc(var(--padding-large) * 2);
 }
 
 /* ________________SIDENAV__________________ */
@@ -198,7 +215,9 @@ nav.side-progress .nav-node[data-current="true"] {
   opacity: 1;
 }
 
-nav.side-progress .nav-node:hover label {
+nav.side-progress .nav-node:hover label,
+nav.side-progress .nav-node label[data-active="true"]
+{
   opacity: 1;
 }
 nav.side-progress .nav-node:hover {
@@ -350,14 +369,28 @@ section.team .team-set .team-card .title {
 
 /* ________________CARD__________________ */
 
+/* disaster */
+
 .card {
-  background-color: red;
   display: grid;
   grid-template-rows: 16em max-content auto;
   max-width: 23em;
+  min-width: 16em;
   border-radius: var(--corner-normal);
   overflow: hidden;
+  position: fixed;
+  z-index: 1000;
+  justify-items: left;
+  text-align: left;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
+.card[data-active="true"] {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .card .hero-image {
   width: 100%;
   height: 100%;
@@ -372,6 +405,7 @@ section.team .team-set .team-card .title {
 .card .header-bar,
 .card .body {
   padding: calc(var(--inner-padding) / 1.6);
+  width: 100%;
 }
 
 .card .header-bar {
@@ -443,18 +477,48 @@ section.team .team-set .team-card .title {
 
 .map {
   width: 100%;
-  padding: var(--padding-large);
-  /* position: absolute; */
-  z-index: -1;
+  position: relative;
 }
 
-.map svg {
+
+.map .actual-map {
   width: 100%;
+  position: absolute;
+  z-index: var(--z-map-inactive);
+  left: calc(var(--padding-large) * -1);
+}
+
+.map .actual-map[data-active="true"] {
+  z-index: var(--z-map-active);
+}
+
+.map .map-inner {
+  position: relative;
+}
+
+.map .marker {
+  width: 2em;
+  position: absolute;
+  transform: translateX(-45%) translateY(-120%);
+  z-index: calc(var(--z-map-active) + 1);
+}
+
+.map .marker:hover svg {
+  fill: var(--colour-white);
   
 }
+.map .marker[data-active="true"] > svg {
+  transform: scale(1);
+}
+.map .marker > svg {
+  fill: var(--colour-lightgrey);
+  transition: transform 0.5s ease;
+  transform: scale(0);
+}
 
-.main-fill {
-  fill: var(--colour-grey);
+.map .actual-map svg {
+  width: 100%;
+  fill: var(--colour-darkgrey);
 }
 
 
@@ -471,4 +535,31 @@ section.team .team-set .team-card .title {
     text-decoration: underline;
     background-color: rgba(210,100,170,0.4);
   }
+}
+
+/* ________________RESP__________________ */
+
+@media screen and (max-width: 40em) {
+
+  :root {
+    --padding-large: 1.5em;
+  }
+  h1.hero {
+    font-size: 2.5em;
+  }
+  h2 {
+    font-size: 1.8em;
+  }
+  h3 {
+    font-size: 1.3em;
+  }
+  
+  section.center-title.center {
+    text-align: left;
+  }
+  
+  nav.side-progress {
+    right: calc(var(--padding) / 2);
+  }
+  
 }

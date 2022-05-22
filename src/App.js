@@ -12,14 +12,14 @@ function App() {
 
   
   //scroll stuff
-  const [offY, setOffY] = useState(0);
-  const handleScroll = () => setOffY(window.pageYOffset);
+  // const [offY, setOffY] = useState(0);
+  // const handleScroll = () => setOffY(window.pageYOffset);
   
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, {passive:true});
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll, {passive:true});
     
-    return () => window.removeEventListener("scroll", handleScroll);
-  },[]);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // },[]);
   
   
   //resize + set dimensions
@@ -46,7 +46,7 @@ function App() {
   
   return (
     <div className='App'>
-      <All />
+      <All screenDimension={dimensions} />
     </div>
   );
 }

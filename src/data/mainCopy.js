@@ -1,9 +1,11 @@
 export const mainCopy = {
   introduction:{
     title:"Wherever you are in the world, you are a part of the story of climate change.",
-    bodyOne:"Since the 19th century we’ve recorded changes in temperature patterns and lost various species subsequently. With the persistence of this problem, even more species of the planet are going to be affected in more severe ways; currently and moving forward, the target is us - the people.",
-    bodyTwo:"Recently, the planet has been exhibiting more frequent forms of natural disasters, transforming the homes of billions into unlivable spaces and forcing communities into environmental migration.",
-    bodyThree:"With the impending influx of people that major cities are going to experience, now, more than ever, we need to start redesigning our cities to be more climate-ready. Climate readiness is not just about creating infrastructure to fend off disasters but also learning to adapt for the fair and equitable inclusion of the incoming climate migrants (or climate refugees) into our communities."
+    body:[
+      "Since the 19th century we’ve recorded changes in temperature patterns and lost various species subsequently. With the persistence of this problem, even more species of the planet are going to be affected in more severe ways; currently and moving forward, the target is us - the people.",
+      "Recently, the planet has been exhibiting more frequent forms of natural disasters, transforming the homes of billions into unlivable spaces and forcing communities into environmental migration.",
+      "With the impending influx of people that major cities are going to experience, now, more than ever, we need to start redesigning our cities to be more climate-ready. Climate readiness is not just about creating infrastructure to fend off disasters but also learning to adapt for the fair and equitable inclusion of the incoming climate migrants (or climate refugees) into our communities."
+    ]
   },
   mapOne:{
     helper:null,

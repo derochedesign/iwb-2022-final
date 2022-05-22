@@ -1,6 +1,15 @@
+import { useEffect, useState } from "react";
+
 const DisasterCard = props => {
+  
+  const [anim, setAnim] = useState(false);
+  
+  useEffect(() => {
+    setAnim(true);
+  }, []);
+  
   return (
-    <div className="card">
+    <div className="card" data-active={anim}>
       <div className="hero-image">
         <img src={`/images/disasters/${props.data.id}/image.jpg`} alt={props.data.title} />
       </div>
