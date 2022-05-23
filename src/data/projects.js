@@ -5,7 +5,7 @@ export const projects = [
     sub:"People Who Build",
     hero:"It's the people who build.",
     location:"Mexico City, Mexico",
-    regionId:104,
+    regionId:"MX",
     body:"Get Up & Grow is a social enterprise based in Mexico City that employs internally displaced rural to urban migrants to act as gardeners and consultants for green development in urban areas. We leverage the agricultural skills and experiences of agricultural workers to provide secure, dignified jobs to newcomers and ensure sustainable urban development. We maintain best practices of regenerative agricultural and spatial planning to ensure municipal compliance and strategic partnerships. We work with private and community clients to ensure that co-design standards are met and client satisfaction is guaranteed.",
     stats:[
       {

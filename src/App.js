@@ -1,6 +1,7 @@
 import 'main.css';
 import { useEffect, useRef, useState } from 'react';
 import All from 'sections/All';
+import Cursor from 'components/Cursor';
 
 function App() {
   
@@ -9,18 +10,6 @@ function App() {
     height: window.innerHeight,
     width: document.body.clientWidth
   });
-
-  
-  //scroll stuff
-  // const [offY, setOffY] = useState(0);
-  // const handleScroll = () => setOffY(window.pageYOffset);
-  
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll, {passive:true});
-    
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // },[]);
-  
   
   //resize + set dimensions
   useEffect(() => {
@@ -46,6 +35,7 @@ function App() {
   
   return (
     <div className='App'>
+      <Cursor dimensions={dimensions} />
       <All screenDimension={dimensions} />
     </div>
   );

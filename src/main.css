@@ -3,9 +3,11 @@
 :root {
   --colour-black: black;
   --colour-white: white;
-  --colour-purple: #5514ac;
-  --colour-purple-dark: #3f0b85;
+  --colour-purple: #B6A7FF;
   --colour-orange: #f65e31;
+  --colour-yellow: #FFCB73;
+  --colour-blue-light: #51F4F4;
+  --colour-blue-dark: #5157F4;
   --colour-darkgrey: #313131;
   --colour-grey: #5C5C5C;
   --colour-lightgrey: grey;
@@ -41,10 +43,13 @@
   --real-vh: 100vh;
   
   /* z-index */
-  --z-map-active: 104;
+  
   --z-map-inactive: -1;
   --z-sidebar: 101;
-  --z-propop: 106;
+  --z-map-active: 104;
+  --z-info: 106;
+  --z-propop: 107;
+  --z-cursor: 1000;
 }
 
 * {
@@ -79,6 +84,7 @@ h1 {
 }
 h1.hero {
   font-size: 3.3em;
+  display: inline-block;
 }
 h1 span.i {
   font-style: italic;
@@ -98,10 +104,10 @@ h4 {
   font: var(--regular) 1.3em/var(--linespace) var(--subheading);
 }
 h5 {
-  font: var(--regular) 1.2em/var(--linespace) var(--subheading);
+  font: var(--regular) 1em/var(--linespace) var(--subheading);
 }
 h6 {
-  font: var(--med) 1.1em/var(--linespace) var(--subheading);
+  font: var(--med) 1em/var(--linespace) var(--subheading);
 }
 h6.explainer {
   font-size: 0.9em;
@@ -113,6 +119,10 @@ h6.explainer {
 
 h1,h2,h3,h4,h5,h6,p,span,a {
   color: var(--colour-text);
+}
+
+h1,h2,h3,h4,h5,h6,p,span,a {
+  /* cursor: text; */
 }
 
 h1.highlight,
@@ -140,6 +150,7 @@ body {
   overflow-x: hidden;
   background-color: var(--colour-black);
   scroll-behavior: smooth;
+  cursor: none;
 }
 html {
   scroll-behavior: smooth;
@@ -154,6 +165,16 @@ section {
 svg {
   width: 2em;
   fill: var(--colour-text);
+}
+
+.no-interact {
+  pointer-events: none;
+}
+
+.info-disp {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 /* ________________SECTIONS__________________ */
@@ -262,6 +283,70 @@ a {
 a.text {
   text-decoration: underline;
 }
+
+/* ________________CURSOR__________________ */
+
+.cursor-area {
+  position: fixed;
+  width: 100vw;
+  z-index: var(--z-cursor);
+  height: var(--real-vh);
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+.cursor {
+  position: absolute;
+  z-index: var(--z-cursor);
+  width: 1.6em;
+  height: 1.6em;
+  opacity: 0.6;
+  background-color: transparent;
+  border: 1.5px solid var(--colour-white);
+  border-radius: var(--round);
+  pointer-events: none;
+  transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, border-color 0.3s ease, background-color 0.3s cubic-bezier(0.64, 0, 0.78, 0);
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+.cursor::after {
+  content: "";
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: var(--round);
+  background-color: var(--colour-white);
+  position: absolute;
+  transition: 0.3s ease;
+}
+
+.cursor[data-pointer="true"],
+.cursor[data-text="true"],
+.cursor[data-hover="true"] {
+  opacity: 1;
+}
+.cursor[data-pointer="true"]::after {
+  width: 100%;
+  height: 100%;
+}
+
+.cursor[data-text="true"] {
+  border-color: transparent;
+}
+.cursor[data-text="true"]::after {
+  width: 0.2em;
+  height: 2em;
+  border-radius: var(--corner-small);
+  border: 1px solid black;
+}
+
+.cursor[data-hover="true"]::after {
+  content: "?";
+  font-weight: 800;
+  background-color: transparent;
+  line-height: 1;
+}
+
 
 /* ________________TEAM__________________ */
 
@@ -480,16 +565,29 @@ section.team .team-set .team-card .title {
   position: relative;
 }
 
+.map .actual-map-outer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
 
 .map .actual-map {
   width: 100%;
+  height: 100%;
   position: absolute;
   z-index: var(--z-map-inactive);
   left: calc(var(--padding-large) * -1);
+  transition: transform 1s ease;
+  display: grid;
+  align-items: center;
 }
 
 .map .actual-map[data-active="true"] {
   z-index: var(--z-map-active);
+}
+
+.map .actual-map[data-zoom="true"] {
+  /* transform: scale(1.5) translateX(-15%); */
 }
 
 .map .map-inner {
@@ -501,6 +599,14 @@ section.team .team-set .team-card .title {
   position: absolute;
   transform: translateX(-45%) translateY(-120%);
   z-index: calc(var(--z-map-active) + 1);
+}
+.map .marker svg path {
+  pointer-events: none;
+}
+
+.map .marker,
+.map .actual-map svg path[data-active="true"] {
+  /* cursor: help; */
 }
 
 .map .marker:hover svg {
@@ -519,6 +625,19 @@ section.team .team-set .team-card .title {
 .map .actual-map svg {
   width: 100%;
   fill: var(--colour-darkgrey);
+}
+.map .actual-map svg path {
+  transition: fill 0.6s ease;
+}
+
+.map-bottom-text {
+  position: absolute;
+  bottom: var(--padding-large);
+  width: 100%;
+  max-width: 60em;
+  padding-left: var(--padding-large);
+  padding-right: var(--padding-large);
+  z-index: var(--z-info);
 }
 
 

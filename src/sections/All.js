@@ -25,7 +25,7 @@ const All = props => {
   const [sectionsPos, setSectionsPos] = useState([]);
   
   const scrollDistIntro = 1500;
-  const scrollDistMain = 3000;
+  const scrollDistMain = 4000;
   const [currMainPos, setMainCurrPos] = useState(0);
   const [mainSeqStart, setMainSeqStart] = useState(false);
   
@@ -55,9 +55,16 @@ const All = props => {
   useEffect(() => {
     let _sPos = [0];
     _sPos.push(getScrollTop(introRef), getScrollTop(mapRef));
-    console.log(_sPos);
     setSectionsPos(_sPos);
-  }, [props.screenDimensions, mapRef, introRef]);
+    
+    //there must be a better way
+    setTimeout(() => {
+      let _sPos = [0];
+      _sPos.push(getScrollTop(introRef), getScrollTop(mapRef));
+      setSectionsPos(_sPos);
+    }, 500);
+    
+  }, [props.screenDimension]);
   
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -72,7 +79,7 @@ const All = props => {
           end: () => `+=${scrollDistMain}`,
           pin: true,
           scrub: true,
-          markers: true,
+          markers: false,
           onUpdate: (e) => handleScroll(e.progress),
           onEnter: () => setMainSeqStart(true),
           onLeaveBack: () => setMainSeqStart(false)

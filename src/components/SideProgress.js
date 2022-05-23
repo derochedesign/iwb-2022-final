@@ -53,11 +53,11 @@ const SideProgress = props => {
     <nav aria-label="secondary" className="side-progress">
       {
         sections.map((s, i) => 
-            <div key={i} className="nav-node" data-current={currSection === i} onClick={() => handleNavigate(i)}>
+            <div key={i} className="nav-node" data-pointer data-current={currSection === i} onClick={() => handleNavigate(i)}>
               {(i === 0) ?
                 <HomeIcon />
               :
-                <div className="node"/>
+                <div className="node" data-pointer/>
               }
               <label data-active={(currSection === i) ? switchedSection : false}>{s}</label>
             </div>

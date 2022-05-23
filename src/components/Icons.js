@@ -4,7 +4,7 @@ export const HomeIcon = _ => (
   </svg>
 );
 export const MarkerIcon = props => (
-  <svg viewBox="0 0 25 30" xmlns="http://www.w3.org/2000/svg">
+  <svg data-hover={props.hover} data-pointer={props.pointer} viewBox="0 0 25 30" xmlns="http://www.w3.org/2000/svg">
     <path d="M4.48542 20.7627C-0.20087 16.0765 -0.20087 8.47848 4.48542 3.79218C9.17171 -0.894107 16.7697 -0.894107 21.456 3.79218C26.1423 8.47848 26.1423 16.0765 21.456 20.7627L12.9707 29.248L4.48542 20.7627Z"/>
   </svg>
 )

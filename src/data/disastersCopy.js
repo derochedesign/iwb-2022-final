@@ -16,5 +16,14 @@ export const disasters = [
     quote:"The results of sea level rise and increasing storm surge threaten the very existence and livelihoods of large segments of the population.",
     displaced:"Entire Island Nation",
     regionId:"FJ"
+  },
+  {
+    id:203,
+    title:"Title Here",
+    location:"Russia",
+    year:"2030",
+    quote:"The results of sea level rise and increasing storm surge threaten the very existence and livelihoods of large segments of the population.",
+    displaced:"Quebec",
+    regionId:"RU"
   }
 ]
