@@ -11,18 +11,28 @@ const DisasterCard = props => {
   
   useEffect(() => {
     
-    if (cardRef.current.offsetWidth + props.left > props.dimensions.width - leftOffsetAllowed) {
-      setLeft(prev => prev - (cardRef.current.offsetWidth / 2));
-    }
-    
-    if (cardRef.current.offsetHeight + props.top > props.dimensions.height - topOffsetAllowed) {
-      setTop(props.dimensions.height/2 - cardRef.current.offsetHeight/2);
-    }
+    definePosition();
     
   }, [props.dimensions, cardRef]);
   
+  const definePosition = () => {
+    console.log("ref", cardRef.current);
+    console.log("ref offWidth", cardRef.current.offsetWidth);
+    console.log("dim width", props.dimensions.width);
+    console.log("left", props.left);
+    
+    if (cardRef.current.offsetWidth + props.left > props.dimensions.width - leftOffsetAllowed) {
+      console.log("inside setLeft");
+      setLeft(prev => prev - (cardRef.current.offsetWidth / 2));
+    }
+    if (cardRef.current.offsetHeight + props.top > props.dimensions.height - topOffsetAllowed) {
+      setTop(props.dimensions.height/2 - cardRef.current.offsetHeight/2);
+    }
+  }
+  
   useEffect(() => {
     setAnim(true);
+    definePosition();
   }, []);
   
   return (
