@@ -21,7 +21,7 @@ export const mainCopy = {
     {
       helper:"Hover over the map to learn more.",
       top:"These are only some of the counrtries of the majority that are being affected - merely a model to showcase what some of the biggest countries of the world are already facing. It will only get worse from here - if we don’t do something now, it will be too late.",
-      bottom:"Climate change's effects aren't immediately evident right away. Everything that happens around the world as a result of climate change has a direct or indirect impact on everyone in the ecosystem, including us humans.",
+      bottom:"The process of moving across borders for environmental struggles is extremely tough - There is no legal process to claim a visa based on Climate change. Yet, climate change will affect all of us. Some more than others, but over time, we will all be impacted.",
       postTitle:{
         text: "It’s the people",
         bold: "that need to take risk"
@@ -32,8 +32,11 @@ export const mainCopy = {
       helper:"Hover your cursor over the map to see where migrants are going.",
       top:null,
       bottom:"Millions of migrants are on the move year-round. External climate displacements are often overlooked when monitoring the movement of people across countries.",
-      postTitle:null,
-      postBody: null
+      postTitle:{
+        text: "",
+        bold: ""
+      },
+      postBody: ""
     },
   ],
   principles:{

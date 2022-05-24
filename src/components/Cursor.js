@@ -13,7 +13,9 @@ const Cursor = (props) => {
       let offsetY = cursorRef.current.offsetHeight / 2 + 10;
       cursorRef.current.style.transform = `translate3d(${cursorX-offsetX}px,${cursorY-offsetY}px,0)`;
       
-      if (e.target.dataset.text) {
+      let isText = !!(["H1","H2","H3","H4","H5","H6","P","SPAN"].find(t => t === e.target.tagName));
+      
+      if (e.target.dataset.text || isText) {
         cursorRef.current.dataset.text=true;
       }
       else if (e.target.dataset.pointer) {
@@ -27,7 +29,6 @@ const Cursor = (props) => {
         cursorRef.current.dataset.text=false;
         cursorRef.current.dataset.hover=false;
       }
-      
     }
 
     window.addEventListener('mousemove', handleCursor, {passive: true});

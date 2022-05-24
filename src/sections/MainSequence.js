@@ -6,8 +6,9 @@ import { disasters } from "data/disastersCopy";
 import DisasterCard from "components/DisasterCard";
 import { keyAffected } from "data/keyAffected";
 import { migrations } from "data/migrations";
+import ConnectionCard from "components/ConnectionCard";
 
-const MainSequence = ({currPos, mainSeqStart, scrollDist}) => {
+const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
   
   const getRelative = val => {
     //get percentage relative to overall scroll distance
@@ -51,19 +52,21 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist}) => {
   
   const [countryCode, setCountry] = useState("");
   const [lockMap, setLockMap] = useState(true);
+  const [hoverPos, setHoverPos] = useState({x:null, y:null});
   
   //map specific data
   const [currDisaster, setCurrDisaster] = useState();
   const [currIDP, setCurrIDP] = useState();
+  const [currConnection, setCurrConnection] = useState();
   const mapPreLit = [
-    disasters.map(d => d.regionId),
-    keyAffected.map(k => k.regionId),
-    migrations.map(m => m.regionId)
+    disasters.map((d,i) => ({regionId:d.regionId, id:i})),
+    keyAffected.map((k,i) => ({regionId:k.regionId, id:i})),
+    migrations.map((m,i) => ({regionId:m.regionId, id:i}))
   ]
   const mapColours = [
     {
       main: "var(--colour-orange)",
-      hover: "var(--colour-white)"
+      hover: "var(--colour-orange)"
     },
     {
       main: "var(--colour-yellow)",
@@ -104,12 +107,16 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist}) => {
   
   useEffect(() => {
     if (currMap === 0) {
-      let _currDisaster = disasters.find(d => d.regionId === countryCode);
+      let _currDisaster = disasters.find(d => (d.id === (countryCode.id && (201+Number(countryCode.id)))));
       setCurrDisaster(_currDisaster);
     }
     else if (currMap === 1) {
-      let _currIDP = keyAffected.find(k => k.regionId === countryCode);
+      let _currIDP = keyAffected.find(k => k.regionId === countryCode.regionId);
       setCurrIDP(_currIDP);
+    }
+    else if (currMap === 2) {
+      let _currConnection = migrations.find(m => m.regionId === countryCode.regionId);
+      setCurrConnection(_currConnection);
     }
   }, [countryCode]);
   
@@ -137,20 +144,24 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist}) => {
       setCurrMap(0);
     }
     else if (currSeq === 1) {
+      //map one (0)
       setLockMap(false);
-      setCurrMap(0);
     }
     else if (currSeq === 2) {
       setLockMap(true);
+      setCurrMap(0);
     }
     else if (currSeq === 3) {
+      //map two (1)
       setCurrMap(1);
       setLockMap(false);
     }
     else if (currSeq === 4) {
       setLockMap(true);
+      setCurrMap(1);
     }
     else if (currSeq === 5) {
+      //map three (2)
       setLockMap(false);
       setCurrMap(2);
     }
@@ -162,14 +173,17 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist}) => {
   return (
     <section className="center-title center map-inner">
       {(currDisaster) && 
-        <DisasterCard data={currDisaster} />
+        <DisasterCard data={currDisaster} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
       }
-      <h1 className="info-disp">{currSeq}</h1>
+      {(currConnection) && 
+        <ConnectionCard data={currConnection} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
+      }
+      <h1 className="info-disp">S:{currSeq}/M:{currMap}</h1>
       <ParallaxProvider>
-        <WorldMap map={currMap} colours={mapColours[currMap]} setCountry={setCountry} lock={lockMap} preLit={mapPreLit[currMap]} targets={currMap === 0} zoom={mapZoom[currSeq]} />
+        <WorldMap map={currMap} colours={mapColours[currMap]} setCountry={setCountry} lock={lockMap} preLit={mapPreLit[currMap]} targets={currMap === 0} zoom={mapZoom[currSeq]} connections={currMap === 2} setHoverPos={setHoverPos} />
         { mainSeqStart && currSeq === 0 &&
-          <Parallax speed={2} startScroll={beginScroll} endScroll={beginScroll + scrollDist}>
-            <Parallax opacity={[0,1]} startScroll={beginScroll} endScroll={beginScroll + fadeInLength}>
+          <Parallax className="inherit" speed={2} startScroll={beginScroll} endScroll={beginScroll + scrollDist}>
+            <Parallax className="inherit" opacity={[0,1]} startScroll={beginScroll} endScroll={beginScroll + fadeInLength}>
               <div className="center-title-inner item-list large">
                 <h2>{currTitleText}</h2>
                 <h3>{currBodyText}</h3>
@@ -177,19 +191,19 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist}) => {
             </Parallax>
           </Parallax>
         }
-        { currSeq === 1 &&
+        { !lockMap &&
           <Parallax opacity={[0,1]} startScroll={beginScroll + getAbsolute(totalSeqOne)} endScroll={beginScroll + getAbsolute(totalSeqOne) + fadeInLengthShort} className="map-bottom-text no-interact">
             <h5>
               {mainCopy.map[currMap].bottom}
             </h5>
           </Parallax>
         }
-        { currSeq === 2 &&
-          <Parallax speed={2} startScroll={beginScroll} endScroll={beginScroll + scrollDist}>
-            <Parallax opacity={[0,1]} startScroll={beginScroll + getAbsolute(totalSeqTwo)} endScroll={beginScroll + getAbsolute(totalSeqTwo) + fadeInLengthShort}>
+        { (currSeq === 4 || currSeq === 2) &&
+          <Parallax className="inherit" speed={2} startScroll={beginScroll} endScroll={beginScroll + scrollDist}>
+            <Parallax className="inherit" opacity={[0,1]} startScroll={beginScroll + getAbsolute(totalSeqTwo)} endScroll={beginScroll + getAbsolute(totalSeqTwo) + fadeInLengthShort}>
               <div className="center-title-inner item-list large">
-                <h1><span className="reg">{mainCopy.map[0].postTitle.text}</span> {mainCopy.map[0].postTitle.bold}</h1>
-                <h3>{mainCopy.map[0].postBody}</h3>
+                <h1><span className="reg">{mainCopy.map[currMap].postTitle.text}</span> {mainCopy.map[currMap].postTitle.bold}</h1>
+                <h3>{mainCopy.map[currMap].postBody}</h3>
               </div>
             </Parallax>
           </Parallax>
@@ -198,8 +212,8 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist}) => {
           <Parallax opacity={[0,1]} 
             startScroll={beginScroll + getAbsolute(totalSeqThree)} 
             endScroll={beginScroll + getAbsolute(totalSeqThree) + fadeInLengthShort} 
-            className="map-bottom-text no-interact">
-            <div className="">
+            className="map-top-text no-interact">
+            <div className="item-list-small">
               <h3>{currIDP ? currIDP.name : ""}</h3>
               <h4>Disaster Displacements: <span>{currIDP ? `${currIDP.disaster} persons` : ""}</span></h4>
               <h4>Conflict Displacements: <span>{currIDP ? `${currIDP.conflict} persons` : ""}</span></h4>

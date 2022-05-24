@@ -1,4 +1,112 @@
 export const grow = {
   id: 401,
-  title: "Get Up & Grow"
+  title: "Get Up & Grow",
+  slug:"getupandgrow",
+  sub:"It's the people who build.",
+  logo:"path-to-svg",
+  intro:{
+    title:"Section Heading",
+    subtitle:null,
+    body:[
+      "Climate change has forced over 7 million people to move internally in 2020 alone. These internal migrants often move from a rural region susceptible to greater climate risk to an urban region for more secure living conditions. Many times, the reason for this move is a result of decreasing or loss of livelihood. In agricultural areas, unsustainable industry experiencing climate impacts will disrupt employment and income levels. Broader implications of climate impacts include global labour shortages as a result of conventional unsustainable agricultural practices, such as monoculture, that directly causes environmental degradation and decreasing agricultural yields. Often, internal migrants have no formalized education or skills applicable to a new urban setting, creating precarity in the labour market that results in underemployment and poverty. The population increase towards these urban centers causes extreme sprawl to informal living conditions and unsustainable growth in a city, making both the city and those who live in its outskirts more susceptible to climate risk and other social-cultural issues, such as exposure to crime.",
+      "The identified user is the rural-to-urban internal migrant. Often, internal migration patterns are not considered climate-induced, but rather economic, due to their close ties with labour and income opportunities or shortages in urban contexts. However, as demonstrated, the economic migrant originating from rural settings is inseparable from climate impacts. These impacts can alter the economic stability of the agricultural industry, forcing decreasing incomes or layoffs due to decreasing food production yields. 80 billion full-time jobs, 66% of them being agricultural workers,  are projected to experience a drop in working hours if temperatures rise by 1.5C, an equivalent of a  $2.4 trillion USD hit to the global economy."
+    ],
+    img: null
+  },
+  user:{
+    title:"User Pain Points",
+    subtitle: "Internal Rural to Urban Migrant",
+    img:"path-to-svg",
+    points:[
+      "Lack of education or transferable skills relevant to urban industries",
+      "Underemployment, low labour participation, unemployment, or employment in informal sectors",
+      "Lack of accessibility to higher developed urban areas, causing urban sprawl to informal zones with poorly maintained infrastructure",
+      "Exposure to sociocultural issues such as crime, poverty and overcrowded living conditions"
+    ],
+    sectionTitle:"Section Heading",
+    body:[
+      "Get Up & Grow is a social enterprise aimed at integrating practical agricultural knowledge and skills into urban settings for the emerging field of urban agriculture. The company works off a “Center of Excellence '' system, where a client (municipal, private, or community-based) will employ Get Up & Grow  to assess and design a systemic urban agriculture plan for a designated area. The team at the “Center” will be a collaboration between Get Up & Grow senior members (internal migrants) and multidisciplinary consultants. The Center will offer the services necessary to create a concept plan according to the client design criteria, while the project implementation teams will consist of smaller groups of internal migrants that provide the physical services necessary to implement the urban farms. This will consist of manual labour, delivery, surveying and building, planting, and garden maintenance. As internal migrants spend more time learning and training on the job, they will be able to gain company as project leads and finally join the “Center”, where they will be responsible for concept design and consultation.",
+      "Get Up & Grow is constructive as a strategy that addresses the tension of the problem holistically: the user needs when entering an urban setting, and the needs of urban centers to prepare climate ready solutions. The green development of urban centers will mitigate  changes of unsustainable growth, allowing for better air quality, carbon sequestration, mental and physical health benefits, flourishing biodiversity, and access to local food. Additional challenges of decreasing food production yield in rural areas will require urban centers to feed growing urban populations through urban agriculture. The internal migrants, when employed at multiple scales in this self-sustaining framework, will provide the necessary intel and labour to make this transition."
+    ],
+    img: null
+  },
+  diagram: "path-to-img",
+  services:{
+    title: "Our Services",
+    subtitle: null,
+    cols:[
+      {
+        img: "path-to-img",
+        title: "Planting and Maintenance",
+        body: "Skilled gardeners with extensive experience in the agricultural industry will execute the project vision for private clients; including material procurement, initial installation and setup, and regular maintenance."
+      },
+      {
+        img: "path-to-img",
+        title: "Consultation and Design",
+        body: "Experienced agriculturists will collaborate with designers to create comprehensive project proposals for clients that consider the site specific spatial planning and layout of built interventions such as vertical gardens, as well as the most appropriate vegetation."
+      },
+      {
+        img: "path-to-img",
+        title: "Legal and Zoning Support",
+        body: "The Get Up & Grow legal team has established strong strategic partnerships with local municipalities to provide extenuating permissions to private green development projects; including obtaining approvals and procuring additional financial grants."
+      }
+    ]
+  },
+  principles:{
+    title: "Our Principles",
+    subtitle: null,
+    cols:[
+      {
+        img: "path-to-img",
+        title: "RECOGNIZE IDENTITIES",
+        body: "We recognize that internal rural to urban climate migrants have the necessary skills and experience that will bring forth climate resilience to urban communities. Therefore, we provide them a platform to use their skills in a responsible and dignified manner, incorporating their knowledge as assets to consult and inform emerging urban agricultural initiatives."
+      },
+      {
+        img: "path-to-img",
+        title: "APPLY REPITITION",
+        body: "We practice under a “Center of Excellence” system that values standardized best practices across client projects. We include a wide variety of easily repeatable schematics and garden plans, that create diverse ecosystems in urban enclaves. Our system values regenerative practices, growing the most sustainable produce in even the most dense spaces."
+      },
+      {
+        img: "path-to-img",
+        title: "REDUCE FAILURES",
+        body: "We understand that the agricultural industry is wholly unsustainable in its current state. In order to scale up urban integration to prevent mass failure of food production, we work with local clients and communities to make customized intervention easily accessible. Our plans are compliant with municipal regulations to streamline widespread green development."
+      }
+    ]
+  },
+  closing:{
+    title: "Section Heading",
+    body:[
+      "The solution of Get Up & Grow lies in its strategy: the deployment of human resources as valuable assets to green development in urbanizing areas. This strategy takes on two fronts: the client-facing approach, and the employee-facing approach. When an internal migrant decides to move to an urban area in Mexico City, they can be contracted with People Get Up & Grow through one of the following channels:",
+      "The internal migrant will begin working as a gardener, constructing and planting an urban garden according to the Center’s plan. As they continue to work for the company, they will be able to prove leadership qualities and growth through educational workshops and training modules that allow for career mobility. An internal migrant will have two options for internal growth: project lead (after 2+ years) and Center consultant (after 5+ years). Once the internal migrant becomes a Center consultant, they will work among a team to assess the client’s designated space for agricultural intervention, create a work plan for produce planted and grown, and a community maintenance plan for continuous relationship building and project expansion.",
+      "The client-facing approach will allow clients to commission the Center for their greening project. They will be able to access an online platform that offers the following services:",
+      "Based on the client needs and space available, the internal team will assess the space to create a “plan” for the local urban garden. The agricultural team will utilize their knowledge infrastructure to maintain best practices for urban agriculture, including sustainable approaches, regenerative agriculture, permaculture, and technologies, repurposed materials, and techniques, to create the most well-rounded site-specific plan. Our internal team will also be responsible for obtaining necessary city approvals for implementing a special project demonstration on the site, enabling our project with more extenuating permissions. If the client requires construction and garden labour, the Center will deploy a team of skilled agriculturalists and craftspeople to build the project efficiently, and in constant communication with the central team. Once complete, the Center will host workshops to enable community maintenance, and work with the community to enhance their green development strategy in conjunction with municipal requirements."
+    ],
+    lists:[
+      [
+        "Recruitment at informal day labour pickup sites, bars, and social service spaces;",
+        "Referral through municipal services, job boards, and career fairs."
+      ],
+      [
+        "Design consultation, proposal, and planting planning;",
+        "Gardening and construction services;",
+        "Legal consultation and obtaining city approvals with municipal partners."
+      ]
+    ],
+    img: "path-to-img"
+  },
+  casestudy:{
+    title:"Case Study",
+    subtitle:"Palo Alto, Mexico City, Mexico",
+    heroImg: "path-to-img",
+    imgs:[
+      "path-to-img",
+      "path-to-img",
+      "path-to-img"
+    ],
+    body:[
+      "The Groundswell Report on internal climate migration has identified Mexico as a prime site for sustainable intervention to improve adaptive capacity in urban centers. Changes to Mexico’s climate conditions such as extreme temperatures and rainfall deficits will primarily affect populations in agriculture-dependent areas. These changes have already resulted in a 15% drop in income levels for agricultural workers, mobilizing workers to seek employment in urban areas such as Mexico City. Rural to urban migration patterns produce “pockets of poverty” in Mexico City, where farming-only livelihoods and low education rates have resulted in impoverished, underemployed, and underserved spaces. As agricultural labour rates have already dropped by 2 million people, rising internal migration continues to exacerbate Mexico City’s urban poverty and labour participation. Palo Alto Co-operativa is a housing co-operative located in a highly urbanized area of Mexico City, bordered by highways and skyscrapers. Palo Alto emerged as an outer-city expansion response to Mexico City’s working class population growth, now housing 2,500 residents."
+    ],
+    article:"Considering Mexico City’s growing participation in innovative green infrastructure and initiatives, could Palo Alto act as a leading community for dignified labour, sustainable urban growth, and proactive climate change mitigation?"
+  }
+  
 }
