@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,500,700');
 
 :root {
-  --colour-black: black;
+  --colour-black: #181818;
   --colour-white: white;
   --colour-purple: #B6A7FF;
   --colour-orange: #97C062;
@@ -13,7 +13,7 @@
   --colour-lightgrey: grey;
   
   /* grayscale version */
-  --colour-black: #313131;
+  /* --colour-black: #313131;
   --colour-white: #d6d6d6;
   --colour-purple: #B6A7FF;
   --colour-orange: #97C062;
@@ -22,7 +22,7 @@
   --colour-blue-dark: #5157F4;
   --colour-darkgrey: #464646;
   --colour-grey: black;
-  --colour-lightgrey: grey;
+  --colour-lightgrey: grey; */
   
   /* dynamic colours */
   --colour-body: var(--colour-black);
@@ -61,6 +61,7 @@
   --z-map-active: 104;
   --z-info: 106;
   --z-propop: 107;
+  --z-project: 110;
   --z-cursor: 1000;
 }
 
@@ -77,9 +78,9 @@
   background-color: rgba(255,255,255,0.4);
   color: var(--colour-white);
 }
-.modal ::selection,
+.project-pop ::selection,
 .menu ::selection {
-  background-color: var(--colour-purple);
+  background-color: var(--colour-black);
 }
 
 html {
@@ -536,6 +537,29 @@ section.team .team-set .team-card .title {
 }
 .card h3, .card h4, .card h5 {
   line-height: 1;
+}
+
+/* ________________PROJECTS__________________ */
+
+.project-pop {
+  position: fixed;
+  z-index: var(--z-project);
+  width: 100%;
+  height: var(--real-vh);
+  background-color: var(--colour-white);
+  top: 0;
+  left: 0;
+  padding: var(--padding) var(--padding-large);
+  --colour-text: var(--colour-black);
+}
+.project-pop section {
+  min-height: unset;
+}
+.project-pop .project-inner {
+  display: grid;
+  gap: var(--gap);
+  max-width: 70em;
+  margin: 0 auto;
 }
 
 /* ________________MODAL__________________ */

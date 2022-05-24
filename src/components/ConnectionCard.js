@@ -11,21 +11,27 @@ const ConnectionCard = props => {
   const leftOffsetAllowed = props.dimensions.width/15;
   const topOffsetAllowed = 24;
   
-  useEffect(() => {
+  const definePosition = () => {
     
     if (cardRef.current.offsetWidth + props.left > props.dimensions.width - leftOffsetAllowed) {
       let el = document.getElementById(props.data.regionId);
-      setLeft(prev => prev - el.getBoundingClientRect().width/2 - cardRef.current.offsetWidth/2);
+      setLeft(props.left - el.getBoundingClientRect().width - cardRef.current.offsetWidth);
     }
     
     if (cardRef.current.offsetHeight + props.top > props.dimensions.height - topOffsetAllowed) {
       setTop(props.dimensions.height/2 - cardRef.current.offsetHeight/2);
     }
+  }
+  
+  useEffect(() => {
     
-  }, [props.dimensions]);
+    definePosition();
+    
+  }, [props.dimensions, cardRef]);
   
   useEffect(() => {
     setAnim(true);
+    definePosition();
   }, []);
   
   return (

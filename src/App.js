@@ -2,6 +2,8 @@ import 'main.css';
 import { useEffect, useRef, useState } from 'react';
 import All from 'sections/All';
 import Cursor from 'components/Cursor';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Project from 'sections/Project';
 
 function App() {
   
@@ -34,10 +36,16 @@ function App() {
   },[]);
   
   return (
-    <div className='App'>
-      <Cursor dimensions={dimensions} />
-      <All screenDimension={dimensions} />
-    </div>
+    <BrowserRouter>
+      <div className='App'>
+        <Cursor dimensions={dimensions} />
+        <Routes>
+          <Route path="/" element={<All screenDimension={dimensions} />}>
+            <Route path=":projId" element={<Project />} />
+          </Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

@@ -7,6 +7,7 @@ import Landing from "./Landing";
 import SideProgress from "components/SideProgress";
 import { mainCopy } from "data/mainCopy";
 import MainSequence from "./MainSequence";
+import { Outlet } from "react-router";
 
 const All = props => {
   
@@ -119,6 +120,7 @@ const All = props => {
       </div>
       <h2>testing</h2>
       <MarkerIcon />
+      <Outlet />
     </>
   )
 }

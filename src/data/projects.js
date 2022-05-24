@@ -1,7 +1,11 @@
+import { grow } from "./projects/grow";
+
 export const projects = [
   {
     id:401,
+    data: grow,
     title: "Get Up & Grow",
+    slug: "build",
     sub:"People Who Build",
     hero:"It's the people who build.",
     location:"Mexico City, Mexico",
