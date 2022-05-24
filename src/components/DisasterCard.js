@@ -19,7 +19,7 @@ const DisasterCard = props => {
       setTop(props.dimensions.height/2 - cardRef.current.offsetHeight/2);
     }
     
-  }, [props.dimensions]);
+  }, [props.dimensions, cardRef]);
   
   useEffect(() => {
     setAnim(true);

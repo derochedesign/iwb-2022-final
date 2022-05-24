@@ -1,7 +1,7 @@
 export const grow = {
   id: 401,
   title: "Get Up & Grow",
-  slug:"getupandgrow",
+  slug:"build",
   sub:"It's the people who build.",
   logo:"path-to-svg",
   intro:{
