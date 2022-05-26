@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { isMobile } from "react-device-detect";
 
 const ConnectionCard = props => {
   
@@ -34,6 +35,7 @@ const ConnectionCard = props => {
     definePosition();
   }, []);
   
+
   return (
     <div ref={cardRef} className="tooltip" data-active={anim} style={{left:left, top:top}}>
       <div className="body item-list">
@@ -47,6 +49,11 @@ const ConnectionCard = props => {
             <p key={c.regionId}>{c.name} - <span>{c.migrants} Migrants</span></p>
           )}
         </div>
+        {/* TODO: actually close card when clicking on Close*/}
+        {/* FIXME: For now, this trivially works because tapping anywhere closes the card */}
+        { isMobile &&
+          <button style={{backgroundColor:'black'}}>Close</button>
+        }
       </div>
     </div>
   )

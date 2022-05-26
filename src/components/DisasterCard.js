@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { isMobile } from "react-device-detect";
 
 const DisasterCard = props => {
   
@@ -46,6 +47,11 @@ const DisasterCard = props => {
           <h5>{props.data.year}</h5>
         </div>
         <p>"{props.data.quote}"</p>
+        {/* TODO: actually close card when clicking on Close*/}
+        {/* FIXME: For now, this trivially works because tapping anywhere closes the card */}
+        { isMobile &&
+          <button style={{backgroundColor:'black'}}>Close</button>
+        }
       </div>
     </div>
   )
