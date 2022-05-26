@@ -113,13 +113,15 @@ const All = props => {
   
   return (
     <>
-      <SideProgress sectionsPos={sectionsPos} scrollTo={scrollTo}/>
-      <Landing secRef={introRef} titles={titles} currPos={currIntroPos}/>
-      <div className="map" ref={mapRef}>
-        <MainSequence currPos={currMainPos} mainSeqStart={mainSeqStart} scrollDist={scrollDistMain} dimensions={props.screenDimension}/>
+      <div className="main-wrapper">
+        <SideProgress sectionsPos={sectionsPos} scrollTo={scrollTo}/>
+        <Landing secRef={introRef} titles={titles} currPos={currIntroPos}/>
+        <div className="map" ref={mapRef}>
+          <MainSequence currPos={currMainPos} mainSeqStart={mainSeqStart} scrollDist={scrollDistMain} dimensions={props.screenDimension}/>
+        </div>
+        <h2>testing</h2>
+        <MarkerIcon />
       </div>
-      <h2>testing</h2>
-      <MarkerIcon />
       <Outlet />
     </>
   )

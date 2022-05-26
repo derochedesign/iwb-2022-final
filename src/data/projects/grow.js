@@ -4,6 +4,11 @@ export const grow = {
   slug:"build",
   sub:"It's the people who build.",
   logo:"path-to-svg",
+  colours:[
+    "#63BA8A",
+    "#3A737D",
+    "#EBF6F0"
+  ],
   intro:{
     title:"Section Heading",
     subtitle:null,
@@ -81,32 +86,21 @@ export const grow = {
       "The client-facing approach will allow clients to commission the Center for their greening project. They will be able to access an online platform that offers the following services:",
       "Based on the client needs and space available, the internal team will assess the space to create a “plan” for the local urban garden. The agricultural team will utilize their knowledge infrastructure to maintain best practices for urban agriculture, including sustainable approaches, regenerative agriculture, permaculture, and technologies, repurposed materials, and techniques, to create the most well-rounded site-specific plan. Our internal team will also be responsible for obtaining necessary city approvals for implementing a special project demonstration on the site, enabling our project with more extenuating permissions. If the client requires construction and garden labour, the Center will deploy a team of skilled agriculturalists and craftspeople to build the project efficiently, and in constant communication with the central team. Once complete, the Center will host workshops to enable community maintenance, and work with the community to enhance their green development strategy in conjunction with municipal requirements."
     ],
-    lists:[
-      [
-        "Recruitment at informal day labour pickup sites, bars, and social service spaces;",
-        "Referral through municipal services, job boards, and career fairs."
-      ],
-      [
-        "Design consultation, proposal, and planting planning;",
-        "Gardening and construction services;",
-        "Legal consultation and obtaining city approvals with municipal partners."
-      ]
-    ],
     img: "path-to-img"
   },
   casestudy:{
     title:"Case Study",
     subtitle:"Palo Alto, Mexico City, Mexico",
     heroImg: "path-to-img",
+    body:[
+      "The Groundswell Report on internal climate migration has identified Mexico as a prime site for sustainable intervention to improve adaptive capacity in urban centers. Changes to Mexico’s climate conditions such as extreme temperatures and rainfall deficits will primarily affect populations in agriculture-dependent areas. These changes have already resulted in a 15% drop in income levels for agricultural workers, mobilizing workers to seek employment in urban areas such as Mexico City. Rural to urban migration patterns produce “pockets of poverty” in Mexico City, where farming-only livelihoods and low education rates have resulted in impoverished, underemployed, and underserved spaces. As agricultural labour rates have already dropped by 2 million people, rising internal migration continues to exacerbate Mexico City’s urban poverty and labour participation. Palo Alto Co-operativa is a housing co-operative located in a highly urbanized area of Mexico City, bordered by highways and skyscrapers. Palo Alto emerged as an outer-city expansion response to Mexico City’s working class population growth, now housing 2,500 residents."
+    ],
+    article:"Considering Mexico City’s growing participation in innovative green infrastructure and initiatives, could Palo Alto act as a leading community for dignified labour, sustainable urban growth, and proactive climate change mitigation?",
     imgs:[
       "path-to-img",
       "path-to-img",
       "path-to-img"
-    ],
-    body:[
-      "The Groundswell Report on internal climate migration has identified Mexico as a prime site for sustainable intervention to improve adaptive capacity in urban centers. Changes to Mexico’s climate conditions such as extreme temperatures and rainfall deficits will primarily affect populations in agriculture-dependent areas. These changes have already resulted in a 15% drop in income levels for agricultural workers, mobilizing workers to seek employment in urban areas such as Mexico City. Rural to urban migration patterns produce “pockets of poverty” in Mexico City, where farming-only livelihoods and low education rates have resulted in impoverished, underemployed, and underserved spaces. As agricultural labour rates have already dropped by 2 million people, rising internal migration continues to exacerbate Mexico City’s urban poverty and labour participation. Palo Alto Co-operativa is a housing co-operative located in a highly urbanized area of Mexico City, bordered by highways and skyscrapers. Palo Alto emerged as an outer-city expansion response to Mexico City’s working class population growth, now housing 2,500 residents."
-    ],
-    article:"Considering Mexico City’s growing participation in innovative green infrastructure and initiatives, could Palo Alto act as a leading community for dignified labour, sustainable urban growth, and proactive climate change mitigation?"
+    ]
   }
   
 }

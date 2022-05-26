@@ -9,6 +9,14 @@ export const MarkerIcon = props => (
   </svg>
 )
 
+export const LogoIcon = props => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91.2 91.97">
+    <polygon points="68.1 31.14 68.1 12.99 45.6 0 23.1 12.99 23.1 31.14 45.6 18.15 68.1 31.14"/>
+    <polygon points="22.5 91.97 38.22 82.89 15.72 69.9 15.72 43.92 0 52.99 0 78.97 22.5 91.97"/>
+    <polygon points="68.69 91.97 91.19 78.98 91.19 53 75.48 43.92 75.48 69.9 52.97 82.89 68.69 91.97"/>
+  </svg>
+)
+
 export const ApplyRepetitionIcon = _ => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 233.86 233.86">
     <path d="M48.85,77.62v78.61l68.08,39.31,68.08-39.31V77.62L116.93,38.32,48.85,77.62Zm131.86,76.13l-63.79,36.83-63.78-36.83V80.1l63.78-36.83,63.79,36.83v73.65Z" />

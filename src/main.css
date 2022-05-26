@@ -12,6 +12,10 @@
   --colour-grey: #5C5C5C;
   --colour-lightgrey: grey;
   
+  --colour-proj-main: red;
+  --colour-proj-dark: red;
+  --colour-proj-light: red;
+  
   /* grayscale version */
   /* --colour-black: #313131;
   --colour-white: #d6d6d6;
@@ -194,6 +198,10 @@ svg {
   left: 0;
 }
 
+/* .main-wrapper[data-lock="true"] {
+  overflow: hidden;
+} */
+
 /* ________________SECTIONS__________________ */
 
 .inherit {
@@ -362,7 +370,7 @@ a.text {
 }
 .cursor[data-text="true"]::after {
   width: 0.2em;
-  height: 2em;
+  height: 1.5em;
   border-radius: var(--corner-small);
 }
 
@@ -549,17 +557,50 @@ section.team .team-set .team-card .title {
   background-color: var(--colour-white);
   top: 0;
   left: 0;
-  padding: var(--padding) var(--padding-large);
   --colour-text: var(--colour-black);
 }
 .project-pop section {
   min-height: unset;
 }
+.project-pop .project-container {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  padding: var(--padding) var(--padding-large);
+}
 .project-pop .project-inner {
   display: grid;
-  gap: var(--gap);
+  gap: calc(var(--gap) * 2);
   max-width: 70em;
   margin: 0 auto;
+}
+
+.project-pop h1, 
+.project-pop h2, 
+.project-pop h3, 
+.project-pop h5,
+.project-pop li p {
+  color: var(--colour-proj-dark);
+}
+.project-pop h1,
+.project-pop h2 {
+  font-weight: var(--bold);
+}
+
+.project-pop img {
+  width: 100%;
+}
+
+/* ________________PROJECT INNERS__________________ */
+
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--gap);
+}
+.three-col .item-list {
+  text-align: center;
+  align-items: center;
 }
 
 /* ________________MODAL__________________ */
