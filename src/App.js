@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import All from 'sections/All';
 import Cursor from 'components/Cursor';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 import Project from 'sections/Project';
 
 function App() {
@@ -38,7 +39,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className='App'>
-        <Cursor dimensions={dimensions} />
+        { !isMobile &&
+          <Cursor dimensions={dimensions} />
+        }
         <Routes>
           <Route path="/" element={<All screenDimension={dimensions} />}>
             <Route path=":projId" element={<Project />} />
