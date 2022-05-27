@@ -3,6 +3,7 @@ import { countries } from "data/countries";
 import { useEffect, useRef, useState } from "react";
 import { MarkerIcon } from "./Icons";
 import { Parallax } from "react-scroll-parallax";
+import { isMobile } from "react-device-detect";
 import { migrations } from "data/migrations";
 import DisasterCard from "./DisasterCard";
 import { disasters } from "data/disastersCopy";
@@ -19,6 +20,9 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   const mapContRef = useRef(null);
   
   const handleHover = e => {
+    // Do nothing if on mobile
+    if (isMobile) return;
+
     let code = e.target.id;
     if (code !== currCountry) {
       
@@ -33,13 +37,56 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
       });
     };
   }
-  
+
+  const handleTap = e => {
+    let code = e.target.id;
+    if (code !== currCountry) {
+      
+      if (isMobile) {
+        setHoverPos({x: "unset", y: "unset"});
+      } else {
+        let _elVals = e.target.getBoundingClientRect();
+        setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
+      }
+      
+      setPrevCountry(currCountry);
+      setCurrCountry(code);
+      setCountry({
+        regionId:code,
+        id: null
+      });
+    };
+  }
+
   const handleHoverMarker = e => {
+    // Do nothing if on mobile
+    if (isMobile) return;
+
     let code = e.currentTarget.dataset.country;
     let uID = e.currentTarget.dataset.uid;
     
     setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - 150});
     
+    setPrevCountry(currCountry);
+    setCurrCountry(code);
+    setCountry({
+      regionId:code,
+      id: uID
+    });
+  }
+  
+  const handleTapMarker = e => {
+    // Do nothing if on mobile
+
+    let code = e.currentTarget.dataset.country;
+    let uID = e.currentTarget.dataset.uid;
+    
+    if (isMobile) {
+      setHoverPos({x: "unset", y: "unset"});
+    } else {
+      setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - 150});
+    }
+
     setPrevCountry(currCountry);
     setCurrCountry(code);
     setCountry({
@@ -188,17 +235,24 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
     
   }, [lock]);
   
+  // TODO: Wrap map in Draggable
   return(
     <>
       <Parallax className="actual-map-outer" scale={[zoom?.startVal || 1, zoom?.endVal || 1]} translateX={[zoom?.startValTrans || 0, zoom?.endValTrans || 0]} startScroll={zoom?.start || 0} endScroll={zoom?.end || 0}>
-        <div className="actual-map" onMouseOver={targets ? null : handleHover} ref={mapContRef} style={{pointerEvents: lock ? "none" : "auto"}} data-active={!lock}>
+        <div className="actual-map" onMouseOver={targets ? null : handleHover} 
+          onClick={targets ? null : handleTap} ref={mapContRef} 
+          style={{pointerEvents: lock ? "none" : "auto"}} data-active={!lock}
+        >
           <Map />
         </div>
       </Parallax>
       {targets && !lock && targetsPos.map((t,i) => 
-        <div className="marker" data-active={markerAnim} data-hover role="button" onMouseEnter={handleHoverMarker} 
-          onMouseLeave={() => setCountry({regionId:null,id: null})}
-          data-country={t.regionId} data-uid={t.id} key={i} style={{left: t.left, top: t.top}}
+        <div className="marker" data-active={markerAnim} data-hover 
+          role="button" onMouseEnter={handleHoverMarker} 
+          onMouseLeave={() => setCountry({regionId:null,id: null})} 
+          onClick={handleTapMarker}
+          data-country={t.regionId} data-uid={t.id} key={i}
+          style={{left: t.left, top: t.top}}
         >
           <MarkerIcon hover/>
           {/* {(t.regionId === "US") && <DisasterCard data={disasters[0]} />} */}
