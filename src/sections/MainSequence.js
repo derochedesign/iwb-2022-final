@@ -138,7 +138,11 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
   // console.log(currSeq);
   // console.log(currMap);
   
+  // NOTE: called every time we change sequences
   useEffect(() => {
+    // TODO: reset 'scroll position' on map
+    // When a scroll position for the draggable map will be decided, reset it here
+
     if (currSeq === 0) {
       setLockMap(true);
       setCurrMap(0);
@@ -168,6 +172,12 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
     else {
       setLockMap(true);
     }
+
+    const mapSeqs = [];
+    if (mapSeqs.includes(currSeq)) {
+        // TODO: do mobile stuff
+        // Map should pan relative to scroll position for whole sequence
+    }
   }, [currSeq]);
   
   return (
@@ -180,6 +190,7 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
       }
       <h1 className="info-disp">S:{currSeq}/M:{currMap}</h1>
       <ParallaxProvider>
+        {/*TODO: When mobile, blow up the map, make it draggable, height 95*/}
         <WorldMap map={currMap} colours={mapColours[currMap]} setCountry={setCountry} lock={lockMap} preLit={mapPreLit[currMap]} targets={currMap === 0} zoom={mapZoom[currSeq]} connections={currMap === 2} setHoverPos={setHoverPos} />
         { mainSeqStart && currSeq === 0 &&
           <Parallax className="inherit" speed={2} startScroll={beginScroll} endScroll={beginScroll + scrollDist}>

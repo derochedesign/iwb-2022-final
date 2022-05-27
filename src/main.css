@@ -877,3 +877,13 @@ section.team {
   }
   
 }
+
+.mobile-map-div {
+  width: 100%;
+  /* overflow-y: scroll; */
+}
+.mobile-map-div svg {
+  /* height: 100%; */
+  width: 300%;
+  /* overflow-y: scroll; */
+}
