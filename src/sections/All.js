@@ -8,6 +8,8 @@ import SideProgress from "components/SideProgress";
 import { mainCopy } from "data/mainCopy";
 import MainSequence from "./MainSequence";
 import { Outlet } from "react-router";
+import Team from "./Team";
+import Footer from "./Footer";
 
 const All = props => {
   
@@ -119,8 +121,8 @@ const All = props => {
         <div className="map" ref={mapRef}>
           <MainSequence currPos={currMainPos} mainSeqStart={mainSeqStart} scrollDist={scrollDistMain} dimensions={props.screenDimension}/>
         </div>
-        <h2>testing</h2>
-        <MarkerIcon />
+        <Team />
+        <Footer />
       </div>
       <Outlet />
     </>

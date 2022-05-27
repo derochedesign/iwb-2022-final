@@ -16,24 +16,34 @@ function App() {
   
   //resize + set dimensions
   useEffect(() => {
-    let timeoutId = null;
-    const handleResize = () => {
-      
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        setDimensions({
-          height: window.innerHeight,
-          width: document.body.clientWidth
-        })
-        root.style.setProperty('--real-vh', window.innerHeight + "px");
-      }, 150);
+    if (isMobile) {
+      setDimensions({
+        height: window.innerHeight,
+        width: document.body.clientWidth
+      })
+      root.style.setProperty('--real-vh', window.innerHeight + "px");
     }
+    else {
+      let timeoutId = null;
+      const handleResize = () => {
+        
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          setDimensions({
+            height: window.innerHeight,
+            width: document.body.clientWidth
+          })
+          root.style.setProperty('--real-vh', window.innerHeight + "px");
+        }, 150);
+      }
 
-    window.addEventListener('resize', handleResize);
-    
-    return _ => {
-      window.removeEventListener('resize', handleResize);
+      window.addEventListener('resize', handleResize);
+      
+      return _ => {
+        window.removeEventListener('resize', handleResize);
+      }
     }
+    
   },[]);
   
   return (
