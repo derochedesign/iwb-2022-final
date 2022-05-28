@@ -38,6 +38,16 @@ export const mainCopy = {
       },
       postBody: ""
     },
+    {
+      helper:"Hover your cursor over the map to find other projects.",
+      top:null,
+      bottom:"Projects are happening around the world",
+      postTitle:{
+        text: "",
+        bold: ""
+      },
+      postBody: ""
+    },
   ],
   principles:{
     preTitle:"Designing Climate-Ready Communities",

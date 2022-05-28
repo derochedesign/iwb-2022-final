@@ -191,9 +191,11 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   const clearPreLit = () => {
     countriesLitVal.forEach(c => {
       let _el = document.getElementById(c.regionId);
-      if (_el) _el.style.fill = "unset";
-      _el.dataset.active = false;
-      _el.dataset.hover = true;
+      if (_el) {
+        _el.style.fill = "unset";
+        _el.dataset.active = false;
+        _el.dataset.hover = true;
+      }
     });
   }
   

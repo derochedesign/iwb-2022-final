@@ -26,9 +26,12 @@ const All = props => {
   ];
   const [currIntroPos, setIntroCurrPos] = useState(0);
   const [sectionsPos, setSectionsPos] = useState([]);
+  const [readyForSetSections, setReadyForSetSections] = useState(false);
+  const [scrollToStart, setScrollToStart] = useState(0);
+  const [scrollOffset, setScrollOffset] = useState(20);
   
   const scrollDistIntro = 1500;
-  const scrollDistMain = 4000;
+  const scrollDistMain = 4800;
   const [currMainPos, setMainCurrPos] = useState(0);
   const [mainSeqStart, setMainSeqStart] = useState(false);
   
@@ -48,25 +51,28 @@ const All = props => {
   }
   
   const scrollTo = val => {
-    window.scrollTo(0, val);
+    let newVal = val;
+    if (val !== 0) {
+      newVal += scrollOffset;
+    }
+    window.scrollTo(0, newVal);
   };
   
   const getScrollTop = ref => {
     return ref.current.getBoundingClientRect().top;
   }
   
+  // useEffect(() => {
+  //   setScrollToStart(getScrollTop(mapRef));
+  //   setReadyForSetSections(true);
+  // }, [props.screenDimension]);
+  
   useEffect(() => {
-    let _sPos = [0];
-    _sPos.push(getScrollTop(introRef), getScrollTop(mapRef));
-    setSectionsPos(_sPos);
-    
-    //there must be a better way
     setTimeout(() => {
-      let _sPos = [0];
-      _sPos.push(getScrollTop(introRef), getScrollTop(mapRef));
-      setSectionsPos(_sPos);
+      setSectionsPos([0]);
+      setScrollToStart(getScrollTop(mapRef));
+      setReadyForSetSections(true);
     }, 500);
-    
   }, [props.screenDimension]);
   
   useEffect(() => {
@@ -116,10 +122,14 @@ const All = props => {
   return (
     <>
       <div className="main-wrapper">
-        <SideProgress sectionsPos={sectionsPos} scrollTo={scrollTo}/>
+        <SideProgress sectionsPos={sectionsPos} scrollTo={scrollTo} setScrollOffset={setScrollOffset}/>
         <Landing secRef={introRef} titles={titles} currPos={currIntroPos}/>
         <div className="map" ref={mapRef}>
-          <MainSequence currPos={currMainPos} mainSeqStart={mainSeqStart} scrollDist={scrollDistMain} dimensions={props.screenDimension}/>
+          <MainSequence 
+            currPos={currMainPos} mainSeqStart={mainSeqStart} scrollDist={scrollDistMain} dimensions={props.screenDimension}
+            setReadyForSetSections={setReadyForSetSections} readyForSetSections={readyForSetSections} setSectionsPos={setSectionsPos}
+            scrollToStart={scrollToStart} sectionsPos={sectionsPos}
+          />
         </div>
         <Team />
         <Footer />

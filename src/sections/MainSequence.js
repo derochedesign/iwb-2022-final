@@ -7,8 +7,10 @@ import DisasterCard from "components/DisasterCard";
 import { keyAffected } from "data/keyAffected";
 import { migrations } from "data/migrations";
 import ConnectionCard from "components/ConnectionCard";
+import { otherProjects } from "data/otherProjects";
+import OtherProjectCard from "components/OtherProjectCard";
 
-const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
+const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyForSetSections, readyForSetSections, setSectionsPos, scrollToStart}) => {
   
   const getRelative = val => {
     //get percentage relative to overall scroll distance
@@ -39,6 +41,10 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
   const totalSeqFive = totalSeqFour + holdTextLength;
   //map three main
   const totalSeqSix = totalSeqFive + holdMapLength;
+  //map three outro
+  const totalSeqSeven = totalSeqSix + holdTextLength;
+  //map four main
+  const totalSeqEight = totalSeqSeven + holdMapLength;
   
   const [currTitleText, setCurrTitleText] = useState(mainCopy.introduction.title);
   const [currBodyText, setCurrBodyText] = useState(
@@ -58,10 +64,12 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
   const [currDisaster, setCurrDisaster] = useState();
   const [currIDP, setCurrIDP] = useState();
   const [currConnection, setCurrConnection] = useState();
+  const [currOtherProject, setCurrOtherProject] = useState();
   const mapPreLit = [
     disasters.map((d,i) => ({regionId:d.regionId, id:i})),
     keyAffected.map((k,i) => ({regionId:k.regionId, id:i})),
-    migrations.map((m,i) => ({regionId:m.regionId, id:i}))
+    migrations.map((m,i) => ({regionId:m.regionId, id:i})),
+    otherProjects.map((p,i) => ({regionId:p.regionId, id:i}))
   ]
   const mapColours = [
     {
@@ -76,6 +84,10 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
       main: "var(--colour-purple)",
       hover: "var(--colour-blue-dark)",
       connection: "var(--colour-blue-light)"
+    },
+    {
+      main: "var(--colour-purple)",
+      hover: "var(--colour-white)",
     }
   ]
   const mapZoom = [
@@ -106,6 +118,21 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
   }, [mainSeqStart]);
   
   useEffect(() => {
+    if (readyForSetSections) {
+      //offset to push into the next section rather than be right at the edge
+      setSectionsPos(prev => 
+      [...prev,
+        scrollToStart+fadeInLength,
+        getAbsolute(totalSeqOne)+scrollToStart, 
+        getAbsolute(totalSeqThree)+scrollToStart,
+        getAbsolute(totalSeqFive)+scrollToStart,
+        getAbsolute(totalSeqSeven)+scrollToStart
+      ]);
+      setReadyForSetSections(false);
+    }
+  }, [readyForSetSections])
+  
+  useEffect(() => {
     if (currMap === 0) {
       let _currDisaster = disasters.find(d => (d.id === (countryCode.id && (201+Number(countryCode.id)))));
       setCurrDisaster(_currDisaster);
@@ -117,6 +144,10 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
     else if (currMap === 2) {
       let _currConnection = migrations.find(m => m.regionId === countryCode.regionId);
       setCurrConnection(_currConnection);
+    }
+    else if (currMap === 3) {
+      let _currOP = otherProjects.find(p => p.regionId === countryCode.regionId);
+      setCurrOtherProject(_currOP);
     }
   }, [countryCode]);
   
@@ -132,6 +163,8 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
     else if (currPos <= totalSeqFour && currPos >= totalSeqThree && currSeq !== 3) setCurrSeq(3);
     else if (currPos <= totalSeqFive && currPos >= totalSeqFour && currSeq !== 4) setCurrSeq(4);
     else if (currPos <= totalSeqSix && currPos >= totalSeqFive && currSeq !== 5) setCurrSeq(5);
+    else if (currPos <= totalSeqSeven && currPos >= totalSeqSix && currSeq !== 6) setCurrSeq(6);
+    else if (currPos <= totalSeqEight && currPos >= totalSeqSeven && currSeq !== 7) setCurrSeq(7);
     
   }, [currPos]);
   
@@ -169,6 +202,15 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
       setLockMap(false);
       setCurrMap(2);
     }
+    else if (currSeq === 6) {
+      setLockMap(true);
+      setCurrMap(2);
+    }
+    else if (currSeq === 7) {
+      //map four (3)
+      setLockMap(false);
+      setCurrMap(3);
+    }
     else {
       setLockMap(true);
     }
@@ -187,6 +229,9 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions}) => {
       }
       {(currConnection) && 
         <ConnectionCard data={currConnection} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
+      }
+      {(currOtherProject) && 
+        <OtherProjectCard data={currOtherProject} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
       }
       <h1 className="info-disp">S:{currSeq}/M:{currMap}</h1>
       <ParallaxProvider>

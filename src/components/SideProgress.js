@@ -21,6 +21,12 @@ const SideProgress = props => {
   const scrollPos = useRef(0);
   
   const handleNavigate = ind => {
+    if (props.sectionsPos[currSection] > props.sectionsPos[ind]) {
+      props.setScrollOffset(-20);
+    }
+    else {
+      props.setScrollOffset(20);
+    }
     props.scrollTo(props.sectionsPos[ind]);
     setIgnoreScroll(true);
     setSwitchedSection(true);
