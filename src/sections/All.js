@@ -10,6 +10,7 @@ import MainSequence from "./MainSequence";
 import { Outlet } from "react-router";
 import Team from "./Team";
 import Footer from "./Footer";
+import Principles from "components/Principles";
 
 const All = props => {
   
@@ -30,8 +31,9 @@ const All = props => {
   const [scrollToStart, setScrollToStart] = useState(0);
   const [scrollOffset, setScrollOffset] = useState(20);
   
+  const [scrollDistMain, setScrollDistMain] = useState(5900);
+  
   const scrollDistIntro = 1500;
-  const scrollDistMain = 4800;
   const [currMainPos, setMainCurrPos] = useState(0);
   const [mainSeqStart, setMainSeqStart] = useState(false);
   
@@ -128,10 +130,11 @@ const All = props => {
           <MainSequence 
             currPos={currMainPos} mainSeqStart={mainSeqStart} scrollDist={scrollDistMain} dimensions={props.screenDimension}
             setReadyForSetSections={setReadyForSetSections} readyForSetSections={readyForSetSections} setSectionsPos={setSectionsPos}
-            scrollToStart={scrollToStart} sectionsPos={sectionsPos}
+            scrollToStart={scrollToStart} sectionsPos={sectionsPos} setScrollDistMain={setScrollDistMain}
           />
         </div>
-        {/* <Team /> */}
+        <Principles dimensions={props.screenDimension}/>
+        <Team />
         <Footer />
       </div>
       <Outlet />

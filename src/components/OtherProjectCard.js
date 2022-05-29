@@ -14,15 +14,23 @@ const OtherProjectCard = props => {
   const topOffsetAllowed = 24;
 
   const definePosition = () => {
-
-    // if (cardRef.current.offsetWidth + props.left > props.dimensions.width - leftOffsetAllowed) {
-    //   let el = document.getElementById(props.data[0].regionId);
-    //   setLeft(props.left - el.getBoundingClientRect().width - cardRef.current.offsetWidth);
-    // }
+    let _left = props.left;
+    let _top = props.top;
+    
+    if (cardRef.current.offsetWidth + props.left > props.dimensions.width - leftOffsetAllowed) {
+      let el = document.getElementById(props.data[0].regionId);
+      _left = props.left - el.getBoundingClientRect().width - cardRef.current.offsetWidth;
+    }
 
     if (cardRef.current.offsetHeight + props.top > props.dimensions.height - topOffsetAllowed) {
-      setTop(props.dimensions.height / 2 - cardRef.current.offsetHeight / 2);
+      _top = props.dimensions.height / 2 - cardRef.current.offsetHeight / 2;
     }
+    setLeft(_left);
+    setTop(_top);
+  }
+  
+  const handleExit = () => {
+    props.setCountryClicked("");
   }
   
   const handleProject = ind => {
@@ -31,7 +39,7 @@ const OtherProjectCard = props => {
 
   useEffect(() => {
     definePosition();
-  }, [props.dimensions, cardRef]);
+  }, [props.dimensions, cardRef, props.data]);
 
   useEffect(() => {
     setAnim(true);
@@ -40,8 +48,8 @@ const OtherProjectCard = props => {
 
 
   return (
-    <div ref={cardRef} className="card list" data-active={anim} style={{ left: left, top: top }}>
-      {currProject && <InnerCard data={currProject} setCurrProject={setCurrProject} />}
+    <div ref={cardRef} className="card list" data-active={anim} style={{ left: left, top: top-5 }}>
+      {currProject && <InnerCard data={currProject} setCurrProject={setCurrProject} handleExit={handleExit} set />}
       {!currProject &&
         <div className="body">
           <ul style={{gridTemplateRows: `repeat(${props.data.length}, 1fr)`}}>
@@ -77,7 +85,7 @@ const InnerCard = props => {
   
   return (
     <>
-      <div className="hero-image">
+      <div className="hero-image" onClick={props.handleExit}>
         <img src={`/images/otherProjects/${props.data.id}/image.jpg`} alt={props.data.title} />
       </div>
       <div className="header-bar item-row">

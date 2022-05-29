@@ -7,11 +7,11 @@ export const otherProjects = [
     year: "2018",
     principles: [
       {
-        id: 603,
+        id: 707,
         name: "Address Variables"
       },
       {
-        id: 607,
+        id: 705,
         name: "Eliminate Exposure"
       },
     ],
@@ -30,39 +30,39 @@ export const otherProjects = [
     year: "2014",
     principles: [
       {
-        id: 601,
+        id: 704,
         name: "Apply Repetition"
       },
       {
-        id: 602,
+        id: 703,
         name: "Distribute Resources"
       },
       {
-        id: 603,
+        id: 707,
         name: "Address Variables"
       },
       {
-        id: 604,
+        id: 701,
         name: "Embrace Perspectives"
       },
       {
-        id: 605,
+        id: 709,
         name: "Reimagine Home"
       },
       {
-        id: 606,
+        id: 702,
         name: "Redefine Boundaries"
       },
       {
-        id: 607,
+        id: 705,
         name: "Eliminate Exposure"
       },
       {
-        id: 608,
+        id: 708,
         name: "Reduce Failures"
       },
       {
-        id: 609,
+        id: 706,
         name: "Recognize Identities"
       },
     ],
@@ -81,7 +81,7 @@ export const otherProjects = [
     year: "2019",
     principles: [
       {
-        id: 601,
+        id: 704,
         name: "Apply Repetition"
       },
     ],
@@ -100,11 +100,11 @@ export const otherProjects = [
     year: "2019",
     principles: [
       {
-        id: 604,
+        id: 701,
         name: "Embrace Perspectives"
       },
       {
-        id: 609,
+        id: 706,
         name: "Recognize Identities"
       },
     ],
@@ -123,11 +123,11 @@ export const otherProjects = [
     year: "2021",
     principles: [
       {
-        id: 601,
+        id: 704,
         name: "Apply Repetition"
       },
       {
-        id: 607,
+        id: 705,
         name: "Eliminate Exposure"
       },
     ],
@@ -146,7 +146,7 @@ export const otherProjects = [
     year: "2020",
     principles: [
       {
-        id: 601,
+        id: 704,
         name: "Apply Repetition"
       },
 
@@ -166,7 +166,7 @@ export const otherProjects = [
     year: "2016",
     principles: [
       {
-        id: 602,
+        id: 703,
         name: "Distribute Resources"
       },
     ],
@@ -185,7 +185,7 @@ export const otherProjects = [
     year: "2015",
     principles: [
       {
-        id: 608,
+        id: 708,
         name: "Reduce Failures"
       },
     ],
@@ -204,11 +204,11 @@ export const otherProjects = [
     year: "2007",
     principles: [
       {
-        id: 603,
+        id: 707,
         name: "Address Variables"
       },
       {
-        id: 608,
+        id: 708,
         name: "Reduce Failures"
       },
     ],
@@ -228,11 +228,11 @@ export const otherProjects = [
     principles: [
 
       {
-        id: 601,
+        id: 704,
         name: "Apply Repetition"
       },
       {
-        id: 607,
+        id: 705,
         name: "Eliminate Exposure"
       },
     ],
@@ -252,11 +252,11 @@ export const otherProjects = [
     principles: [
 
       {
-        id: 607,
+        id: 705,
         name: "Eliminate Exposure"
       },
       {
-        id: 608,
+        id: 708,
         name: "Reduce Failures"
       },
     ],
@@ -276,7 +276,7 @@ export const otherProjects = [
     principles: [
 
       {
-        id: 608,
+        id: 708,
         name: "Reduce Failures"
       },
     ],
@@ -296,7 +296,7 @@ export const otherProjects = [
     principles: [
 
       {
-        id: 608,
+        id: 708,
         name: "Reduce Failures"
       },
     ],
@@ -315,23 +315,23 @@ export const otherProjects = [
     year: "2021",
     principles: [
       {
-        id: 601,
+        id: 704,
         name: "Apply Repetition"
       },
       {
-        id: 602,
+        id: 703,
         name: "Distribute Resources"
       },
       {
-        id: 607,
+        id: 705,
         name: "Eliminate Exposure"
       },
       {
-        id: 608,
+        id: 708,
         name: "Reduce Failures"
       },
       {
-        id: 609,
+        id: 706,
         name: "Recognize Identities"
       },
     ],
@@ -350,7 +350,7 @@ export const otherProjects = [
     year: "2012",
     principles: [
       {
-        id: 602,
+        id: 703,
         name: "Distribute Resources"
       },
     ],
@@ -369,11 +369,11 @@ export const otherProjects = [
     year: "2010",
     principles: [
       {
-        id: 605,
+        id: 709,
         name: "Reimagine Home"
       },
       {
-        id: 607,
+        id: 705,
         name: "Eliminate Exposure"
       },
     ],
@@ -392,11 +392,11 @@ export const otherProjects = [
     year: "2014",
     principles: [
       {
-        id: 602,
+        id: 703,
         name: "Distribute Resources"
       },
       {
-        id: 605,
+        id: 709,
         name: "Reimagine Home"
       },
     ],
@@ -415,7 +415,7 @@ export const otherProjects = [
     year: "2020",
     principles: [
       {
-        id: 609,
+        id: 706,
         name: "Recognize Identities"
       },
     ],
@@ -435,11 +435,11 @@ export const otherProjects = [
     year: "2016",
     principles: [
       {
-        id: 605,
+        id: 709,
         name: "Reimagine Home"
       },
       {
-        id: 606,
+        id: 702,
         name: "Redefine Boundaries"
       },
     ],
@@ -458,11 +458,11 @@ export const otherProjects = [
     year: "2010",
     principles: [
       {
-        id: 603,
+        id: 707,
         name: "Address Variables"
       },
       {
-        id: 608,
+        id: 708,
         name: "Reduce Failures"
       },
     ],
@@ -481,15 +481,15 @@ export const otherProjects = [
     year: "2020",
     principles: [
       {
-        id: 601,
+        id: 704,
         name: "Apply Repetition"
       },
       {
-        id: 607,
+        id: 705,
         name: "Eliminate Exposure"
       },
       {
-        id: 608,
+        id: 708,
         name: "Reduce Failures"
       },
     ],
@@ -508,7 +508,7 @@ export const otherProjects = [
     year: "2020",
     principles: [
       {
-        id: 603,
+        id: 707,
         name: "Address Variables"
       },
     ],
@@ -527,23 +527,23 @@ export const otherProjects = [
     year: "2020",
     principles: [
       {
-        id: 601,
+        id: 704,
         name: "Apply Repetition"
       },
       {
-        id: 602,
+        id: 703,
         name: "Distribute Resources"
       },
       {
-        id: 603,
+        id: 707,
         name: "Address Variables"
       },
       {
-        id: 608,
+        id: 708,
         name: "Reduce Failures"
       },
       {
-        id: 609,
+        id: 706,
         name: "Recognize Identities"
       },
     ],
@@ -562,7 +562,7 @@ export const otherProjects = [
     year: "2020",
     principles: [
       {
-        id: 603,
+        id: 707,
         name: "Address Variables"
       },
 
@@ -582,7 +582,7 @@ export const otherProjects = [
     year: "2021",
     principles: [
       {
-        id: 604,
+        id: 701,
         name: "Embrace Perspectives"
       },
 
@@ -602,7 +602,7 @@ export const otherProjects = [
     year: "2019",
     principles: [
       {
-        id: 606,
+        id: 702,
         name: "Redefine Boundaries"
       },
 
@@ -622,11 +622,11 @@ export const otherProjects = [
     year: "2016",
     principles: [
       {
-        id: 603,
+        id: 707,
         name: "Address Variables"
       },
       {
-        id: 609,
+        id: 706,
         name: "Recognize Identities"
       },
     ],
@@ -645,15 +645,15 @@ export const otherProjects = [
     year: "2015",
     principles: [
       {
-        id: 602,
+        id: 703,
         name: "Distribute Resources"
       },
       {
-        id: 605,
+        id: 709,
         name: "Reimagine Home"
       },
       {
-        id: 607,
+        id: 705,
         name: "Eliminate Exposure"
       },
     ],

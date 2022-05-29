@@ -15,7 +15,7 @@ export const grow = {
     body:[
       "Climate change has forced over 7 million people to move internally in 2020 alone. These internal migrants often move from a rural region susceptible to greater climate risk to an urban region for more secure living conditions. Many times, the reason for this move is a result of decreasing or loss of livelihood. In agricultural areas, unsustainable industry experiencing climate impacts will disrupt employment and income levels. Broader implications of climate impacts include global labour shortages as a result of conventional unsustainable agricultural practices, such as monoculture, that directly causes environmental degradation and decreasing agricultural yields. Often, internal migrants have no formalized education or skills applicable to a new urban setting, creating precarity in the labour market that results in underemployment and poverty. The population increase towards these urban centers causes extreme sprawl to informal living conditions and unsustainable growth in a city, making both the city and those who live in its outskirts more susceptible to climate risk and other social-cultural issues, such as exposure to crime.",
       
-      "The identified user is the rural-to-urban internal migrant. Often, internal migration patterns are not considered climate-induced, but rather economic, due to their close ties with labour and income opportunities or shortages in urban contexts. However, as demonstrated, the economic migrant originating from rural settings is inseparable from climate impacts. These impacts can alter the economic stability of the agricultural industry, forcing decreasing incomes or layoffs due to decreasing food production yields. 80 billion full-time jobs, 66% of them being agricultural workers,  are projected to experience a drop in working hours if temperatures rise by 1.5C, an equivalent of a  $2.4 trillion USD hit to the global economy."
+      "The identified user is the rural-to-urban internal migrant. Often, internal migration patterns are not considered climate-induced, but rather economic, due to their close ties with labour and income opportunities or shortages in urban contexts. However, as demonstrated, the economic migrant originating from rural settings is inseparable from climate impacts. These impacts can alter the economic stability of the agricultural industry, forcing decreasing incomes or layoffs due to decreasing food production yields. 80 billion full-time jobs, 66% of them being agricultural workers,  are projected to experience a drop in working hours if temperatures rise by 1.5C, an equivalent of a $2.4 trillion USD hit to the global economy."
     ],
     img: null
   },
@@ -66,19 +66,19 @@ export const grow = {
       {
         img: "path-to-img",
         title: "RECOGNIZE IDENTITIES",
-        id: 0,
+        id: 609,
         body: "We recognize that internal rural to urban climate migrants have the necessary skills and experience that will bring forth climate resilience to urban communities. Therefore, we provide them a platform to use their skills in a responsible and dignified manner, incorporating their knowledge as assets to consult and inform emerging urban agricultural initiatives."
       },
       {
         img: "path-to-img",
         title: "APPLY REPITITION",
-        id: 0,
+        id: 601,
         body: "We practice under a “Center of Excellence” system that values standardized best practices across client projects. We include a wide variety of easily repeatable schematics and garden plans, that create diverse ecosystems in urban enclaves. Our system values regenerative practices, growing the most sustainable produce in even the most dense spaces."
       },
       {
         img: "path-to-img",
         title: "REDUCE FAILURES",
-        id: 0,
+        id: 608,
         body: "We understand that the agricultural industry is wholly unsustainable in its current state. In order to scale up urban integration to prevent mass failure of food production, we work with local clients and communities to make customized intervention easily accessible. Our plans are compliant with municipal regulations to streamline widespread green development."
       }
     ]
@@ -86,10 +86,10 @@ export const grow = {
   closing:{
     title: "Section Heading",
     body:[
-      "The solution of Get Up & Grow lies in its strategy: the deployment of human resources as valuable assets to green development in urbanizing areas. This strategy takes on two fronts: the client-facing approach, and the employee-facing approach. When an internal migrant decides to move to an urban area in Mexico City, they can be contracted with People Get Up & Grow through one of the following channels:",
+      "The solution of Get Up & Grow lies in its strategy: the deployment of human resources as valuable assets to green development in urbanizing areas. This strategy takes on two fronts: the client-facing approach, and the employee-facing approach. When an internal migrant decides to move to an urban area in Mexico City, they can be contracted with People Get Up & Grow through one of the following channels:the client-facing approach, and the employee-facing approach. When an internal migrant decides to move to an urban area in Mexico City, they can be contracted with People Get Up & Grow through one of the following channels: Recruitment at informal day labour pickup sites, bars, and social service spaces or referral through municipal services, job boards, and career fairs.",
       "The internal migrant will begin working as a gardener, constructing and planting an urban garden according to the Center’s plan. As they continue to work for the company, they will be able to prove leadership qualities and growth through educational workshops and training modules that allow for career mobility. An internal migrant will have two options for internal growth: project lead (after 2+ years) and Center consultant (after 5+ years). Once the internal migrant becomes a Center consultant, they will work among a team to assess the client’s designated space for agricultural intervention, create a work plan for produce planted and grown, and a community maintenance plan for continuous relationship building and project expansion.",
       
-      "The client-facing approach will allow clients to commission the Center for their greening project. They will be able to access an online platform that offers the following services:",
+      "The client-facing approach will allow clients to commission the Center for their greening project. They will be able to access an online platform that offers the following services:(1) Design consultation, proposal, and planting planning, (2) Gardening and construction service, and (3) Legal consultation and obtaining city approvals with municipal partners.",
       
       "Based on the client needs and space available, the internal team will assess the space to create a “plan” for the local urban garden. The agricultural team will utilize their knowledge infrastructure to maintain best practices for urban agriculture, including sustainable approaches, regenerative agriculture, permaculture, and technologies, repurposed materials, and techniques, to create the most well-rounded site-specific plan. Our internal team will also be responsible for obtaining necessary city approvals for implementing a special project demonstration on the site, enabling our project with more extenuating permissions. If the client requires construction and garden labour, the Center will deploy a team of skilled agriculturalists and craftspeople to build the project efficiently, and in constant communication with the central team. Once complete, the Center will host workshops to enable community maintenance, and work with the community to enhance their green development strategy in conjunction with municipal requirements."
     ],
@@ -111,15 +111,5 @@ export const grow = {
       "path-to-img",
       "path-to-img"
     ]
-  },
-  sources:[
-    {
-      title: "link text",
-      link: "https://actual-link"
-    },
-    {
-      title: "link text",
-      link: "https://actual-link"
-    },
-  ]
+  }
 }

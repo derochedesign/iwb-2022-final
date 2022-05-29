@@ -30,23 +30,23 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
   const holdTextLength = getRelative(500);
   const holdMapLength = getRelative(400);
   
-  //map one intro ; seq 0
+  //map one intro
   const totalSeqOne = holdTextLength*3 + (getRelative(fadeInLength));
-  //map one main; seq 1
+  //map one main
   const totalSeqTwo = totalSeqOne + holdMapLength;
-  //map one outro; seq 2
+  //map one outro
   const totalSeqThree = totalSeqTwo + holdTextLength;
-  //map two main; seq 3
+  //map two main
   const totalSeqFour = totalSeqThree + holdMapLength;
-  //map two outro; seq 4
+  //map two outro
   const totalSeqFive = totalSeqFour + holdTextLength;
-  //map three main; seq 5
+  //map three main
   const totalSeqSix = totalSeqFive + holdMapLength;
-  //map three outro; seq 6
-  const totalSeqSeven = totalSeqSix + holdTextLength*3 + (getRelative(fadeInLength));
-  //map four main; seq 7
+  //map three outro
+  const totalSeqSeven = totalSeqSix + holdTextLength;
+  //map four main
   const totalSeqEight = totalSeqSeven + holdMapLength;
-  //principles in; seq 8
+  //principles in
   const totalSeqNine = totalSeqEight + holdMapLength;
   
   const [currTitleText, setCurrTitleText] = useState(mainCopy.introduction.title);
@@ -69,10 +69,13 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
   const [currDisaster, setCurrDisaster] = useState();
   const [currIDP, setCurrIDP] = useState();
   const [currConnection, setCurrConnection] = useState();
+  const [currOtherProject, setCurrOtherProject] = useState();
+  const otherProjectTimeoutRef = useRef();
   const mapPreLit = [
     disasters.map((d,i) => ({regionId:d.regionId, id:i})),
     keyAffected.map((k,i) => ({regionId:k.regionId, id:i})),
-    migrations.map((m,i) => ({regionId:m.regionId, id:i}))
+    migrations.map((m,i) => ({regionId:m.regionId, id:i})),
+    otherProjects.map((p,i) => ({regionId:p.regionId, id:i}))
   ]
   const mapColours = [
     {
@@ -87,6 +90,10 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
       main: "var(--colour-purple)",
       hover: "var(--colour-blue-dark)",
       connection: "var(--colour-blue-light)"
+    },
+    {
+      main: "var(--colour-purple)",
+      hover: "var(--colour-white)",
     }
   ]
   const mapZoom = [
@@ -146,6 +153,13 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
       let _currConnection = migrations.find(m => m.regionId === countryCode.regionId);
       setCurrConnection(_currConnection);
     }
+    else if (currMap === 3) {
+      let _currOP = otherProjects.filter(p => p.regionId === countryCode.regionId);
+      if (countryClicked !== countryCodeFixed) {
+        clearTimeout(otherProjectTimeoutRef.current);
+        setCurrOtherProject(_currOP);
+      }
+    }
   }, [countryCode]);
   
   useEffect(() => {
@@ -158,21 +172,10 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
   }, [countryClicked]);
   
   useEffect(() => {
-    
-    if (currPos < totalSeqFour) {
-      let _pos = (currPos < (holdTextLength*mainCopy.introduction.body.length)) 
-        ? Math.floor(currPos / holdTextLength) 
-        : mainCopy.introduction.body.length - 1;
-      if (mainCopy.introduction.body[_pos] !== currBodyText) setCurrBodyText(mainCopy.introduction.body[_pos]);
-    }
-    else {
-      let _pos = (currPos - totalSeqSix < (holdTextLength*mainCopy.principles.preBody.length)) 
-        ? Math.floor((currPos - totalSeqSix) / holdTextLength) 
-        : mainCopy.principles.preBody.length - 1;
-      console.log(_pos);
-      if (mainCopy.principles.preBody[_pos] !== currBodyText) setCurrBodyText(mainCopy.principles.preBody[_pos]);
-    }
-    
+    let _pos = (currPos < (holdTextLength*mainCopy.introduction.body.length)) 
+      ? Math.floor(currPos / holdTextLength) 
+      : mainCopy.introduction.body.length - 1;
+    if (mainCopy.introduction.body[_pos] !== currBodyText) setCurrBodyText(mainCopy.introduction.body[_pos]);
     
     if (currPos <= totalSeqOne && currPos >= 0 && currSeq !== 0) setCurrSeq(0);
     else if (currPos <= totalSeqTwo && currPos >= totalSeqOne && currSeq !== 1) setCurrSeq(1);
@@ -223,7 +226,16 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
     else if (currSeq === 6) {
       setLockMap(true);
       setCurrMap(2);
-      setCurrTitleText(mainCopy.principles.preTitle);
+    }
+    else if (currSeq === 7) {
+      //map four (3)
+      setLockMap(false);
+      setCurrMap(3);
+    }
+    else if (currSeq === 8) {
+      //map four (3)
+      setLockMap(true);
+      setCurrMap(3);
     }
     else {
       setLockMap(true);
@@ -244,13 +256,16 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
       {(currConnection) && 
         <ConnectionCard data={currConnection} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
       }
+      {(currOtherProject?.length > 0 && countryClicked === countryCodeFixed) && 
+        <OtherProjectCard data={currOtherProject} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions} setCountryClicked={setCountryClicked}/>
+      }
       <h1 className="info-disp">S:{currSeq}/M:{currMap}</h1>
       <ParallaxProvider>
         {/*TODO: When mobile, blow up the map, make it draggable, height 95*/}
         <WorldMap map={currMap} colours={mapColours[currMap]} setCountry={setCountry} lock={lockMap} preLit={mapPreLit[currMap]} targets={currMap === 0} zoom={mapZoom[currSeq]} connections={currMap === 2} setHoverPos={setHoverPos} setCountryClicked={setCountryClicked} />
-        { mainSeqStart && (currSeq === 0 || currSeq === 6) &&
+        { mainSeqStart && currSeq === 0 &&
           <Parallax className="inherit" speed={2} startScroll={beginScroll} endScroll={beginScroll + scrollDist}>
-            <Parallax className="inherit" opacity={[0,1]} startScroll={beginScroll + ( currSeq === 6 ? getAbsolute(totalSeqSix) : 0)} endScroll={beginScroll + ( currSeq === 6 ? getAbsolute(totalSeqSix) : 0) + fadeInLength}>
+            <Parallax className="inherit" opacity={[0,1]} startScroll={beginScroll} endScroll={beginScroll + fadeInLength}>
               <div className="center-title-inner item-list large">
                 <h2>{currTitleText}</h2>
                 <h3>{currBodyText}</h3>
@@ -287,10 +302,10 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
             </div>
           </Parallax>
         }
-        { currSeq === 7 &&
+        { currSeq === 8 &&
           <Parallax opacity={[0,1]} 
-          startScroll={beginScroll + getAbsolute(totalSeqSeven)} 
-          endScroll={beginScroll + getAbsolute(totalSeqSeven) + fadeInLengthShort} 
+          startScroll={beginScroll + getAbsolute(totalSeqEight)} 
+          endScroll={beginScroll + getAbsolute(totalSeqEight) + fadeInLengthShort} 
           className="">
             <div className="center-title-inner item-list-large">
               <h4 className="i">How do we create climate-ready communities? We start by understanding the nine core principles for building solutions.</h4>

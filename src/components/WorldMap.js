@@ -9,7 +9,7 @@ import { migrations } from "data/migrations";
 import DisasterCard from "./DisasterCard";
 import { disasters } from "data/disastersCopy";
 
-const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connections, setHoverPos}) => {
+const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connections, setHoverPos, setCountryClicked}) => {
   
   const Map = TheWorldMap;
   const [currCountry, setCurrCountry] = useState("");
@@ -23,16 +23,12 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   const handleHover = e => {
     // Do nothing if on mobile
     if (isMobile) return;
-    const adjust = map === 3 ? 2 : 1;
-    const offset = 64; //the offset of the map
 
     let code = e.target.id;
     if (code !== currCountry) {
       
       let _elVals = e.target.getBoundingClientRect();
-      let xVal = code === "US" ? _elVals.x + (_elVals.width/4) : _elVals.x;
-      
-      setHoverPos({x:xVal + (_elVals.width/adjust) - offset, y:_elVals.y});
+      setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
       
       setPrevCountry(currCountry);
       setCurrCountry(code);
@@ -62,6 +58,15 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
       });
     };
   }
+  
+  const handleClick = e => {
+    if (countriesLitVal.find( l => l.regionId === e.target.id)) {
+      setCountryClicked(e.target.id);
+    }
+    else {
+      setCountryClicked("");
+    }
+  }
 
   const handleHoverMarker = e => {
     // Do nothing if on mobile
@@ -70,7 +75,9 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
     let code = e.currentTarget.dataset.country;
     let uID = e.currentTarget.dataset.uid;
     
-    setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - 150});
+    let yOff = 150;
+    
+    setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - yOff});
     
     setPrevCountry(currCountry);
     setCurrCountry(code);
@@ -154,6 +161,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   const addPreLit = () => {
     let _elPos = [];
     let litSoFar = [];
+    let customTargets = [];
     countriesLitVal.forEach(c => {
       litSoFar.push(c.regionId);
       let _el = document.getElementById(c.regionId);
@@ -188,14 +196,22 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
           });
         }
         else {
-          if (_elVals.width < 0) {
-            let newItem = "test";
-            setTargetsPos(prev => [...prev, newItem])
+          
+          if (_elVals.width * _elVals.height < 120) {
+            let newItem = {
+              left: _elVals.x + (_elVals.width / 2),
+              top:  _elVals.y+10,
+              regionId: c.regionId,
+              id: c.id, 
+              el: _el
+            };
+            customTargets.push(newItem);
           }
         }
       }
     });
     (targets && _elPos) && setTargetsPos(_elPos);
+    (!targets && customTargets) && setTargetsPos(customTargets);
   }
   
   const clearPreLit = () => {
@@ -258,12 +274,12 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
           startScroll={zoom?.start || 0} endScroll={zoom?.end || 0}
         >
           <div className="actual-map" onMouseOver={targets ? null : handleHover} 
-            onClick={targets ? null : handleTap} ref={mapContRef} 
+            onClick={!isMobile ? handleClick : handleTap} ref={mapContRef} 
             style={{pointerEvents: lock ? "none" : "auto"}} data-active={!lock}
           >
             <Map/>
           </div>
-          {targets && !lock && targetsPos.map((t,i) => 
+          {(targets || map === 3) && !lock && targetsPos.map((t,i) => 
             <div className="marker" data-active={markerAnim} data-hover 
               role="button" onMouseEnter={handleHoverMarker} 
               onMouseLeave={() => setCountry({regionId:null,id: null})} 

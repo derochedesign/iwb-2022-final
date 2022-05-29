@@ -1,3 +1,5 @@
+import { AddressVariablesIcon, ApplyRepetitionIcon, EliminateExposuresIcon, RecognizeIdentitiesIcon, RedefineBoundariesIcon, RedistributeResourcesIcon, ReduceFailuresIcon, ReimagineHomesIcon } from "components/Icons";
+
 export const mainCopy = {
   introduction:{
     title:"Wherever you are in the world, you are a part of the story of climate change.",
@@ -51,54 +53,67 @@ export const mainCopy = {
   ],
   principles:{
     preTitle:"Designing Climate-Ready Communities",
-    preBody:"We are all affected by climate change. Not everyone will be forcibly displaced by natural disasters, but the places where millions will seek refuge will need to adapt to their needs.",
+    preBody:[
+      "We are all affected by climate change. Not everyone will be forcibly displaced by natural disasters, but the places where millions will seek refuge will need to adapt to their needs.",
+      "Climate-readiness does not mean only addressing building resilience against natural disasters. Climate-ready communities understand that communities are systems that must be resilient, circular, co-operative, and integrated with the natural environment. Climate ready communities recognize that resiliency is embedded in the diversity of people, cultures, and ecosystems.",
+      "A climate ready community acts in the present to produce future benefit for all, it reflects real world conditions rather than abstract utopias."
+    ],
     top:"How do we create climate-ready communities? We start by understanding the nine core principles for building solutions.",
     title:"9 Principles to lead the way",
     principles:[
       { 
-        id:301,
+        id:701,
         title:"Embrace Perspectives",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta."
+        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        icon: AddressVariablesIcon
       },
       { 
-        id:302,
+        id:702,
         title:"REDEFINE BOUNDARIES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta."
+        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        icon: RedefineBoundariesIcon
       },
       { 
-        id:303,
+        id:703,
         title:"REDISTRIBUTE RESOURCES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta."
+        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        icon: RedistributeResourcesIcon
       },
       { 
-        id:304,
+        id:704,
         title:"APPLY REPETITION",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta."
+        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        icon: ApplyRepetitionIcon
       },
       { 
-        id:305,
+        id:705,
         title:"ELIMINATE EXPOSURES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta."
+        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        icon: EliminateExposuresIcon
       },
       { 
-        id:306,
+        id:706,
         title:"RECOGNIZE IDENTITIES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta."
+        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        icon: RecognizeIdentitiesIcon
       },
       { 
-        id:307,
+        id:707,
         title:"ADDRESS VARIABLES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta."
+        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        icon: AddressVariablesIcon
       },
       { 
-        id:308,
+        id:708,
         title:"REDUCE FAILURES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta."
+        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        icon: ReduceFailuresIcon
       },
       { 
-        id:309,
+        id:709,
         title:"REIMAGINE HOMES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta."
+        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        icon: ReimagineHomesIcon
       }
     ]
   }

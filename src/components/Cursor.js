@@ -15,14 +15,14 @@ const Cursor = (props) => {
       
       let isText = !!(["H1","H2","H3","H4","H5","H6","P","SPAN"].find(t => t === e.target.tagName));
       
-      if (e.target.dataset.text || isText) {
-        cursorRef.current.dataset.text=true;
+      if (e.target.dataset.hover) {
+        cursorRef.current.dataset.hover=true;
       }
       else if (e.target.dataset.pointer) {
         cursorRef.current.dataset.pointer=true;
       }
-      else if (e.target.dataset.hover) {
-        cursorRef.current.dataset.hover=true;
+      else if (e.target.dataset.text || isText) {
+        cursorRef.current.dataset.text=true;
       }
       else {
         cursorRef.current.dataset.pointer=false;
