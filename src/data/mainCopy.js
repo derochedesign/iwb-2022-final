@@ -116,5 +116,9 @@ export const mainCopy = {
         icon: ReimagineHomesIcon
       }
     ]
+  },
+  projectsIntro:{
+    title: "Climate-ready communities will be people-centred",
+    body: "We’ve developed three solutions to be used as frameworks for designing people-centered solutions. Each of these projects use the nine principles to address the various pain points in achieving climate-readiness."
   }
 }

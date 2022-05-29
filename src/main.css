@@ -470,6 +470,12 @@ section.team {
 .item-list-large > :last-child {
   margin-bottom: unset;
 }
+.item-list.center,
+.item-list-small.center,
+.item-list-med.center,
+.item-list-large.center {
+  align-items: center;
+}
 
 .item-list > button {
   margin-right: auto;
@@ -511,6 +517,23 @@ section.team {
 }
 .center p {
   max-width: unset;
+}
+
+.center-title .three-col {
+  gap: 9vw;
+}
+
+.project-intro-stack {
+  display: grid;
+  grid-template-rows: 10em auto auto;
+  justify-content: center;
+  justify-items: center;
+  gap: var(--gap);
+}
+.project-intro-stack svg {
+  height: 100%;
+  width: unset;
+  padding-bottom: var(--gap);
 }
 
 /* ________________CARD__________________ */

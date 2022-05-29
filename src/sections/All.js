@@ -11,6 +11,7 @@ import { Outlet } from "react-router";
 import Team from "./Team";
 import Footer from "./Footer";
 import Principles from "components/Principles";
+import ProjectsIntro from "./ProjectsIntro";
 
 const All = props => {
   
@@ -134,6 +135,7 @@ const All = props => {
           />
         </div>
         <Principles dimensions={props.screenDimension}/>
+        <ProjectsIntro />
         <Team />
         <Footer />
       </div>

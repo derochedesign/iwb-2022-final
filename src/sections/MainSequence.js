@@ -292,9 +292,11 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
           startScroll={beginScroll + getAbsolute(totalSeqSeven)} 
           endScroll={beginScroll + getAbsolute(totalSeqSeven) + fadeInLengthShort} 
           className="">
-            <div className="center-title-inner item-list-large">
-              <h4 className="i">How do we create climate-ready communities? We start by understanding the nine core principles for building solutions.</h4>
-              <h1>9 Principles to lead the way</h1>
+            <div className="center-title-inner">
+              <div className="item-list-large center">
+                <h4 className="i">How do we create climate-ready communities? We start by understanding the nine core principles for building solutions.</h4>
+                <h1>9 Principles to lead the way</h1>
+              </div>
             </div>
           </Parallax>
         }
