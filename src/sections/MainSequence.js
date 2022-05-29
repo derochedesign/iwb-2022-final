@@ -1,6 +1,6 @@
 import { mainCopy } from "data/mainCopy";
 import WorldMap from "components/WorldMap";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParallax, Parallax, ParallaxProvider } from "react-scroll-parallax";
 import { disasters } from "data/disastersCopy";
 import DisasterCard from "components/DisasterCard";
@@ -65,6 +65,7 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
   const [currIDP, setCurrIDP] = useState();
   const [currConnection, setCurrConnection] = useState();
   const [currOtherProject, setCurrOtherProject] = useState();
+  const otherProjectTimeoutRef = useRef();
   const mapPreLit = [
     disasters.map((d,i) => ({regionId:d.regionId, id:i})),
     keyAffected.map((k,i) => ({regionId:k.regionId, id:i})),
@@ -133,6 +134,7 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
   }, [readyForSetSections])
   
   useEffect(() => {
+    //set hover card information
     if (currMap === 0) {
       let _currDisaster = disasters.find(d => (d.id === (countryCode.id && (201+Number(countryCode.id)))));
       setCurrDisaster(_currDisaster);
@@ -146,8 +148,18 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
       setCurrConnection(_currConnection);
     }
     else if (currMap === 3) {
-      let _currOP = otherProjects.find(p => p.regionId === countryCode.regionId);
-      setCurrOtherProject(_currOP);
+      let _currOP = otherProjects.filter(p => p.regionId === countryCode.regionId);
+      if (currOtherProject?.length > 0 && _currOP.length === 0) {
+        otherProjectTimeoutRef.current = setTimeout(() => {
+          setCurrOtherProject(_currOP);
+          console.log("still happening");
+        }, 0);
+      }
+      else {
+        console.log("did clear");
+        clearTimeout(otherProjectTimeoutRef.current);
+        setCurrOtherProject(_currOP);
+      }
     }
   }, [countryCode]);
   
@@ -230,7 +242,7 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
       {(currConnection) && 
         <ConnectionCard data={currConnection} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
       }
-      {(currOtherProject) && 
+      {(currOtherProject?.length > 0) && 
         <OtherProjectCard data={currOtherProject} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
       }
       <h1 className="info-disp">S:{currSeq}/M:{currMap}</h1>

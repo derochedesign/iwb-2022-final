@@ -159,33 +159,6 @@ export const otherProjects = [
     ]
   },
   {
-    id: 507,
-    title: "Immigrant Services Society of BC",
-    link: "https://issbc.org/",
-    location: "Vancouver, Canada",
-    year: "1972",
-    principles: [
-      {
-        id: 605,
-        name: "Reimagine Home"
-      },
-      {
-        id: 606,
-        name: "Redefine Boundaries"
-      },
-      {
-        id: 609,
-        name: "Recognize Identities"
-      },
-    ],
-    regionId: "CA",
-    body: [
-
-      "Immigrant Services Society of BC is an immigration agency that provides housing, English language education, and career guidance to immigrants and refugees new to Canada."
-
-    ]
-  },
-  {
     id: 508,
     title: "Alipay Ant Forest",
     link: "https://medium.com/alipay-and-the-world/alipay-gallery-ant-forest-tree-planting-spring-2019-dc4e0578cc7c",
@@ -243,34 +216,6 @@ export const otherProjects = [
     body: [
 
       "A post-disaster reconstruction plan helps the community become a socially, economically, and environmentally sustainable city. The plan was developed by the community of Greensburg with a long term vision for rebuilding as a sustainable, resilient community."
-
-    ]
-  },
-  {
-    id: 511,
-    title: "Climate Smart Mining (CSM) Initiative",
-    link: "https://www.iva.se/globalassets/info-trycksaker/iva/1---la-porta---csm-presentation---sept-2020.pdf",
-    location: "Greensburg, United States",
-    year: "2007",
-    principles: [
-
-      {
-        id: 601,
-        name: "Apply Repetition"
-      },
-      {
-        id: 602,
-        name: "Distribute Resources"
-      },
-      {
-        id: 607,
-        name: "Eliminate Exposure"
-      },
-    ],
-    regionId: "US",
-    body: [
-
-      "CSM is a global initiative to ensure that the mining sector is managed in a way that minimizes the environmental and climate footprint considering the climate-action driven clean energy transition."
 
     ]
   },
@@ -397,154 +342,6 @@ export const otherProjects = [
 
     ]
   },
-
-
-  {
-    id: 517,
-    title: "Homebound",
-    link: "https://www.bloomberg.com/news/features/2020-10-06/is-rebuilding-in-fire-prone-areas-worth-it-homebound-thinks-so",
-    location: "California, United States",
-    year: "2018",
-    principles: [
-
-      {
-        id: 602,
-        name: "Distribute Resources"
-      },
-      {
-        id: 605,
-        name: "Reimagine Home"
-      },
-      {
-        id: 606,
-        name: "Redefine Boundaries"
-      },
-      {
-        id: 607,
-        name: "Eliminate Exposure"
-      },
-      {
-        id: 609,
-        name: "Recognize Identities"
-      },
-    ],
-    regionId: "US",
-    body: [
-
-      "Homebound is a start-up originating in California as a response to increasing wildfires. It is a platform that allows those affected by climate disaster to seamlessly commission an affordable, sustainable rebuild of their homes through the joint forces of architects, engineers, contractors, and insurance policies."
-
-    ]
-  },
-
-
-  {
-    id: 518,
-    title: "Transition Toronto",
-    link: "https://transitiongroups.org/group/toronto/",
-    location: "Toronto, Canada",
-    year: "2009",
-    principles: [
-
-      {
-        id: 601,
-        name: "Apply Repetition"
-      },
-      {
-        id: 602,
-        name: "Distribute Resources"
-      },
-      {
-        id: 603,
-        name: "Address Variables"
-      },
-      {
-        id: 605,
-        name: "Reimagine Home"
-      },
-      {
-        id: 607,
-        name: "Eliminate Exposure"
-      },
-      {
-        id: 608,
-        name: "Reduce Failures"
-      },
-      {
-        id: 609,
-        name: "Recognize Identities"
-      },
-    ],
-    regionId: "CA",
-    body: [
-
-      "The Transition Toronto project envisions a city made up of linked, locally resilient settlements. Its goal is to improve community involvement by fostering linkages between individuals, neighborhoods, and local government. They hope to inspire and assist people to minimize their reliance on fossil fuels, allowing them to maintain or improve their quality of life. It also intends to provide platforms for locating, developing, and sharing local resources. Overall, they hope to motivate and encourage good community action to improve local resilience."
-
-    ]
-  },
-
-
-  {
-    id: 519,
-    title: "Vivre en Ville",
-    link: "https://vivreenville.org/",
-    location: "Quebec, Canada",
-    year: "2010",
-    principles: [
-
-      {
-        id: 603,
-        name: "Address Variables"
-
-      },
-      {
-        id: 608,
-        name: "Reduce Failures"
-      },
-    ],
-    regionId: "CA",
-    body: [
-
-      "Vivre en Ville is a public interest organization that contributes to the development of sustainable communities throughout Quebec. It brings about change on all scales: from the building and the street to the neighborhood and the urban area. Through its actions, Vivre en Ville stimulates innovation and supports decision makers, professionals and citizens in creating prosperous living environments conducive to the wellbeing of its residents and mindful of the supporting capacity of the ecosystems."
-
-    ]
-  },
-
-  {
-    id: 520,
-    title: "Active Neighborhoods Canada Network",
-    link: "https://participatoryplanning.ca/",
-    location: "Montreal, Canada",
-    year: "2009",
-    principles: [
-      {
-        id: 601,
-        name: "Apply Repetition"
-      },
-      {
-        id: 603,
-        name: "Address Variables"
-      },
-      {
-        id: 605,
-        name: "Reimagine Home"
-      },
-      {
-        id: 607,
-        name: "Eliminate Exposure"
-      },
-      {
-        id: 608,
-        name: "Reduce Failures"
-      },
-    ],
-    regionId: "CA",
-    body: [
-
-      "The Active Neighborhoods Canada network is an innovative pan-Canadian partnership between the Montréal Urban Ecology Center, The Center for Active Transportation and Sustainable Calgary. The initiative strives to build equity in both planning processes and outcomes through built-in infrastructure interventions."
-
-    ]
-  },
-
   {
     id: 521,
     title: "The ECOBAS Project",
@@ -564,7 +361,6 @@ export const otherProjects = [
 
     ]
   },
-
   {
     id: 522,
     title: "Onaville",
@@ -588,63 +384,6 @@ export const otherProjects = [
 
     ]
   },
-
-  {
-    id: 523,
-    title: "Slum Dwellers International",
-    link: "https://sdinet.org",
-    location: "Africa, Asia, Latin America",
-    year: "1980s",
-    principles: [
-      {
-        id: 603,
-        name: "Address Variables"
-      },
-      {
-        id: 604,
-        name: "Embrace Perspectives"
-      },
-      {
-        id: 607,
-        name: "Eliminate Exposure"
-      },
-      {
-        id: 608,
-        name: "Reduce Failures"
-      },
-      {
-        id: 609,
-        name: "Recognize Identities"
-      },
-    ],
-    regionId: "BR",
-    body: [
-
-      "SDI is a network of community-based organizations of the urban poor in 32 countries and hundreds of cities and towns across Africa, Asia and Latin America. In each country where SDI has a presence, affiliate organizations come together at the community, city and national level to form federations of the urban poor.  SDI commits to creating a community management model for informal communities that are managed by residents to reduce urban poverty and exclusion. This includes profiling, enumeration and mapping."
-
-    ]
-  },
-
-  {
-    id: 524,
-    title: "Multicultural Mental Health Resource Centre",
-    link: "https://multiculturalmentalhealth.ca/",
-    location: "Canada",
-    year: "2012",
-    principles: [
-      {
-        id: 604,
-        name: "Embrace Perspectives"
-      },
-    ],
-    regionId: "CA",
-    body: [
-
-      "MMHRC seeks to improve the quality and availability of mental health services for people from diverse cultural and ethnic backgrounds, including new Canadians, refugees and members of established ethnocultural communities. The website provides timely and critical resources and multilingual information for beneficiaries and stakeholders in healthcare systems."
-
-    ]
-  },
-
   {
     id: 525,
     title: "Stellar",
@@ -668,7 +407,6 @@ export const otherProjects = [
 
     ]
   },
-
   {
     id: 526,
     title: "#StandUp4Migrants",
@@ -712,27 +450,6 @@ export const otherProjects = [
 
     ]
   },
-
-  {
-    id: 528,
-    title: "Miles4Migrants",
-    link: "https://miles4migrants.org/",
-    location: "United States",
-    year: "2016",
-    principles: [
-      {
-        id: 606,
-        name: "Redefine Boundaries"
-      },
-    ],
-    regionId: "US",
-    body: [
-
-      "Miles4Migrants is a non-profit organization that accepts unused frequent flyer miles, or unused credit card points to fund flights for refugees, asylees, and asylum seekers."
-
-    ]
-  },
-
   {
     id: 529,
     title: "Kibera Public Space Project",
@@ -756,51 +473,6 @@ export const otherProjects = [
 
     ]
   },
-
-  {
-    id: 530,
-    title: "Manufactured Sites | Estudio Teddy Cruz",
-    link: "https://www.moma.org/collection/works/113261",
-    location: "San Diego - Tijuana",
-    year: "2005",
-    principles: [
-      {
-        id: 607,
-        name: "Eliminate Exposure"
-      },
-    ],
-    regionId: "MX",
-    body: [
-
-      "Manufactured Sites proposes a maquiladora-produced frame that mediates across the multiplicity of recycled materials and systems brought from San Diego and re-assembled in Tijuana. It reinforces housing structure and improves the unavoidable recycling of low-income environments. The simple modular and rapidly deployable scaffolding system allows for vertical development and leaves the rest of the work and design up to the users. Not only does the settlement receive structural enhancements, the project instills a sense of value in those who live in these areas and work in the factory as they actively contribute to building the area they live in, reinforcing a sense of community."
-
-    ]
-  },
-
-  {
-    id: 531,
-    title: "U.S Department of Education- USNEI",
-    link: "https://www2.ed.gov/about/offices/list/ous/international/usnei/edlite-about.html",
-    location: "United States",
-    year: "2007",
-    principles: [
-      {
-        id: 605,
-        name: "Reimagine Home"
-      },
-      {
-        id: 606,
-        name: "Redefine Boundaries"
-      },
-    ],
-    regionId: "US",
-    body: [
-
-      "USNEI performs analyses of non-U.S. qualifications and issues recommendations as to how a particular qualification compares to a similar qualification or set of qualifications in the U.S. education system, labor market, or professions."
-
-    ]
-  },
-
   {
     id: 532,
     title: "Leeside",
@@ -828,7 +500,6 @@ export const otherProjects = [
 
     ]
   },
-
   {
     id: 533,
     title: "Climate Resilient Communities",
@@ -848,7 +519,6 @@ export const otherProjects = [
 
     ]
   },
-
   {
     id: 534,
     title: "Toyota Woven City",
@@ -884,7 +554,6 @@ export const otherProjects = [
 
     ]
   },
-
   {
     id: 535,
     title: "T.O. Supports",
@@ -905,7 +574,6 @@ export const otherProjects = [
 
     ]
   },
-
   {
     id: 536,
     title: "Preparing Our Home: Building Climate Resilience in First Nation Communities",
@@ -926,7 +594,6 @@ export const otherProjects = [
 
     ]
   },
-
   {
     id: 537,
     title: "Rural and Northern Immigration Pilot",
@@ -947,28 +614,6 @@ export const otherProjects = [
 
     ]
   },
-
-  {
-    id: 538,
-    title: "Encampment Support Network",
-    link: "https://www.encampmentsupportnetwork.com/",
-    location: "Toronto, Canada",
-    year: "2019",
-    principles: [
-      {
-        id: 607,
-        name: "Eliminate Exposure"
-      },
-
-    ],
-    regionId: "CA",
-    body: [
-
-      "Toronto will become a landing point for people that have been displaced from their homes due to the slow or sudden effects of climate change. Toronto already suffers from a lack of affordable housing options, pushing many current residents to live in the streets. If population density due to climate migrations increases the cost of living in this city, are we creating more individuals that face precarious housing due to the compounding effects of climate change. Toronto’s Encampment Support Network provides ad hoc supplies to unhoused individuals left exposed while advocating for permanent housing solutions. Dignified housing is a basic right for all people."
-
-    ]
-  },
-
   {
     id: 539,
     title: "Life Shara",
@@ -992,7 +637,6 @@ export const otherProjects = [
 
     ]
   },
-
   {
     id: 540,
     title: "Mangrove Conservation Project",

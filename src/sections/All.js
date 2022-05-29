@@ -131,7 +131,7 @@ const All = props => {
             scrollToStart={scrollToStart} sectionsPos={sectionsPos}
           />
         </div>
-        <Team />
+        {/* <Team /> */}
         <Footer />
       </div>
       <Outlet />

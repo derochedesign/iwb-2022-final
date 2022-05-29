@@ -23,12 +23,16 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   const handleHover = e => {
     // Do nothing if on mobile
     if (isMobile) return;
+    const adjust = map === 3 ? 2 : 1;
+    const offset = 64; //the offset of the map
 
     let code = e.target.id;
     if (code !== currCountry) {
       
       let _elVals = e.target.getBoundingClientRect();
-      setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
+      let xVal = code === "US" ? _elVals.x + (_elVals.width/4) : _elVals.x;
+      
+      setHoverPos({x:xVal + (_elVals.width/adjust) - offset, y:_elVals.y});
       
       setPrevCountry(currCountry);
       setCurrCountry(code);
@@ -182,6 +186,12 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
             id:c.id, 
             el:_el
           });
+        }
+        else {
+          if (_elVals.width < 0) {
+            let newItem = "test";
+            setTargetsPos(prev => [...prev, newItem])
+          }
         }
       }
     });
