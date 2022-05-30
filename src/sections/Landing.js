@@ -7,13 +7,13 @@ const Landing = ({currPos, titles, secRef}) => {
     <>
     <section className="center-title">
       <div className="center-title-inner">
-        <h1 data-text className="hero">What is the <span data-text className="i">change</span> in climate change?</h1>
+        <h1 data-text className="hero">What is the <span data-text className="i">change</span> in <span data-text className="reg">climate change?</span></h1>
       </div>
     </section>
     
     <section ref={secRef} className="center-title">
       <div className="center-title-inner">
-        <h1 data-text className="hero">It's the <span data-text className="reg">{titles[currPos]}</span></h1>
+        <h1 data-text className="hero"><span data-text className="reg">It's {titles[currPos]}</span></h1>
       </div>
     </section>
     </>

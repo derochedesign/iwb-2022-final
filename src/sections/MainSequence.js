@@ -11,7 +11,7 @@ import { otherProjects } from "data/otherProjects";
 import OtherProjectCard from "components/OtherProjectCard";
 import Principles from "components/Principles";
 
-const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyForSetSections, readyForSetSections, setSectionsPos, scrollToStart, setScrollDistMain}) => {
+const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimensions, setReadyForSetSections, readyForSetSections, setSectionsPos, scrollToStart, setScrollDistMain}) => {
   
   const getRelative = val => {
     //get percentage relative to overall scroll distance
@@ -112,8 +112,8 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
     null
   ];
 
-  
   useEffect(() => {
+    console.log(mainSeqStart);
     setBeginScroll(window.scrollY);
   }, [mainSeqStart]);
   
@@ -247,7 +247,7 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
       <h1 className="info-disp">S:{currSeq}/M:{currMap}</h1>
       <ParallaxProvider>
         {/*TODO: When mobile, blow up the map, make it draggable, height 95*/}
-        <WorldMap map={currMap} colours={mapColours[currMap]} setCountry={setCountry} lock={lockMap} preLit={mapPreLit[currMap]} targets={currMap === 0} zoom={mapZoom[currSeq]} connections={currMap === 2} setHoverPos={setHoverPos} setCountryClicked={setCountryClicked} />
+        {(!projectSeqStart) && <WorldMap map={currMap} colours={mapColours[currMap]} setCountry={setCountry} lock={lockMap} preLit={mapPreLit[currMap]} targets={currMap === 0} zoom={mapZoom[currSeq]} connections={currMap === 2} setHoverPos={setHoverPos} setCountryClicked={setCountryClicked} />}
         { mainSeqStart && (currSeq === 0 || currSeq === 6) &&
           <Parallax className="inherit" speed={2} startScroll={beginScroll} endScroll={beginScroll + scrollDist}>
             <Parallax className="inherit" opacity={[0,1]} startScroll={beginScroll + ( currSeq === 6 ? getAbsolute(totalSeqSix) : 0)} endScroll={beginScroll + ( currSeq === 6 ? getAbsolute(totalSeqSix) : 0) + fadeInLength}>
@@ -259,10 +259,17 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
           </Parallax>
         }
         { !lockMap &&
-          <Parallax opacity={[0,1]} startScroll={beginScroll + getAbsolute(totalSeqOne)} endScroll={beginScroll + getAbsolute(totalSeqOne) + fadeInLengthShort} className="map-bottom-text no-interact">
-            <h5>
-              {mainCopy.map[currMap].bottom}
-            </h5>
+          <Parallax opacity={[0,1]} startScroll={beginScroll + getAbsolute(totalSeqOne)} endScroll={beginScroll + getAbsolute(totalSeqOne) + fadeInLengthShort} className="inherit no-interact">
+            <div className="map-bottom-text no-interact">
+              <h5>
+                {mainCopy.map[currMap].bottom}
+              </h5>
+            </div>
+            <div className="map-top-text no-interact">
+              <h5>
+                {mainCopy.map[currMap].top}
+              </h5>
+            </div>
           </Parallax>
         }
         { (currSeq === 4 || currSeq === 2) &&
@@ -279,12 +286,20 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
           <Parallax opacity={[0,1]} 
             startScroll={beginScroll + getAbsolute(totalSeqThree)} 
             endScroll={beginScroll + getAbsolute(totalSeqThree) + fadeInLengthShort} 
-            className="map-top-text no-interact">
-            <div className="item-list-small">
-              <h3>{currIDP ? currIDP.name : ""}</h3>
-              <h4>Disaster Displacements: <span>{currIDP ? `${currIDP.disaster} persons` : ""}</span></h4>
-              <h4>Conflict Displacements: <span>{currIDP ? `${currIDP.conflict} persons` : ""}</span></h4>
-            </div>
+            className="map-top-text no-width no-interact">
+            {currIDP && 
+              <div className="item-list-small">
+                <h3>{currIDP.name}</h3>
+                <div className="item-row">
+                  <h4>Disaster Displacements:</h4>
+                  <h4 className="weight-bold">{`${currIDP.disaster} people`}</h4>
+                </div>
+                <div className="item-row">
+                  <h4>Conflict Displacements:</h4>
+                  <h4 className="weight-bold">{`${currIDP.conflict} people`}</h4>
+                </div>
+              </div>
+            }
           </Parallax>
         }
         { currSeq === 7 &&

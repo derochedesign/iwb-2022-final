@@ -11,13 +11,13 @@ import zan from "img/team/zan.jpg";
 const Team = props => {
   
   const allTeam = [
-    {img:daksh, name:"daksh gandhi", title:"Bachelor of Architecture"},
-    {img:jenna, name:"jenna rose storey", title:"Bachelor of Fine Arts, Integrated Media, & Furniture Designer"},
-    {img:migs, name:"joaquin (migs) topacio", title:"Bachelor of Science in Industrial Design"},
-    {img:jp, name:"josé pablo (jp) carrillo", title:"Bachelor of Visual Communication, Brand Strategist, & Packaging Designer"},
-    {img:rebecca, name:"rebecca arshawsky", title:"Honours Bachelor of Arts, Architecture, & Human Geography"},
-    {img:shashank, name:"shashank banawalikar", title:"Bachelor of Architecture"},
-    {img:zan, name:"zan ding", title:"Bachelor of Science in Agricultural & Environmental Sciences"},
+    {img:daksh, name:"daksh gandhi", title:"Bachelor of Architecture", link:"https://linkedin.com/in/dakshgandhi"},
+    {img:jenna, name:"jenna rose storey", title:"Bachelor of Fine Arts, Integrated Media, & Furniture Designer", link:""},
+    {img:migs, name:"joaquin (migs) topacio", title:"Bachelor of Science in Industrial Design", link:""},
+    {img:jp, name:"josé pablo (jp) carrillo", title:"Bachelor of Visual Communication, Brand Strategist, & Packaging Designer", link:""},
+    {img:rebecca, name:"rebecca arshawsky", title:"Honours Bachelor of Arts, Architecture, & Human Geography", link:"https://linkedin.com/in/rebecca-arshawsky-6639b1176"},
+    {img:shashank, name:"shashank banawalikar", title:"Bachelor of Architecture", link:"https://linkedin.com/in/shashank-banawalikar-5b7689223"},
+    {img:zan, name:"zan ding", title:"Bachelor of Science in Agricultural & Environmental Sciences", link:"https://linkedin.com/in/zan-ding-b18187218"},
   ];
   
   return(
@@ -25,7 +25,7 @@ const Team = props => {
       <h1>IDS '22 Research Team</h1>
     <div className="team-set">
       {allTeam.map((t,i) => 
-        <TeamCard key={i} img={t.img} name={t.name} title={t.title} setImgLoaded={props.setImgLoaded} imgsCount={allTeam.length}/>
+        <TeamCard key={i} img={t.img} name={t.name} title={t.title} link={t.link} setImgLoaded={props.setImgLoaded} imgsCount={allTeam.length}/>
       )}
     </div>
     </section>
@@ -44,8 +44,12 @@ const TeamCard = props => {
   
   return (
     <div className="team-card">
-      <img src={props.img} alt={`${props.name} headshot`} onLoad={handleLoad} />
-      <h4 className="name">{props.name}</h4>
+      <a href={props.link} target="_blank" rel="noopener" data-pointer>
+        <img src={props.img} alt={`${props.name} headshot`} onLoad={handleLoad} data-pointer/>
+      </a>
+      <a href={props.link} target="_blank" rel="noopener" data-pointer>
+        <h4 className="name" data-pointer>{props.name}</h4>
+      </a>
       <p className="title small">{props.title}</p>
     </div>
   )

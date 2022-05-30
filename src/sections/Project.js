@@ -1,4 +1,4 @@
-import { LogoIcon } from "components/Icons";
+import { LogoIcon, ProjectOneUserIcon } from "components/Icons";
 import { projects } from "data/projects";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -10,10 +10,12 @@ const Project = props => {
   const {projId} = useParams();
   const navigate = useNavigate();
   const data = projects.find(p => p.slug === projId)?.data;
-  const testImage = true;
+  const testImage = false;
   const testImageUri = "/images/projects/test.png";
   const [lightboxActive, setLightboxActive] = useState(false);
+  const [animReady, setAnimReady] = useState(false);
   const [currImage, setCurrImage] = useState();
+  const imageUri = `/images/projects/${data.slug}/`;
   
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -22,6 +24,8 @@ const Project = props => {
     root.style.setProperty('--colour-proj-main', data.colours[0]);
     root.style.setProperty('--colour-proj-dark', data.colours[1]);
     root.style.setProperty('--colour-proj-light', data.colours[2]);
+    
+    setAnimReady(true);
     
   }, []);
   
@@ -46,7 +50,7 @@ const Project = props => {
   if (!data) return null
   else
   return (
-      <div className="project-pop">
+      <div className="project-pop" data-active={animReady}>
         {lightboxActive && <Lightbox 
           mainSrc={currImage}
           onCloseRequest={() => setLightboxActive(false)}
@@ -59,6 +63,7 @@ const Project = props => {
                 <h1 className="hero-text">{data.title}</h1>
                 <h3 className="hero-text">{data.sub}</h3>
               </div>
+              {data.logo()}
             </section>
             
             <section className="item-list intro">
@@ -71,8 +76,8 @@ const Project = props => {
             <section className="item-list user">
               <h2>{data.user.title}</h2>
               <h4>{data.user.subtitle}</h4>
-              <div className="img-info-list">
-                <img src={ testImage ? testImageUri : data.user.img} alt="user"/>
+              <div className="img-info-list" data-tall={data.slug === "heal"}>
+                {data.user.img()}
                 <ul>
                   { data.user.points.map((p,i) =>
                     <li key={i}><p>{p}</p></li>
@@ -86,7 +91,7 @@ const Project = props => {
             </section>
             
             <section className="hero-img">
-              <img className="img-full" src={ testImage ? testImageUri : data.diagram} alt="" onClick={() => setCurrImage(testImageUri)} />
+              <ImageCont src={ testImage ? testImageUri : imageUri + data.diagram} alt={data.diagramLabel} handleClick={() => setCurrImage(imageUri + data.diagram)} label={data.diagramLabel} />
             </section>
             
             <section className="item-list services">
@@ -95,9 +100,9 @@ const Project = props => {
               { data.services.cols.map((c,i) =>
                 <div key={i} className="item-list">
                   <div className="img-cont">
-                    <img src={ testImage ? testImageUri : c.img} alt={c.title} />
+                    {c.img()}
                   </div>
-                  <h3>{c.title}</h3>
+                  <h3 className="weight-bold">{c.title}</h3>
                   <p>{c.body}</p>
                 </div>
               )}
@@ -110,9 +115,9 @@ const Project = props => {
                 { data.principles.cols.map((c,i) =>
                   <div key={i} className="item-list">
                     <div className="img-cont">
-                      <img src={ testImage ? testImageUri : c.img} alt={c.title} />
+                      {c.img(false)}
                     </div>
-                    <h3>{c.title}</h3>
+                    <h3 className="width-min">{c.title}</h3>
                     <p>{c.body}</p>
                   </div>
                 )}
@@ -124,14 +129,14 @@ const Project = props => {
               { data.closing.body.map((p,i) =>
                 <p key={i}>{p}</p>
               )}
-              <img className="img-full" src={ testImage ? testImageUri : data.closing.img} alt={data.closing.title} onClick={() => setCurrImage(testImageUri)} />
+              <ImageCont src={ testImage ? testImageUri : imageUri + data.closing.img} alt={data.closing.imgLabel} handleClick={() => setCurrImage(imageUri + data.closing.img)} label={data.closing.imgLabel} />
             </section>
             
             <section className="item-list-small case-study">
               <h2>{data.casestudy.title}</h2>
               <h4 className="hero-text">{data.casestudy.subtitle}</h4>
               
-              <ImageCont src={ testImage ? testImageUri : data.casestudy.heroImg} alt={data.casestudy.title} handleClick={() => setCurrImage(testImageUri)} label={"this is label"} />
+              <ImageCont src={ testImage ? testImageUri : imageUri + data.casestudy.heroImg} alt={data.casestudy.title} handleClick={() => setCurrImage(imageUri + data.casestudy.heroImg)} label={data.casestudy.imgLabel} />
               <div className="item-list info">
                 { data.casestudy.body.map((p,i) =>
                   <p key={i}>{p}</p>
@@ -141,9 +146,20 @@ const Project = props => {
                   <p key={i}>{p}</p>
                 )}
               </div>
-              { data.casestudy.imgs.map((img,i) =>
-                <img className="img-full" key={i} src={ testImage ? testImageUri : img} alt={"case study"} onClick={() => setCurrImage(testImageUri)} />
+              { (data.casestudy.imgs) && data.casestudy.imgs.map((img,i) =>
+                <ImageCont src={ testImage ? testImageUri : imageUri + img.name} alt={img.label} handleClick={() => setCurrImage(imageUri + img.name)} label={img.label} />
               )}
+            </section>
+            
+            <section className="item-list">
+              <h3>Sources</h3>
+              <div className="item-list-small">
+                {data.sources.map((s,i) =>
+                  <a className="text" key={i} href={s.link} target="_blank" rel="noopener">
+                    {s.title}
+                  </a>
+                )}
+              </div>
             </section>
             
           </div>
@@ -165,7 +181,7 @@ const ProjectHeader = ({handleBack}) => {
 const ImageCont = props => {
   return (
     <div className="image-container">
-      <img className="img-full"
+      <img data-pointer className="img-full"
         src={props.src} 
         alt={props.alt} 
         onClick={props.handleClick} 

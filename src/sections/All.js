@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { WorldMap } from "components/WorldMap";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import { MarkerIcon, ProjectOneIcon } from "components/Icons";
 import Landing from "./Landing";
 import SideProgress from "components/SideProgress";
 import { mainCopy } from "data/mainCopy";
@@ -12,19 +11,23 @@ import Team from "./Team";
 import Footer from "./Footer";
 import Principles from "components/Principles";
 import ProjectsIntro from "./ProjectsIntro";
+import SecondSequence from "./SecondSequence";
+import ProjectsSequence from "./ProjectsSequence";
 
 const All = props => {
   
   const mapRef = useRef(null);
+  const mapTwoRef = useRef(null);
   const introRef = useRef(null);
+  const projectsRef = useRef(null);
+  const prinRef = useRef(null);
   
   const titles = [
-    "greenhouse gasses",
-    "ice caps",
-    "carbon footprints",
+    "increasing greenhouse gasses",
+    "melting ice caps",
     "growing cities",
-    "resilient communities",
-    "people"
+    "migrating populations",
+    "shaping resilient communities"
   ];
   const [currIntroPos, setIntroCurrPos] = useState(0);
   const [sectionsPos, setSectionsPos] = useState([]);
@@ -33,10 +36,14 @@ const All = props => {
   const [scrollOffset, setScrollOffset] = useState(20);
   
   const [scrollDistMain, setScrollDistMain] = useState(5900);
+  const [scrollDistSecond, setScrollDistSecond] = useState(3000);
   
   const scrollDistIntro = 1500;
   const [currMainPos, setMainCurrPos] = useState(0);
   const [mainSeqStart, setMainSeqStart] = useState(false);
+  
+  const [currSecondPos, setSecondCurrPos] = useState(0);
+  const [secondSeqStart, setSecondSeqStart] = useState(false);
   
   const handleIntroScroll = prog => {
     const breaks = 1 / titles.length;
@@ -52,6 +59,9 @@ const All = props => {
   const handleScroll = prog => {
     setMainCurrPos(Math.round(prog*100));
   }
+  const handleSecondScroll = prog => {
+    setSecondCurrPos(Math.round(prog*100));
+  }
   
   const scrollTo = val => {
     let newVal = val;
@@ -62,7 +72,7 @@ const All = props => {
   };
   
   const getScrollTop = ref => {
-    return ref.current.getBoundingClientRect().top;
+    return ref.current.getBoundingClientRect().top + window.scrollY;
   }
   
   // useEffect(() => {
@@ -81,7 +91,8 @@ const All = props => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     
-    if (introRef.current) {
+    if (introRef.current && mapRef.current) {
+      
     const stopTrigger = () => {
       const tl = gsap.timeline({
         delay: 1,
@@ -94,7 +105,7 @@ const All = props => {
           markers: false,
           onUpdate: (e) => handleScroll(e.progress),
           onEnter: () => setMainSeqStart(true),
-          onLeaveBack: () => setMainSeqStart(false)
+          onLeaveBack: () => setMainSeqStart(false),
         }
       });
       return tl;
@@ -120,7 +131,7 @@ const All = props => {
     master.add(stopIntroText());
     master.add(stopTrigger());
   }
-  }, [introRef.current]);
+  }, [introRef?.current, mapRef?.current]);
   
   return (
     <>
@@ -131,11 +142,11 @@ const All = props => {
           <MainSequence 
             currPos={currMainPos} mainSeqStart={mainSeqStart} scrollDist={scrollDistMain} dimensions={props.screenDimension}
             setReadyForSetSections={setReadyForSetSections} readyForSetSections={readyForSetSections} setSectionsPos={setSectionsPos}
-            scrollToStart={scrollToStart} sectionsPos={sectionsPos} setScrollDistMain={setScrollDistMain}
+            scrollToStart={scrollToStart} sectionsPos={sectionsPos} setScrollDistMain={setScrollDistMain} projectSeqStart={secondSeqStart}
           />
         </div>
-        <Principles dimensions={props.screenDimension}/>
-        <ProjectsIntro />
+        <Principles dimensions={props.screenDimension} prinRef={prinRef}/>
+        <ProjectsSequence seqStart={secondSeqStart} scrollDist={scrollDistSecond} dimensions={props.screenDimension} getScrollTop={getScrollTop} projectsRef={projectsRef} />
         <Team />
         <Footer />
       </div>

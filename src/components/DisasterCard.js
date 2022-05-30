@@ -37,7 +37,7 @@ const DisasterCard = props => {
         <img src={`/images/disasters/${props.data.id}/image.jpg`} alt={props.data.title} />
       </div>
       <div className="header-bar item-list-small">
-        <h4>Approx. Displaced:</h4>
+        <h4>Approx. Displaced</h4>
         <h3>{props.data.displaced}</h3>
       </div>
       <div className="body item-list-small">

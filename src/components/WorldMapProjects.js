@@ -28,31 +28,31 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
     if (code !== currCountry) {
       
       let _elVals = e.target.getBoundingClientRect();
-      setHoverPos && setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
+      setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
       
       setPrevCountry(currCountry);
       setCurrCountry(code);
-      setCountry && setCountry({
+      setCountry({
         regionId:code,
         id: null
       });
     };
   }
-  
+
   const handleTap = e => {
     let code = e.target.id;
     if (code !== currCountry) {
       
       if (isMobile) {
-        setHoverPos && setHoverPos({x: "unset", y: "unset"});
+        setHoverPos({x: "unset", y: "unset"});
       } else {
         let _elVals = e.target.getBoundingClientRect();
-        setHoverPos && setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
+        setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
       }
       
       setPrevCountry(currCountry);
       setCurrCountry(code);
-      setCountry && setCountry({
+      setCountry({
         regionId:code,
         id: null
       });
@@ -61,10 +61,10 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   
   const handleClick = e => {
     if (countriesLitVal.find( l => l.regionId === e.target.id)) {
-      setCountryClicked && setCountryClicked(e.target.id);
+      setCountryClicked(e.target.id);
     }
     else {
-      setCountryClicked && setCountryClicked("");
+      setCountryClicked("");
     }
   }
 
@@ -77,11 +77,11 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
     
     let yOff = 150;
     
-    setHoverPos && setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - yOff});
+    setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - yOff});
     
     setPrevCountry(currCountry);
     setCurrCountry(code);
-    setCountry && setCountry({
+    setCountry({
       regionId:code,
       id: uID
     });
@@ -94,14 +94,14 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
     let uID = e.currentTarget.dataset.uid;
     
     if (isMobile) {
-      setHoverPos && setHoverPos({x: "unset", y: "unset"});
+      setHoverPos({x: "unset", y: "unset"});
     } else {
-      setHoverPos && setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - 150});
+      setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - 150});
     }
 
     setPrevCountry(currCountry);
     setCurrCountry(code);
-    setCountry && setCountry({
+    setCountry({
       regionId:code,
       id: uID
     });
@@ -137,7 +137,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
         let _countryEl = document.getElementById(currCountry);
         _countryEl && (_countryEl.style.fill = colours.hover);
         
-        //setHoverPos && setHoverPos({x:0,y:0});
+        //setHoverPos({x:0,y:0});
         
       }
       
@@ -175,6 +175,8 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
           //check how many of c exist in litSoFar
           let countryCount = litSoFar.filter(v => v === c.regionId).length;
           let countryCountAll = countriesLitVal.filter(v => v.regionId === c.regionId).length;
+          console.log(countryCount);
+          console.log(countryCountAll);
           let _left;
           
           //position differently over country when multiple
@@ -257,7 +259,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
       setMarkerAnim(false);
       setCountriesLit(false);
       clearPreLit();
-      setCountry && setCountry({
+      setCountry({
         regionId:null,
         id: null
       });
@@ -283,7 +285,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
           {(targets || map === 3) && !lock && targetsPos.map((t,i) => 
             <div className="marker" data-active={markerAnim} data-hover 
               role="button" onMouseEnter={handleHoverMarker} 
-              onMouseLeave={() => setCountry && setCountry({regionId:null,id: null})} 
+              onMouseLeave={() => setCountry({regionId:null,id: null})} 
               onClick={handleTapMarker}
               data-country={t.regionId} data-uid={t.id} key={i}
               style={{left: t.left, top: t.top}}
@@ -299,7 +301,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
             {targets && !lock && targetsPos.map((t,i) => 
               <div className="marker" data-active={markerAnim} data-hover 
                 role="button" onMouseEnter={handleHoverMarker} 
-                onMouseLeave={() => setCountry && setCountry({regionId:null,id: null})} 
+                onMouseLeave={() => setCountry({regionId:null,id: null})} 
                 onClick={handleTapMarker}
                 data-country={t.regionId} data-uid={t.id} key={i}
                 style={{left: t.left, top: t.top}}
