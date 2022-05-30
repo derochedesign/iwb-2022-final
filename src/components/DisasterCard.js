@@ -9,6 +9,8 @@ const DisasterCard = props => {
   const [top, setTop] = useState(props.top);
   const leftOffsetAllowed = props.dimensions.width/15;
   const topOffsetAllowed = 24;
+
+  const setCurrDisaster = props.setCurrDisaster;
   
   const definePosition = () => {
     
@@ -47,10 +49,9 @@ const DisasterCard = props => {
           <h5>{props.data.year}</h5>
         </div>
         <p>"{props.data.quote}"</p>
-        {/* TODO: actually close card when clicking on Close*/}
-        {/* FIXME: For now, this trivially works because tapping anywhere closes the card */}
         { isMobile &&
-          <button style={{backgroundColor:'black'}}>Close</button>
+          <button style={{backgroundColor:'black'}}
+          onClick={() => setCurrDisaster(null)}>Close</button>
         }
       </div>
     </div>

@@ -10,6 +10,8 @@ const OtherProjectCard = props => {
   const [top, setTop] = useState(props.top);
   const leftOffsetAllowed = props.dimensions.width/15;
   const topOffsetAllowed = 24;
+
+  const setCurrOtherProject = props.setCurrOtherProject;
   
   const definePosition = () => {
     
@@ -52,10 +54,9 @@ const OtherProjectCard = props => {
           <h5>{props.data.year}</h5>
         </div>
         <p>{props.data.body[0]}</p>
-        {/* TODO: actually close card when clicking on Close*/}
-        {/* FIXME: For now, this trivially works because tapping anywhere closes the card */}
         { isMobile &&
-          <button style={{backgroundColor:'black'}}>Close</button>
+          <button style={{backgroundColor:'black'}} 
+          onClick={() => setCurrOtherProject(null)}>Close</button>
         }
       </div>
     </div>

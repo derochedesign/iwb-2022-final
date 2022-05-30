@@ -878,10 +878,15 @@ section.team {
   
 }
 
-.mobile-map-div {
-  width: 100%;
-  overflow: hidden;
+.mobile-map-div .actual-map {
+  width: 100%; 
+  position: inherit !important;
 }
-.mobile-map-div svg {
-  width: 300%;
+.mobile-map-div .actual-map svg {
+  width: 300% !important;
+}
+
+.draggable-map-outer {
+  overflow: hidden;
+  width: 100%;
 }

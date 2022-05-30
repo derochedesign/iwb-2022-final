@@ -225,17 +225,19 @@ const MainSequence = ({currPos, mainSeqStart, scrollDist, dimensions, setReadyFo
   return (
     <section className="center-title center map-inner">
       {(currDisaster) && 
-        <DisasterCard data={currDisaster} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
+        <DisasterCard data={currDisaster} left={hoverPos.x} top={hoverPos.y} 
+        dimensions={dimensions} setCurrDisaster={setCurrDisaster}/>
       }
       {(currConnection) && 
-        <ConnectionCard data={currConnection} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
+        <ConnectionCard data={currConnection} left={hoverPos.x} top={hoverPos.y} 
+        dimensions={dimensions} setCurrConnection={setCurrConnection}/>
       }
       {(currOtherProject) && 
-        <OtherProjectCard data={currOtherProject} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
+        <OtherProjectCard data={currOtherProject} left={hoverPos.x} top={hoverPos.y} 
+        dimensions={dimensions} setCurrOtherProject={setCurrOtherProject}/>
       }
       <h1 className="info-disp">S:{currSeq}/M:{currMap}</h1>
       <ParallaxProvider>
-        {/*TODO: When mobile, blow up the map, make it draggable, height 95*/}
         <WorldMap map={currMap} colours={mapColours[currMap]} setCountry={setCountry} lock={lockMap} preLit={mapPreLit[currMap]} targets={currMap === 0} zoom={mapZoom[currSeq]} connections={currMap === 2} setHoverPos={setHoverPos} />
         { mainSeqStart && currSeq === 0 &&
           <Parallax className="inherit" speed={2} startScroll={beginScroll} endScroll={beginScroll + scrollDist}>

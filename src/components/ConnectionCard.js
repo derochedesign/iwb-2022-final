@@ -11,6 +11,8 @@ const ConnectionCard = props => {
   const [top, setTop] = useState(props.top);
   const leftOffsetAllowed = props.dimensions.width/15;
   const topOffsetAllowed = 24;
+
+  const setCurrConnection = props.setCurrConnection;
   
   const definePosition = () => {
     
@@ -49,10 +51,9 @@ const ConnectionCard = props => {
             <p key={c.regionId}>{c.name} - <span>{c.migrants} Migrants</span></p>
           )}
         </div>
-        {/* TODO: actually close card when clicking on Close*/}
-        {/* FIXME: For now, this trivially works because tapping anywhere closes the card */}
         { isMobile &&
-          <button style={{backgroundColor:'black'}}>Close</button>
+          <button style={{backgroundColor:'black'}} 
+          onClick={() => setCurrConnection(null)}>Close</button>
         }
       </div>
     </div>

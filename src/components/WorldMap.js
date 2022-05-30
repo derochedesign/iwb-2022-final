@@ -19,6 +19,8 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   const [countriesLit, setCountriesLit] = useState(false);
   const [countriesLitVal, setCountriesLitVal] = useState(preLit);
   const mapContRef = useRef(null);
+
+  const dragOffset = useState({deltaX: 0, deltaY: 0});
   
   const handleHover = e => {
     // Do nothing if on mobile
@@ -199,6 +201,20 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
     });
   }
   
+  // const dragHandler = (e, data) => {
+  //   console.log(targetsPos[0])
+  //   console.log(data.deltaX, data.deltaY)
+  //   if (targets && targetsPos.length > 0) {
+  //     let _targetsPos = [...targetsPos];
+  //     targetsPos.forEach((t,i) => {
+  //       _targetsPos[i].x = t.el.getBoundingClientRect().x - data.deltaX;
+  //       // _targetsPos[i].y = t.el.getBoundingClientRect().y;
+  //     });
+  //     setTargetsPos(_targetsPos);
+  //   }
+  
+  // }
+
   useEffect(() => {
     if (countriesLitVal && countriesLit) {
       addPreLit();
@@ -266,9 +282,17 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
             </div>
           )}
         </Parallax>
-         : <Draggable axis="x">
+         : 
+         <div className="draggable-map-outer">
+         {/* <Draggable axis="x" allowAnyClick="false" onDrag={dragHandler}> */}
+         {/* <Draggable axis="x" allowAnyClick="false"> */}
+         <Draggable axis="x">
           <div className="mobile-map-div" >
+            <div className="actual-map">
             <Map />
+            </div>
+          </div>
+          </Draggable>
             {targets && !lock && targetsPos.map((t,i) => 
               <div className="marker" data-active={markerAnim} data-hover 
                 role="button" onMouseEnter={handleHoverMarker} 
@@ -281,8 +305,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
                 {/* {(t.regionId === "US") && <DisasterCard data={disasters[0]} />} */}
               </div>
             )}
-          </div>
-          </Draggable>
+         </div>
       }
     </>
   )
