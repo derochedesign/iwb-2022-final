@@ -1,10 +1,11 @@
 import { TheWorldMap } from "img/worldMap";
 import { countries } from "data/countries";
 import { useEffect, useRef, useState } from "react";
+import Slider from "rc-slider";
+import 'rc-slider/assets/index.css';
 import { MarkerIcon } from "./Icons";
 import { Parallax } from "react-scroll-parallax";
 import { BrowserView, isMobile, MobileView } from "react-device-detect";
-import Draggable  from "react-draggable";
 import { migrations } from "data/migrations";
 import DisasterCard from "./DisasterCard";
 import { disasters } from "data/disastersCopy";
@@ -19,18 +20,22 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   const [countriesLit, setCountriesLit] = useState(false);
   const [countriesLitVal, setCountriesLitVal] = useState(preLit);
   const mapContRef = useRef(null);
+  const mobileMapRef = useRef(null);
+  const [mapTranslation, setMapTranslation] = useState(0);
+  const [sliderValue, setSliderValue] = useState(0);
 
-  const dragOffset = useState({deltaX: 0, deltaY: 0});
-  
+  const [mapWidth, setMapWidth] = useState(0);
+
   const handleHover = e => {
-    // Do nothing if on mobile
-    if (isMobile) return;
-
     let code = e.target.id;
     if (code !== currCountry) {
       
-      let _elVals = e.target.getBoundingClientRect();
-      setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
+      if (isMobile) {
+        setHoverPos({x: "unset", y: "unset"});
+      } else {
+        let _elVals = e.target.getBoundingClientRect();
+        setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
+      }
       
       setPrevCountry(currCountry);
       setCurrCountry(code);
@@ -63,8 +68,6 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
 
   const handleHoverMarker = e => {
     // Do nothing if on mobile
-    if (isMobile) return;
-
     let code = e.currentTarget.dataset.country;
     let uID = e.currentTarget.dataset.uid;
     
@@ -79,8 +82,6 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   }
   
   const handleTapMarker = e => {
-    // Do nothing if on mobile
-
     let code = e.currentTarget.dataset.country;
     let uID = e.currentTarget.dataset.uid;
     
@@ -97,6 +98,17 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
       id: uID
     });
   }
+
+  useEffect(() => {
+    if (!isMobile) return;
+    setMapWidth(mobileMapRef.current.scrollWidth);
+
+  }, [mobileMapRef])
+
+  useEffect(() => {
+    const newMapTranslation = sliderValue * (-1);
+    setMapTranslation(newMapTranslation);
+  }, [sliderValue])
   
   useEffect(() => {
     
@@ -201,20 +213,6 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
     });
   }
   
-  // const dragHandler = (e, data) => {
-  //   console.log(targetsPos[0])
-  //   console.log(data.deltaX, data.deltaY)
-  //   if (targets && targetsPos.length > 0) {
-  //     let _targetsPos = [...targetsPos];
-  //     targetsPos.forEach((t,i) => {
-  //       _targetsPos[i].x = t.el.getBoundingClientRect().x - data.deltaX;
-  //       // _targetsPos[i].y = t.el.getBoundingClientRect().y;
-  //     });
-  //     setTargetsPos(_targetsPos);
-  //   }
-  
-  // }
-
   useEffect(() => {
     if (countriesLitVal && countriesLit) {
       addPreLit();
@@ -254,11 +252,10 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
     
   }, [lock]);
   
-  // TODO: Wrap map in Draggable
   return(
     <>
       {!isMobile 
-        ? <Parallax className="actual-map-outer" 
+        ? <Parallax className="actual-map-outer"
           scale={[zoom?.startVal || 1, zoom?.endVal || 1]} 
           translateX={[zoom?.startValTrans || 0, zoom?.endValTrans || 0]}
           startScroll={zoom?.start || 0} endScroll={zoom?.end || 0}
@@ -282,17 +279,14 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
             </div>
           )}
         </Parallax>
-         : 
-         <div className="draggable-map-outer">
-         {/* <Draggable axis="x" allowAnyClick="false" onDrag={dragHandler}> */}
-         {/* <Draggable axis="x" allowAnyClick="false"> */}
-         <Draggable axis="x">
-          <div className="mobile-map-div" >
-            <div className="actual-map">
+         : <div className="draggable-map-outer">
+          <div className="mobile-map-div" 
+          style={{transform: `translateX(${mapTranslation}px)`}}
+          ref={mobileMapRef}
+          >
+            <div className="actual-map" onClick={targets? null : handleHover}>
             <Map />
             </div>
-          </div>
-          </Draggable>
             {targets && !lock && targetsPos.map((t,i) => 
               <div className="marker" data-active={markerAnim} data-hover 
                 role="button" onMouseEnter={handleHoverMarker} 
@@ -305,6 +299,8 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
                 {/* {(t.regionId === "US") && <DisasterCard data={disasters[0]} />} */}
               </div>
             )}
+          </div>
+          <Slider value={sliderValue} onChange={setSliderValue} max={mapWidth}/>
          </div>
       }
     </>
