@@ -54,8 +54,8 @@ export const mainCopy = {
     },
     {
       helper:"Hover your cursor over the map to see where migrants are going.",
-      top:`Throughout the year, millions of migrants are on the move. People who leave their homes and go to another country are sometimes disregarded due to the lack of legal avenues for recognition. The reason behind their move may be climate related projections in their home country, but the only legal pathway available to them may be "economical" and hence these numbers fail to reflect the true scale.`,
-      bottom:'"There is currently no reliable resource to know or track how many climate migrants there are today." - World Migration Report 2022',
+      top:null,
+      bottom:'Throughout the year, millions of migrants are on the move. People who leave their homes and go to another country are sometimes disregarded due to the lack of legal avenues for recognition. The reason behind their move may be climate related projections in their home country, but the only legal pathway available to them may be "economical" and hence these numbers fail to reflect the true scale.',
       postTitle:{
         text: "",
         bold: ""

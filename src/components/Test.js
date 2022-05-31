@@ -1,18 +1,16 @@
 import { TheWorldMap } from "img/worldMap";
 import { countries } from "data/countries";
 import { useEffect, useRef, useState } from "react";
+import Slider from "rc-slider";
+import 'rc-slider/assets/index.css';
 import { MarkerIcon } from "./Icons";
 import { Parallax } from "react-scroll-parallax";
 import { BrowserView, isMobile, MobileView } from "react-device-detect";
-import Draggable  from "react-draggable";
 import { migrations } from "data/migrations";
 import DisasterCard from "./DisasterCard";
 import { disasters } from "data/disastersCopy";
 
-import Slider from "rc-slider";
-import 'rc-slider/assets/index.css';
-
-const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connections, setHoverPos, setCountryClicked, cardOpen, setCardOpen}) => {
+const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connections, setHoverPos}) => {
   
   const Map = TheWorldMap;
   const [currCountry, setCurrCountry] = useState("");
@@ -22,46 +20,46 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   const [countriesLit, setCountriesLit] = useState(false);
   const [countriesLitVal, setCountriesLitVal] = useState(preLit);
   const mapContRef = useRef(null);
-  const [sliderValue, setSliderValue] = useState(0);
+  const mobileMapRef = useRef(null);
   const [mapTranslation, setMapTranslation] = useState(0);
+  const [sliderValue, setSliderValue] = useState(0);
+
   const [mapWidth, setMapWidth] = useState(0);
-  const [lockMap, setLockMap] = useState(lock);
-  
+
   const handleHover = e => {
-    // Do nothing if on mobile
-    if (isMobile) return;
-    
     let code = e.target.id;
     if (code !== currCountry) {
       
-      let _elVals = e.target.getBoundingClientRect();
-      setHoverPos && setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
+      if (isMobile) {
+        setHoverPos({x: "unset", y: "unset"});
+      } else {
+        let _elVals = e.target.getBoundingClientRect();
+        setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
+      }
       
       setPrevCountry(currCountry);
       setCurrCountry(code);
-      setCountry && setCountry({
+      setCountry({
         regionId:code,
         id: null
       });
     };
   }
-  
+
   const handleTap = e => {
-    
-    if (cardOpen) return;
-    
     let code = e.target.id;
-    if (code.length === 2) {
+    if (code !== currCountry) {
+      
       if (isMobile) {
-        setHoverPos && setHoverPos({x: "unset", y: "unset"});
+        setHoverPos({x: "unset", y: "unset"});
       } else {
         let _elVals = e.target.getBoundingClientRect();
-        setHoverPos && setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
+        setHoverPos({x:_elVals.x + _elVals.width, y:_elVals.y});
       }
       
       setPrevCountry(currCountry);
       setCurrCountry(code);
-      setCountry && setCountry({
+      setCountry({
         regionId:code,
         id: null
       });
@@ -70,86 +68,53 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
 
   const handleHoverMarker = e => {
     // Do nothing if on mobile
-    if (isMobile) return;
-
     let code = e.currentTarget.dataset.country;
     let uID = e.currentTarget.dataset.uid;
     
-    let yOff = 150;
-    
-    setHoverPos && setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - yOff});
+    setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - 150});
     
     setPrevCountry(currCountry);
     setCurrCountry(code);
-    setCountry && setCountry({
+    setCountry({
       regionId:code,
       id: uID
     });
   }
   
-  const handleHoverOutTarget = () => {
-    if (isMobile) return;
-    
-    setCountry && setCountry({regionId:null,id: null});
-  }
-  
   const handleTapMarker = e => {
-    // Do nothing if on mobile
-    if (cardOpen) return;
-    
     let code = e.currentTarget.dataset.country;
     let uID = e.currentTarget.dataset.uid;
-    if (code.length === 2) {
-      if (isMobile) {
-        setHoverPos && setHoverPos({x: "unset", y: "unset"});
-      } else {
-        setHoverPos && setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - 150});
-      }
+    
+    if (isMobile) {
+      setHoverPos({x: "unset", y: "unset"});
+    } else {
+      setHoverPos({x:parseInt(e.currentTarget.style.left), y:parseInt(e.currentTarget.style.top) - 150});
+    }
 
-      setPrevCountry(currCountry);
-      setCurrCountry(code);
-      setCountry && setCountry({
-        regionId:code,
-        id: uID
-      });
-    }
+    setPrevCountry(currCountry);
+    setCurrCountry(code);
+    setCountry({
+      regionId:code,
+      id: uID
+    });
   }
-  
-  useEffect(() => {
-    if (!cardOpen && isMobile) {
-      let curr = currCountry;
-      const _to = migrations.find(m => m.regionId === curr)?.to;
-      if (_to) {
-        _to.forEach(t => {
-          let _connEl = document.getElementById(t.regionId);
-          _connEl && (_connEl.style.fill = "unset");
-        })
-        addPreLit();
-      }
-    }
-  }, [cardOpen]);
-  
+
   useEffect(() => {
     if (!isMobile) return;
-    setMapWidth(mapContRef.current.scrollWidth);
+    setMapWidth(mobileMapRef.current.scrollWidth);
 
-  }, [mapContRef])
-  
+  }, [mobileMapRef])
+
   useEffect(() => {
-    if (!lock) {
-      const newMapTranslation = sliderValue * (-0.8);
-      setMapTranslation(newMapTranslation);
-      setLockMap(true);
-      setTimeout(() => {
-        addPreLit();
-        setLockMap(false);
-      },1000)
-    }
+    const newMapTranslation = sliderValue * (-1);
+    setMapTranslation(newMapTranslation);
+    addPreLit();
+    console.log("moved");
   }, [sliderValue])
   
   useEffect(() => {
     
-    if (!countriesLitVal && !lockMap) {
+    if (!countriesLitVal && !lock) {
       if (currCountry.length === 2) {
         let _countryEl = document.getElementById(currCountry);
         _countryEl && (_countryEl.style.fill = colours.hover);
@@ -159,7 +124,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
         _countryEl && (_countryEl.style.fill = "unset");
       }
     }
-    else if (countriesLitVal && !lockMap) {
+    else if (countriesLitVal && !lock) {
       const isValid = countriesLitVal.some(c => c.regionId === currCountry);
       const isPrevValid = countriesLitVal.some(c => c.regionId === prevCountry);
       
@@ -177,7 +142,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
         let _countryEl = document.getElementById(currCountry);
         _countryEl && (_countryEl.style.fill = colours.hover);
         
-        //setHoverPos && setHoverPos({x:0,y:0});
+        //setHoverPos({x:0,y:0});
         
       }
       
@@ -201,21 +166,18 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   const addPreLit = () => {
     let _elPos = [];
     let litSoFar = [];
-    let customTargets = [];
     countriesLitVal.forEach(c => {
       litSoFar.push(c.regionId);
       let _el = document.getElementById(c.regionId);
       if (_el) {
-        
-        _el.style.fill = (c.regionId !== "FJ") && colours.main;
+        _el.style.fill = colours.main;
         // _el.style.stroke = "var(--colour-darkgrey)";
         _el.dataset.active = true;
         _el.dataset.hover = true;
         let _elVals = _el.getBoundingClientRect();
         if (targets) {
-          //check how many of c exist in litSoFar
+          //check how many of c exist in countriesLitVal
           let countryCount = litSoFar.filter(v => v === c.regionId).length;
-          let countryCountAll = countriesLitVal.filter(v => v.regionId === c.regionId).length;
           let _left;
           
           //position differently over country when multiple
@@ -229,44 +191,28 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
             _left = _elVals.x + (_elVals.width - 10);
           }
           
-          let mod = (c.regionId === "FJ" ? 30 : 0)
-          
           _elPos.push({
             left: _left,
-            top: countryCountAll === 1 ? _elVals.y + (_elVals.height / 2) - mod : ((countryCount === 1) ? _elVals.y + (_elVals.height / 2) + 30 : _elVals.y + (_elVals.height / 2)),
+            top: (countryCount === 1) ? _elVals.y + (_elVals.height / 2) : _elVals.y + (_elVals.height / 2) + 20,
             regionId:c.regionId,
             id:c.id, 
             el:_el
           });
         }
-        else {
-          
-          if (_elVals.width * _elVals.height < 120) {
-            let newItem = {
-              left: _elVals.x + (_elVals.width / 2),
-              top:  _elVals.y,
-              regionId: c.regionId,
-              id: c.id, 
-              el: _el
-            };
-            customTargets.push(newItem);
-          }
-        }
       }
     });
     (targets && _elPos) && setTargetsPos(_elPos);
-    (!targets && customTargets) && setTargetsPos(customTargets);
   }
   
   const clearPreLit = () => {
-    for (const [key, val] of Object.entries(countries)) {
-      let _el = document.getElementById(key);
+    countriesLitVal.forEach(c => {
+      let _el = document.getElementById(c.regionId);
       if (_el) {
         _el.style.fill = "unset";
         _el.dataset.active = false;
         _el.dataset.hover = true;
       }
-    }
+    });
   }
   
   useEffect(() => {
@@ -291,7 +237,8 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
       });
       setTargetsPos(_targetsPos);
     }
-    if (!lockMap) {
+    
+    if (!lock) {
       setMarkerAnim(true);
       setCountriesLit(true);
     }
@@ -299,36 +246,32 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
       setMarkerAnim(false);
       setCountriesLit(false);
       clearPreLit();
-      setCountry && setCountry({
+      setCountry({
         regionId:null,
         id: null
       });
     }
     
-  }, [lockMap]);
+  }, [lock]);
   
-  useEffect(() => {
-    setLockMap(lock);
-  },[lock])
-  
-  // TODO: Wrap map in Draggable
   return(
     <>
-      <Parallax className="actual-map-outer" data-mobile={isMobile} 
+      {!isMobile 
+        ? <Parallax className="actual-map-outer"
           scale={[zoom?.startVal || 1, zoom?.endVal || 1]} 
           translateX={[zoom?.startValTrans || 0, zoom?.endValTrans || 0]}
           startScroll={zoom?.start || 0} endScroll={zoom?.end || 0}
         >
           <div className="actual-map" onMouseOver={targets ? null : handleHover} 
-            onClick={isMobile ? handleTap : null} ref={mapContRef} 
-            style={!isMobile ? {pointerEvents: lockMap ? "none" : "auto"} : {transform: `translateX(${mapTranslation}px)`, pointerEvents: lockMap ? "none" : "auto"}} data-active={!lockMap}
+            onClick={targets ? null : handleTap} ref={mapContRef} 
+            style={{pointerEvents: lock ? "none" : "auto"}} data-active={!lock}
           >
             <Map/>
           </div>
-          {(targets || map === 3) && !lockMap && targetsPos.map((t,i) => 
+          {targets && !lock && targetsPos.map((t,i) => 
             <div className="marker" data-active={markerAnim} data-hover 
               role="button" onMouseEnter={handleHoverMarker} 
-              onMouseLeave={handleHoverOutTarget} 
+              onMouseLeave={() => setCountry({regionId:null,id: null})} 
               onClick={handleTapMarker}
               data-country={t.regionId} data-uid={t.id} key={i}
               style={{left: t.left, top: t.top}}
@@ -337,12 +280,31 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
               {/* {(t.regionId === "US") && <DisasterCard data={disasters[0]} />} */}
             </div>
           )}
-          { isMobile && !lock && 
-            <div className="slider-container">
-              <Slider value={sliderValue} onChange={setSliderValue} max={mapWidth}/>
-            </div>
-          }
         </Parallax>
+         : <div className="draggable-map-outer">
+          <div className="mobile-map-div" 
+          style={{transform: `translateX(${mapTranslation}px)`}}
+          ref={mobileMapRef}
+          >
+            <div className="actual-map" onClick={targets? null : handleHover}>
+            <Map />
+            </div>
+            {targets && !lock && targetsPos.map((t,i) => 
+              <div className="marker" data-active={markerAnim} data-hover 
+                role="button" onMouseEnter={handleHoverMarker} 
+                onMouseLeave={() => setCountry({regionId:null,id: null})} 
+                onClick={handleTapMarker}
+                data-country={t.regionId} data-uid={t.id} key={i}
+                style={{left: t.left, top: t.top}}
+              >
+                <MarkerIcon hover/>
+                {/* {(t.regionId === "US") && <DisasterCard data={disasters[0]} />} */}
+              </div>
+            )}
+          </div>
+          <Slider value={sliderValue} onChange={setSliderValue} max={mapWidth}/>
+         </div>
+      }
     </>
   )
 }

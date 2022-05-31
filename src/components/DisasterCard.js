@@ -31,6 +31,10 @@ const DisasterCard = props => {
     definePosition();
   }, []);
   
+  const handleClickExit = () => {
+    props.closeCard();
+  }
+  
   return (
     <div ref={cardRef} className="card" data-active={anim} style={{left:left, top:top}}>
       <div className="hero-image">
@@ -51,7 +55,7 @@ const DisasterCard = props => {
         {/* TODO: actually close card when clicking on Close*/}
         {/* FIXME: For now, this trivially works because tapping anywhere closes the card */}
         { isMobile &&
-          <button><h3>&#10005;</h3></button>
+          <button onTouchEnd={handleClickExit} onClick={handleClickExit}><h3>&#10005;</h3></button>
         }
       </div>
     </div>

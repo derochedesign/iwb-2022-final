@@ -75,6 +75,8 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
   const [defTop, setDefTop] = useState(0);
   const [defWidth, setDefWidth] = useState(0);
   
+  const [cardOpen, setCardOpen] = useState(false);
+  
   //map specific data
   const [currDisaster, setCurrDisaster] = useState();
   const [currIDP, setCurrIDP] = useState();
@@ -103,27 +105,26 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
     null,
     null,
     null,
-    {
+    !isMobile ? {
       start: beginScroll+getAbsolute(totalSeqThree),
       end: beginScroll+getAbsolute(totalSeqThree)+(getAbsolute(holdMapLength) / 2),
       startVal: 1,
       endVal: 1.5,
       startValTrans: 0,
       endValTrans: "-15%"
-    },
-    {
+    } : null,
+    !isMobile ? {
       start: beginScroll+getAbsolute(totalSeqFour) - 50,
       end: beginScroll+getAbsolute(totalSeqFour)+(getAbsolute(holdTextLength) / 2),
       startVal: 1.5,
       endVal: 1,
       startValTrans: "-15%",
       endValTrans: 0
-    },
+    } : null,
     null
   ];
 
   useEffect(() => {
-    console.log(mainSeqStart);
     setBeginScroll(window.scrollY);
   }, [mainSeqStart]);
   
@@ -147,6 +148,7 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
     if (currMap === 0) {
       let _currDisaster = disasters.find(d => (d.id === (countryCode.id && (201+Number(countryCode.id)))));
       setCurrDisaster(_currDisaster);
+      _currDisaster ? setCardOpen(true) : setCardOpen(false);
     }
     else if (currMap === 1) {
       let _currIDP = keyAffected.find(k => k.regionId === countryCode.regionId);
@@ -155,17 +157,16 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
     else if (currMap === 2) {
       let _currConnection = migrations.find(m => m.regionId === countryCode.regionId);
       setCurrConnection(_currConnection);
+      _currConnection ? setCardOpen(true) : setCardOpen(false);
     }
   }, [countryCode]);
   
-  useEffect(() => {
-    if (countryClicked && countryClicked.length > 2) {
-      setCountryFixed("");
-    }
-    else if (countryClicked) {
-      setCountryFixed(countryClicked);
-    }
-  }, [countryClicked]);
+  const handleClose = () => {
+    setCurrDisaster();
+    setCurrIDP();
+    setCurrConnection();
+    setCardOpen(false);
+  }
   
   useEffect(() => {
     
@@ -179,7 +180,6 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
       let _pos = (currPos - totalSeqSix < (holdTextLength*mainCopy.principles.preBody.length)) 
         ? Math.floor((currPos - totalSeqSix) / holdTextLength) 
         : mainCopy.principles.preBody.length - 1;
-      console.log(_pos);
       if (mainCopy.principles.preBody[_pos] !== currBodyText) setCurrBodyText(mainCopy.principles.preBody[_pos]);
     }
     
@@ -248,12 +248,9 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
   }, [currSeq]);
   
   const handleDefHover = (e) => {
-    console.log(e.target.dataset.def);
     let id = e.target.dataset.def;
     let def = definitions.find(d => d.id === Number(id));
-    console.log(def);
     if (def) {
-      console.log(def);
       let elVals = e.target.getBoundingClientRect();
       setCurrDefinition(def);
       
@@ -273,17 +270,17 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
   return (
     <section className="center-title center map-inner">
       {(currDisaster) && 
-        <DisasterCard data={currDisaster} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
+        <DisasterCard data={currDisaster} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions} closeCard={handleClose} />
       }
       {(currConnection) && 
-        <ConnectionCard data={currConnection} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
+        <ConnectionCard data={currConnection} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions} closeCard={handleClose} />
       }
       {(currDefinition) &&
-        <DefinitionCard data={currDefinition} left={defLeft} top={defTop} dimensions={dimensions} width={defWidth} />
+        <DefinitionCard data={currDefinition} left={defLeft} top={defTop} dimensions={dimensions} width={defWidth} closeCard={handleClose} />
       }
       <ParallaxProvider>
         {/*TODO: When mobile, blow up the map, make it draggable, height 95*/}
-        {(!projectSeqStart) && <WorldMap map={currMap} colours={mapColours[currMap]} setCountry={setCountry} lock={lockMap} preLit={mapPreLit[currMap]} targets={currMap === 0} zoom={mapZoom[currSeq]} connections={currMap === 2} setHoverPos={setHoverPos} setCountryClicked={setCountryClicked} />}
+        {(!projectSeqStart) && <WorldMap map={currMap} colours={mapColours[currMap]} setCountry={setCountry} lock={lockMap} preLit={mapPreLit[currMap]} targets={currMap === 0} zoom={mapZoom[currSeq]} connections={currMap === 2} setHoverPos={setHoverPos} setCountryClicked={setCountryClicked} cardOpen={cardOpen} setCardOpen={setCardOpen} closeCard={handleClose} />}
         { mainSeqStart && (currSeq === 0 || currSeq === 6) &&
           <Parallax className="inherit" speed={2} startScroll={beginScroll} endScroll={beginScroll + scrollDist}>
             <Parallax className="inherit" opacity={[0,1]} startScroll={beginScroll + ( currSeq === 6 ? getAbsolute(totalSeqSix) : 0)} endScroll={beginScroll + ( currSeq === 6 ? getAbsolute(totalSeqSix) : 0) + fadeInLength}>
@@ -324,7 +321,7 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
             endScroll={beginScroll + getAbsolute(totalSeqThree) + fadeInLengthShort} 
             className="map-top-text no-width no-interact">
             {currIDP && 
-              <div className="item-list-small">
+              <div className="item-list-small" data-mobile={isMobile}>
                 <h3>{currIDP.name}</h3>
                 <div className="item-row">
                   <h4>Disaster Displacements:</h4>

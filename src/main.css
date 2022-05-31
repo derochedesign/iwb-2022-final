@@ -232,6 +232,10 @@ svg {
   left: 0;
 }
 
+.slider-container {
+  padding: var(--inner-padding);
+}
+
 /* .main-wrapper[data-lock="true"] {
   overflow: hidden;
 } */
@@ -792,6 +796,7 @@ footer {
 .card button, .tooltip button {
   background-color: var(--colour-lightgrey);
   color: var(--colour-white);
+  pointer-events: auto;
 }
 .card.list .body ul {
   padding-bottom: calc( var(--padding) * 2.5);
@@ -1201,6 +1206,28 @@ footer {
   height: 100%;
   position: absolute;
 }
+.map .actual-map-outer[data-mobile="true"] {
+  overflow: hidden;
+}
+.map .actual-map-outer[data-mobile="true"] .actual-map {
+  width: 300%;
+}
+.slider-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: calc(var(--z-map-active) + 1);
+}
+.slider-container .rc-slider-handle {
+  width: 2em;
+  height: 2em;
+  margin-top: -0.8em;
+  border: unset !important;
+  box-shadow: unset !important;
+  background-color: var(--colour-white) !important;
+  opacity: 1;
+}
 
 .map.fixed-map {
   position: fixed;
@@ -1305,6 +1332,11 @@ footer {
   padding-right: var(--padding-large);
   z-index: var(--z-info);
 }
+
+.item-list-small[data-mobile="true"] {
+  margin-top: calc(var(--padding) * 1.5);
+}
+
 .map-top-text.no-width {
   width: unset;
 }
