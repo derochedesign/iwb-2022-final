@@ -86,55 +86,55 @@ export const mainCopy = {
       { 
         id:701,
         title:"Embrace Perspectives",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        body:"Climate migrants do not experience a single emotional trauma; some will undergo extreme mental distress associated with losing a home, while others will see migration as an opportunity for mobility, financial stability, or independence. We should strive to remain nonjudgmental in our perceptions of the migrant, and the migration experience.",
         icon: AddressVariablesIcon
       },
       { 
         id:702,
         title:"REDEFINE BOUNDARIES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        body:"A migrant may experience multiple compounding factors, such as loss of livelihood or political instability and conflict, influencing their decision to migrate. The root cause, however, may be climate change. Climate migration is not currently acknowledged as a legal means to claim refugee status, despite the tendency for climate change to be an underlying factor in many people’s decision to relocate. ",
         icon: RedefineBoundariesIcon
       },
       { 
         id:703,
         title:"REDISTRIBUTE RESOURCES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        body:"Emerging economies have less financial resources to adapt, despite greater exposure to climate change. This exposure might be due to geographic location and/or their industries’ or economy’s reliance on the health of their natural environment, for example, tourism. The dominant economic engines that contribute the most to climate change, such as Canadian oil companies, must change course and provide the means for smaller economies to protect themselves. Degrading environmental conditions do not ascribe to political boundaries, therefore national economies should address climate change at a global scale.",
         icon: RedistributeResourcesIcon
       },
       { 
         id:704,
         title:"APPLY REPETITION",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        body:"As seen in natural systems, there are benefits to redundancy, or many species in an ecosystem providing the same or similar function. Should one species be negatively affected by a change in the environment and unable to perform its role, there will be others to continue to support the ecosystem. More biodiverse spaces will help mitigate the effects of climate change, including economic disruptions and climate migration. ",
         icon: ApplyRepetitionIcon
       },
       { 
         id:705,
         title:"ELIMINATE EXPOSURES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        body:"Although climate migrants need and deserve paths to resettlement that uphold their dignity, we must not overlook individuals within those communities that might already be experiencing housing insecurity and exposure to climate risks. Climate-ready Communities understand that all current and future community members require equitable design solutions.",
         icon: EliminateExposuresIcon
       },
       { 
         id:706,
         title:"RECOGNIZE IDENTITIES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        body:"Human resettlement will require us to embrace change within our communities and  the value that people create, for one another and the local environment. A rise in migration means we will see increasingly diverse populations. This diversity will benefit communities socially, economically, and environmentally by contributing an array of cultural experiences, skills, and resources that better positions communities to respond and adapt to climate change.",
         icon: RecognizeIdentitiesIcon
       },
       { 
         id:707,
         title:"ADDRESS VARIABLES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        body:"Communities at the forefront of climate change are vulnerable in different ways. Some are preparing for the direct physical effects of extreme weather. Others that will host climate migrants will need to prepare for the effects of population growth and increased human activity. Our framework of preparedness must reflect the assorted risks communities may face as a result of climate change.",
         icon: AddressVariablesIcon
       },
       { 
         id:708,
         title:"REDUCE FAILURES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        body:"We can apply this same principle of redundancy at a community infrastructure level. By creating functional diversity in a community, you protect against total systems failure. Should one service, such as a power generator, go offline during a moment of extreme weather, others may step in to  support the community until the interruption has been resolved. This should be applied to all components of a community, including the built environment, landscapes, institutions, cultural groups and knowledge systems.",
         icon: ReduceFailuresIcon
       },
       { 
         id:709,
         title:"REIMAGINE HOMES",
-        body:"placerat commodo ac amet, vel malesuada placerat tincidunt risus nec enim. sollicitudin. tempor quis Nam id odio turpis non. elit est. efficitur. Cras varius nec lacus, nec nulla, ipsum venenatis enim. eget vitae ipsum Sed hendrerit porta.",
+        body:"The process of relocation the migrant undergoes is difficult to segment into a linear journey of ‘before, during, and after.’ Migration is a continuous process that does not conclude once the migrant has reached a landing point, but persists as they adapt and integrate into a new community. Home is not a fixed, physical location. It is where one decides to stay for however long they decide to stay there.",
         icon: ReimagineHomesIcon
       }
     ]

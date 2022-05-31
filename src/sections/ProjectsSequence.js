@@ -51,13 +51,13 @@ const ProjectsSequence = ({seqStart, scrollDist, dimensions, projectsRef, getScr
     }
     if(el){
       const v = mapLocations[map];
-      let zoom = dimensions.width / v.width / mapScales[map]; //3.4, 1.89, 6.34
+      let zoom = (dimensions?.width || document.body.offsetWidth) / v.width / mapScales[map]; //3.4, 1.89, 6.34
       
       let rightEdge = (v.x) + (v.width);
       let bottomEdge = (v.y) + (v.height);
       
-      let right = dimensions.width - rightEdge;
-      let bottom = dimensions.height - bottomEdge;
+      let right = (dimensions?.width || document.body.offsetWidth) - rightEdge;
+      let bottom = (dimensions?.height || document.body.offsetHeight) - bottomEdge;
       
       const padding = 100/mapScales[map];
       

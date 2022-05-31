@@ -72,8 +72,8 @@ const OtherProjectsSequence = ({thisRef, dimensions}) => {
             <h4>{mainCopy.otherProjectsIntro.body}</h4>
           </div>
         </section>
-        <Parallax speed={20}>
-          <div ref={mapRef}>
+        <Parallax speed={20} style={{width: "100%"}}>
+          <div ref={mapRef} style={{width: "100%"}}>
             <WorldMapOther colours={mapColours[0]} animReady={animReady} setCountry={setCountry} preLit={mapPreLit[0]} targets={false} setHoverPos={setHoverPos} setCountryClicked={setCountryClicked} dimensions={dimensions}/>
           </div>
         </Parallax>

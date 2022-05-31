@@ -8,15 +8,15 @@ const DefinitionCard = props => {
   const cardRef = useRef(null);
   const [left, setLeft] = useState(props.left*1.1);
   const [top, setTop] = useState(props.top);
-  const leftOffsetAllowed = props.dimensions.width/15;
+  const leftOffsetAllowed = (props.dimensions?.width || document.body.offsetWidth)/15;
   const topOffsetAllowed = 24;
   
   const definePosition = () => {
-    if (cardRef.current.offsetWidth + props.left > props.dimensions.width - leftOffsetAllowed) {
+    if (cardRef.current.offsetWidth + props.left > (props.dimensions?.width || document.body.offsetWidth) - leftOffsetAllowed) {
       setLeft(props.left - (props.width * 2.5));
     }
-    if (cardRef.current.offsetHeight + (props.top - cardRef.current.offsetHeight/2) > props.dimensions.height - topOffsetAllowed) {
-      setTop(props.dimensions.height/2 - cardRef.current.offsetHeight/2);
+    if (cardRef.current.offsetHeight + (props.top - cardRef.current.offsetHeight/2) > (props.dimensions?.height || document.body.offsetHeight) - topOffsetAllowed) {
+      setTop((props.dimensions?.height || document.body.offsetHeight)/2 - cardRef.current.offsetHeight/2);
     }
     else {
       setTop(props.top - cardRef.current.offsetHeight/2)

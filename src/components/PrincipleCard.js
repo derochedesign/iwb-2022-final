@@ -7,12 +7,12 @@ const PrincipleCard = props => {
   
   const cardRef = useRef(null);
   const [left, setLeft] = useState(props.left);
-  const leftOffsetAllowed = props.dimensions.width/15;
+  const leftOffsetAllowed = (props.dimensions?.width || document.body.offsetWidth)/15;
   const topOffsetAllowed = 24;
   
   const definePosition = () => {
     let leftMost = cardRef.current.offsetWidth + props.left;
-    let leftAvail = props.dimensions.width - leftOffsetAllowed;
+    let leftAvail = (props.dimensions?.width || document.body.offsetWidth) - leftOffsetAllowed;
     if (leftMost > leftAvail) {
       setLeft(props.left - (leftMost - leftAvail));
     }

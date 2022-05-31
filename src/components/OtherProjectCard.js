@@ -10,14 +10,14 @@ const OtherProjectCard = props => {
   const [left, setLeft] = useState(props.left);
   const [top, setTop] = useState(props.top);
   const [currProject, setCurrProject] = useState(null);
-  const leftOffsetAllowed = props.dimensions.width / 15;
+  const leftOffsetAllowed = (props.dimensions?.width || document.body.offsetWidth) / 15;
   const topOffsetAllowed = 24;
 
   const definePosition = () => {
     let _left = props.left;
     let _top = props.dimensions.height / 2 - cardRef.current.offsetHeight / 2;
     
-    if (cardRef.current.offsetWidth + props.left > props.dimensions.width - leftOffsetAllowed) {
+    if (cardRef.current.offsetWidth + props.left > (props.dimensions?.width || document.body.offsetWidth) - leftOffsetAllowed) {
       let el = document.getElementById(props.data[0].regionId);
       _left = props.left - el.getBoundingClientRect().width - cardRef.current.offsetWidth;
     }
