@@ -1,3 +1,5 @@
+import { AddressVariablesIcon, ApplyRepetitionIcon, EliminateExposuresIcon, RedistributeResourcesIcon, RedefineBoundariesIcon, ReimagineHomesIcon, EmbracePerspectivesIcon, ReduceFailuresIcon, RecognizeIdentitiesIcon } from "components/Icons";
+
 export const otherProjects = [
   {
     id: 501,
@@ -8,11 +10,13 @@ export const otherProjects = [
     principles: [
       {
         id: 707,
-        name: "Address Variables"
+        name: "Address Variables",
+        icon: AddressVariablesIcon
       },
       {
         id: 705,
-        name: "Eliminate Exposure"
+        name: "Eliminate exposure",
+        icon: EliminateExposuresIcon
       },
     ],
     regionId: "NL",
@@ -31,42 +35,52 @@ export const otherProjects = [
     principles: [
       {
         id: 704,
-        name: "Apply Repetition"
+        name: "Apply repetition",
+        icon: ApplyRepetitionIcon,
+        icon: ApplyRepetitionIcon
       },
       {
         id: 703,
-        name: "Distribute Resources"
+        name: "Distribute resources",
+        icon: RedistributeResourcesIcon
       },
       {
         id: 707,
-        name: "Address Variables"
+        name: "Address Variables",
+        icon: AddressVariablesIcon
       },
       {
         id: 701,
-        name: "Embrace Perspectives"
+        name: "Embrace perspectives",
+        icon: EmbracePerspectivesIcon
       },
       {
         id: 709,
-        name: "Reimagine Home"
+        name: "Reimagine home",
+        icon: ReimagineHomesIcon
       },
       {
         id: 702,
-        name: "Redefine Boundaries"
+        name: "Redefine boundaries",
+        icon: RedefineBoundariesIcon
       },
       {
         id: 705,
-        name: "Eliminate Exposure"
+        name: "Eliminate exposure",
+        icon: EliminateExposuresIcon
       },
       {
         id: 708,
-        name: "Reduce Failures"
+        name: "Reduce failures",
+        icon: ReduceFailuresIcon
       },
       {
         id: 706,
-        name: "Recognize Identities"
+        name: "Recognize identities",
+        icon: RecognizeIdentitiesIcon
       },
     ],
-    regionId: "KI",
+    regionId: "FJ",
     body: [
 
       "Due to the effects of extreme climate change and overcrowding, it has been predicted that the Republic of Kiribati, a small island nation in the Pacific, could become completely uninhabitable by 2050. With the country’s long-term sustainability and survival under threat, President Anote Tong has proposed the “migrating with dignity” strategy to collaborate with developed countries and create educational training programs in hopes that more I-Kiribati will be able to gain employment and move overseas."
@@ -82,7 +96,8 @@ export const otherProjects = [
     principles: [
       {
         id: 704,
-        name: "Apply Repetition"
+        name: "Apply repetition",
+        icon: ApplyRepetitionIcon
       },
     ],
     regionId: "CA",
@@ -101,11 +116,13 @@ export const otherProjects = [
     principles: [
       {
         id: 701,
-        name: "Embrace Perspectives"
+        name: "Embrace perspectives",
+        icon: EmbracePerspectivesIcon
       },
       {
         id: 706,
-        name: "Recognize Identities"
+        name: "Recognize identities",
+        icon: RecognizeIdentitiesIcon
       },
     ],
     regionId: "CA",
@@ -124,11 +141,13 @@ export const otherProjects = [
     principles: [
       {
         id: 704,
-        name: "Apply Repetition"
+        name: "Apply repetition",
+        icon: ApplyRepetitionIcon
       },
       {
         id: 705,
-        name: "Eliminate Exposure"
+        name: "Eliminate exposure",
+        icon: EliminateExposuresIcon
       },
     ],
     regionId: "PE",
@@ -147,7 +166,8 @@ export const otherProjects = [
     principles: [
       {
         id: 704,
-        name: "Apply Repetition"
+        name: "Apply repetition",
+        icon: ApplyRepetitionIcon
       },
 
     ],
@@ -167,7 +187,8 @@ export const otherProjects = [
     principles: [
       {
         id: 703,
-        name: "Distribute Resources"
+        name: "Distribute resources",
+        icon: RedistributeResourcesIcon
       },
     ],
     regionId: "CN",
@@ -186,7 +207,8 @@ export const otherProjects = [
     principles: [
       {
         id: 708,
-        name: "Reduce Failures"
+        name: "Reduce failures",
+        icon: ReduceFailuresIcon
       },
     ],
     regionId: "US",
@@ -205,11 +227,13 @@ export const otherProjects = [
     principles: [
       {
         id: 707,
-        name: "Address Variables"
+        name: "Address Variables",
+        icon: AddressVariablesIcon
       },
       {
         id: 708,
-        name: "Reduce Failures"
+        name: "Reduce failures",
+        icon: ReduceFailuresIcon
       },
     ],
     regionId: "US",
@@ -229,11 +253,13 @@ export const otherProjects = [
 
       {
         id: 704,
-        name: "Apply Repetition"
+        name: "Apply repetition",
+        icon: ApplyRepetitionIcon
       },
       {
         id: 705,
-        name: "Eliminate Exposure"
+        name: "Eliminate exposure",
+        icon: EliminateExposuresIcon
       },
     ],
     regionId: "KE",
@@ -253,11 +279,13 @@ export const otherProjects = [
 
       {
         id: 705,
-        name: "Eliminate Exposure"
+        name: "Eliminate exposure",
+        icon: EliminateExposuresIcon
       },
       {
         id: 708,
-        name: "Reduce Failures"
+        name: "Reduce failures",
+        icon: ReduceFailuresIcon
       },
     ],
     regionId: "AR",
@@ -277,7 +305,8 @@ export const otherProjects = [
 
       {
         id: 708,
-        name: "Reduce Failures"
+        name: "Reduce failures",
+        icon: ReduceFailuresIcon
       },
     ],
     regionId: "DM",
@@ -297,7 +326,8 @@ export const otherProjects = [
 
       {
         id: 708,
-        name: "Reduce Failures"
+        name: "Reduce failures",
+        icon: ReduceFailuresIcon
       },
     ],
     regionId: "US",
@@ -316,23 +346,28 @@ export const otherProjects = [
     principles: [
       {
         id: 704,
-        name: "Apply Repetition"
+        name: "Apply repetition",
+        icon: ApplyRepetitionIcon
       },
       {
         id: 703,
-        name: "Distribute Resources"
+        name: "Distribute resources",
+        icon: RedistributeResourcesIcon
       },
       {
         id: 705,
-        name: "Eliminate Exposure"
+        name: "Eliminate exposure",
+        icon: EliminateExposuresIcon
       },
       {
         id: 708,
-        name: "Reduce Failures"
+        name: "Reduce failures",
+        icon: ReduceFailuresIcon
       },
       {
         id: 706,
-        name: "Recognize Identities"
+        name: "Recognize identities",
+        icon: RecognizeIdentitiesIcon
       },
     ],
     regionId: "MX",
@@ -351,7 +386,8 @@ export const otherProjects = [
     principles: [
       {
         id: 703,
-        name: "Distribute Resources"
+        name: "Distribute resources",
+        icon: RedistributeResourcesIcon
       },
     ],
     regionId: "BD",
@@ -370,11 +406,13 @@ export const otherProjects = [
     principles: [
       {
         id: 709,
-        name: "Reimagine Home"
+        name: "Reimagine home",
+        icon: ReimagineHomesIcon
       },
       {
         id: 705,
-        name: "Eliminate Exposure"
+        name: "Eliminate exposure",
+        icon: EliminateExposuresIcon
       },
     ],
     regionId: "HT",
@@ -393,11 +431,13 @@ export const otherProjects = [
     principles: [
       {
         id: 703,
-        name: "Distribute Resources"
+        name: "Distribute resources",
+        icon: RedistributeResourcesIcon
       },
       {
         id: 709,
-        name: "Reimagine Home"
+        name: "Reimagine home",
+        icon: ReimagineHomesIcon
       },
     ],
     regionId: "US",
@@ -416,7 +456,8 @@ export const otherProjects = [
     principles: [
       {
         id: 706,
-        name: "Recognize Identities"
+        name: "Recognize identities",
+        icon: RecognizeIdentitiesIcon
       },
     ],
     regionId: "CH",
@@ -436,11 +477,13 @@ export const otherProjects = [
     principles: [
       {
         id: 709,
-        name: "Reimagine Home"
+        name: "Reimagine home",
+        icon: ReimagineHomesIcon
       },
       {
         id: 702,
-        name: "Redefine Boundaries"
+        name: "Redefine boundaries",
+        icon: RedefineBoundariesIcon
       },
     ],
     regionId: "CA",
@@ -459,11 +502,13 @@ export const otherProjects = [
     principles: [
       {
         id: 707,
-        name: "Address Variables"
+        name: "Address Variables",
+        icon: AddressVariablesIcon
       },
       {
         id: 708,
-        name: "Reduce Failures"
+        name: "Reduce failures",
+        icon: ReduceFailuresIcon
       },
     ],
     regionId: "KE",
@@ -482,15 +527,18 @@ export const otherProjects = [
     principles: [
       {
         id: 704,
-        name: "Apply Repetition"
+        name: "Apply repetition",
+        icon: ApplyRepetitionIcon
       },
       {
         id: 705,
-        name: "Eliminate Exposure"
+        name: "Eliminate exposure",
+        icon: EliminateExposuresIcon
       },
       {
         id: 708,
-        name: "Reduce Failures"
+        name: "Reduce failures",
+        icon: ReduceFailuresIcon
       },
     ],
     regionId: "US",
@@ -509,7 +557,8 @@ export const otherProjects = [
     principles: [
       {
         id: 707,
-        name: "Address Variables"
+        name: "Address Variables",
+        icon: AddressVariablesIcon
       },
     ],
     regionId: "US",
@@ -528,23 +577,28 @@ export const otherProjects = [
     principles: [
       {
         id: 704,
-        name: "Apply Repetition"
+        name: "Apply repetition",
+        icon: ApplyRepetitionIcon
       },
       {
         id: 703,
-        name: "Distribute Resources"
+        name: "Distribute resources",
+        icon: RedistributeResourcesIcon
       },
       {
         id: 707,
-        name: "Address Variables"
+        name: "Address Variables",
+        icon: AddressVariablesIcon
       },
       {
         id: 708,
-        name: "Reduce Failures"
+        name: "Reduce failures",
+        icon: ReduceFailuresIcon
       },
       {
         id: 706,
-        name: "Recognize Identities"
+        name: "Recognize identities",
+        icon: RecognizeIdentitiesIcon
       },
     ],
     regionId: "JP",
@@ -563,7 +617,8 @@ export const otherProjects = [
     principles: [
       {
         id: 707,
-        name: "Address Variables"
+        name: "Address Variables",
+        icon: AddressVariablesIcon
       },
 
     ],
@@ -583,7 +638,8 @@ export const otherProjects = [
     principles: [
       {
         id: 701,
-        name: "Embrace Perspectives"
+        name: "Embrace perspectives",
+        icon: EmbracePerspectivesIcon
       },
 
     ],
@@ -603,7 +659,8 @@ export const otherProjects = [
     principles: [
       {
         id: 702,
-        name: "Redefine Boundaries"
+        name: "Redefine boundaries",
+        icon: RedefineBoundariesIcon
       },
 
     ],
@@ -623,11 +680,13 @@ export const otherProjects = [
     principles: [
       {
         id: 707,
-        name: "Address Variables"
+        name: "Address Variables",
+        icon: AddressVariablesIcon
       },
       {
         id: 706,
-        name: "Recognize Identities"
+        name: "Recognize identities",
+        icon: RecognizeIdentitiesIcon
       },
     ],
     regionId: "ES",
@@ -646,15 +705,18 @@ export const otherProjects = [
     principles: [
       {
         id: 703,
-        name: "Distribute Resources"
+        name: "Distribute resources",
+        icon: RedistributeResourcesIcon
       },
       {
         id: 709,
-        name: "Reimagine Home"
+        name: "Reimagine home",
+        icon: ReimagineHomesIcon
       },
       {
         id: 705,
-        name: "Eliminate Exposure"
+        name: "Eliminate exposure",
+        icon: EliminateExposuresIcon
       },
     ],
     regionId: "LK",

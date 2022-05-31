@@ -44,6 +44,7 @@ const DisasterCard = props => {
         <h3>{props.data.title}</h3>
         <div className="item-row">
           <h5>{props.data.location}</h5>
+          <h5>|</h5>
           <h5>{props.data.year}</h5>
         </div>
         <p>"{props.data.quote}"</p>

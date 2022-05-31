@@ -1,14 +1,16 @@
 import { LogoIcon, ProjectOneUserIcon } from "components/Icons";
 import { projects } from "data/projects";
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext, useLayoutEffect } from "react";
+import { useParams, useNavigate, UNSAFE_NavigationContext } from "react-router-dom";
 import Lightbox from "react-image-lightbox";
 import 'react-image-lightbox/style.css';
+import { useTitle } from "tools/useTitle";
 
 const Project = props => {
   
   const {projId} = useParams();
   const navigate = useNavigate();
+  const navigation = useContext(UNSAFE_NavigationContext).navigator;
   const data = projects.find(p => p.slug === projId)?.data;
   const testImage = false;
   const testImageUri = "/images/projects/test.png";
@@ -16,9 +18,20 @@ const Project = props => {
   const [animReady, setAnimReady] = useState(false);
   const [currImage, setCurrImage] = useState();
   const imageUri = `/images/projects/${data.slug}/`;
+  useTitle(data.title)
+  
+  useLayoutEffect(() => {
+    if (navigation) {
+      navigation.listen((locationListener) => {
+        if (locationListener.action === "POP") {
+          document.body.style.overflowY = "auto";
+        }
+      });
+    }
+  }, [navigation]);
   
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflowY = "hidden";
     
     let root = document.documentElement;
     root.style.setProperty('--colour-proj-main', data.colours[0]);
@@ -43,7 +56,7 @@ const Project = props => {
   
   const handleBack = () => {
     //close popup
-    document.body.style.overflow = "auto";
+    document.body.style.overflowY = "auto";
     navigate(-1);
   }
   
@@ -147,8 +160,15 @@ const Project = props => {
                 )}
               </div>
               { (data.casestudy.imgs) && data.casestudy.imgs.map((img,i) =>
-                <ImageCont src={ testImage ? testImageUri : imageUri + img.name} alt={img.label} handleClick={() => setCurrImage(imageUri + img.name)} label={img.label} />
+                <ImageCont key={i} src={ testImage ? testImageUri : imageUri + img.name} alt={img.label} handleClick={() => setCurrImage(imageUri + img.name)} label={img.label} />
               )}
+              { data.casestudy.prototype && <div className="iframe-cont item-list">
+                <h3>Interactive Prototype</h3>
+                <iframe
+                  src={data.casestudy.prototype}
+                  allowFullScreen
+                />
+              </div>}
             </section>
             
             <section className="item-list">

@@ -166,7 +166,8 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
       litSoFar.push(c.regionId);
       let _el = document.getElementById(c.regionId);
       if (_el) {
-        _el.style.fill = colours.main;
+        
+        _el.style.fill = (c.regionId !== "FJ") && colours.main;
         // _el.style.stroke = "var(--colour-darkgrey)";
         _el.dataset.active = true;
         _el.dataset.hover = true;
@@ -188,9 +189,11 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
             _left = _elVals.x + (_elVals.width - 10);
           }
           
+          let mod = (c.regionId === "FJ" ? 30 : 0)
+          
           _elPos.push({
             left: _left,
-            top: countryCountAll === 1 ? _elVals.y + (_elVals.height / 2) : ((countryCount === 1) ? _elVals.y + (_elVals.height / 2) + 30 : _elVals.y + (_elVals.height / 2)),
+            top: countryCountAll === 1 ? _elVals.y + (_elVals.height / 2) - mod : ((countryCount === 1) ? _elVals.y + (_elVals.height / 2) + 30 : _elVals.y + (_elVals.height / 2)),
             regionId:c.regionId,
             id:c.id, 
             el:_el

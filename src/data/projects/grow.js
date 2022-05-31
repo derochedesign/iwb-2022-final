@@ -127,7 +127,8 @@ export const grow = {
         name:"case-image4.jpg",
         label: "Urban agriculture action plan (3)"
       }
-    ]
+    ],
+    prototype:null
   },
   sources:[
     {

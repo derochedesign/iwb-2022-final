@@ -11,8 +11,8 @@ import Team from "./Team";
 import Footer from "./Footer";
 import Principles from "components/Principles";
 import ProjectsIntro from "./ProjectsIntro";
-import SecondSequence from "./SecondSequence";
 import ProjectsSequence from "./ProjectsSequence";
+import OtherProjectsSequence from "./OtherProjectsSequence";
 
 const All = props => {
   
@@ -21,13 +21,15 @@ const All = props => {
   const introRef = useRef(null);
   const projectsRef = useRef(null);
   const prinRef = useRef(null);
+  const otherProjectsRef = useRef(null);
   
   const titles = [
     "increasing greenhouse gasses",
     "melting ice caps",
     "growing cities",
     "migrating populations",
-    "shaping resilient communities"
+    "shaping resilient communities",
+    "The change is occurring both within and around you."
   ];
   const [currIntroPos, setIntroCurrPos] = useState(0);
   const [sectionsPos, setSectionsPos] = useState([]);
@@ -137,7 +139,7 @@ const All = props => {
     <>
       <div className="main-wrapper">
         <SideProgress sectionsPos={sectionsPos} scrollTo={scrollTo} setScrollOffset={setScrollOffset}/>
-        <Landing secRef={introRef} titles={titles} currPos={currIntroPos}/>
+        <Landing secRef={introRef} titles={titles} currPos={currIntroPos} final={titles.length - 1 === currIntroPos}/>
         <div className="map" ref={mapRef}>
           <MainSequence 
             currPos={currMainPos} mainSeqStart={mainSeqStart} scrollDist={scrollDistMain} dimensions={props.screenDimension}
@@ -147,6 +149,9 @@ const All = props => {
         </div>
         <Principles dimensions={props.screenDimension} prinRef={prinRef}/>
         <ProjectsSequence seqStart={secondSeqStart} scrollDist={scrollDistSecond} dimensions={props.screenDimension} getScrollTop={getScrollTop} projectsRef={projectsRef} />
+        <div className="map">
+          <OtherProjectsSequence thisRef={otherProjectsRef} dimensions={props.screenDimension} />
+        </div>
         <Team />
         <Footer />
       </div>

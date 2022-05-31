@@ -10,6 +10,8 @@ import ConnectionCard from "components/ConnectionCard";
 import { otherProjects } from "data/otherProjects";
 import OtherProjectCard from "components/OtherProjectCard";
 import Principles from "components/Principles";
+import DefinitionCard from "components/DefinitionCard";
+import { definitions } from "data/definitions";
 
 const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimensions, setReadyForSetSections, readyForSetSections, setSectionsPos, scrollToStart, setScrollDistMain}) => {
   
@@ -64,6 +66,13 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
   const [lockMap, setLockMap] = useState(true);
   const [hoverPos, setHoverPos] = useState({x:null, y:null});
   const [countryClicked, setCountryClicked] = useState();
+  
+  //for def cards
+  const [currDefinition, setCurrDefinition] = useState();
+  
+  const [defLeft, setDefLeft] = useState(0);
+  const [defTop, setDefTop] = useState(0);
+  const [defWidth, setDefWidth] = useState(0);
   
   //map specific data
   const [currDisaster, setCurrDisaster] = useState();
@@ -201,6 +210,7 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
     else if (currSeq === 1) {
       //map one (0)
       setLockMap(false);
+      setCurrTitleText(mainCopy.introduction.title);
     }
     else if (currSeq === 2) {
       setLockMap(true);
@@ -236,6 +246,27 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
     }
   }, [currSeq]);
   
+  const handleDefHover = (e) => {
+    console.log(e.target.dataset.def);
+    let id = e.target.dataset.def;
+    let def = definitions.find(d => d.id === Number(id));
+    console.log(def);
+    if (def) {
+      console.log(def);
+      let elVals = e.target.getBoundingClientRect();
+      setCurrDefinition(def);
+      setDefLeft(elVals.x + elVals.width);
+      setDefTop(elVals.y);
+      setDefWidth(elVals.width);
+    }
+    else {
+      setCurrDefinition();
+    }
+  }
+  const handleDefHoverEnd = () => {
+    setCurrDefinition();
+  }
+  
   return (
     <section className="center-title center map-inner">
       {(currDisaster) && 
@@ -244,7 +275,9 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
       {(currConnection) && 
         <ConnectionCard data={currConnection} left={hoverPos.x} top={hoverPos.y} dimensions={dimensions}/>
       }
-      <h1 className="info-disp">S:{currSeq}/M:{currMap}</h1>
+      {(currDefinition) &&
+        <DefinitionCard data={currDefinition} left={defLeft} top={defTop} dimensions={dimensions} width={defWidth} />
+      }
       <ParallaxProvider>
         {/*TODO: When mobile, blow up the map, make it draggable, height 95*/}
         {(!projectSeqStart) && <WorldMap map={currMap} colours={mapColours[currMap]} setCountry={setCountry} lock={lockMap} preLit={mapPreLit[currMap]} targets={currMap === 0} zoom={mapZoom[currSeq]} connections={currMap === 2} setHoverPos={setHoverPos} setCountryClicked={setCountryClicked} />}
@@ -252,8 +285,8 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
           <Parallax className="inherit" speed={2} startScroll={beginScroll} endScroll={beginScroll + scrollDist}>
             <Parallax className="inherit" opacity={[0,1]} startScroll={beginScroll + ( currSeq === 6 ? getAbsolute(totalSeqSix) : 0)} endScroll={beginScroll + ( currSeq === 6 ? getAbsolute(totalSeqSix) : 0) + fadeInLength}>
               <div className="center-title-inner item-list large">
-                <h2>{currTitleText}</h2>
-                <h3>{currBodyText}</h3>
+                <h2 onMouseOver={handleDefHover} onMouseLeave={handleDefHoverEnd}>{currTitleText}</h2>
+                <h3 onMouseOver={handleDefHover} onMouseLeave={handleDefHoverEnd}>{currBodyText}</h3>
               </div>
             </Parallax>
           </Parallax>

@@ -10,23 +10,32 @@ import zan from "img/team/zan.jpg";
 
 const Team = props => {
   
-  const allTeam = [
-    {img:daksh, name:"daksh gandhi", title:"Bachelor of Architecture", link:"https://linkedin.com/in/dakshgandhi"},
-    {img:jenna, name:"jenna rose storey", title:"Bachelor of Fine Arts, Integrated Media, & Furniture Designer", link:""},
-    {img:migs, name:"joaquin (migs) topacio", title:"Bachelor of Science in Industrial Design", link:""},
-    {img:jp, name:"josé pablo (jp) carrillo", title:"Bachelor of Visual Communication, Brand Strategist, & Packaging Designer", link:""},
-    {img:rebecca, name:"rebecca arshawsky", title:"Honours Bachelor of Arts, Architecture, & Human Geography", link:"https://linkedin.com/in/rebecca-arshawsky-6639b1176"},
-    {img:shashank, name:"shashank banawalikar", title:"Bachelor of Architecture", link:"https://linkedin.com/in/shashank-banawalikar-5b7689223"},
-    {img:zan, name:"zan ding", title:"Bachelor of Science in Agricultural & Environmental Sciences", link:"https://linkedin.com/in/zan-ding-b18187218"},
+  const allTeamRowOne = [
+    {img:daksh, name:"daksh gandhi", title:["Architect", "Design Strategist"], link:"https://www.linkedin.com/in/dakshgandhi/"},
+    {img:jenna, name:"jenna rose storey", title:["Artist", "UX Researcher"], link:"https://www.linkedin.com/in/jennarosestorey/"},
+    {img:migs, name:"joaquin (migs) topacio", title:["Industrial Designer", "Service Designer"], link:"https://www.linkedin.com/in/miguel-topacio/"},
+    {img:jp, name:"josé pablo (jp) carrillo", title:["Brand & Packaging Designer", "Design Strategist"], link:"https://www.linkedin.com/in/jp-carrillo-artigas-a96861232/"},
+  ];
+  const allTeamRowTwo = [
+    {img:rebecca, name:"rebecca arshawsky", title:["Urban Researcher", "Service Designer"], link:"https://www.linkedin.com/in/rebecca-arshawsky-6639b1176/"},
+    {img:shashank, name:"shashank banawalikar", title:["Artist, Architect, Film", "Film Maker & Comedian"], link:"https://www.linkedin.com/in/shashank-banawalikar-5b7689223/"},
+    {img:zan, name:"zan ding", title:["Life Scientist", "Design Researcher"], link:"https://www.linkedin.com/in/zan-ding-b18187218/"},
   ];
   
   return(
-    <section className="team item-list">
-      <h1>IDS '22 Research Team</h1>
+    <section className="team item-list-med">
+      <h2>IDS '22 RESEARCH TEAM</h2>
     <div className="team-set">
-      {allTeam.map((t,i) => 
-        <TeamCard key={i} img={t.img} name={t.name} title={t.title} link={t.link} setImgLoaded={props.setImgLoaded} imgsCount={allTeam.length}/>
-      )}
+      <div className="team-row">
+        {allTeamRowOne.map((t,i) => 
+          <TeamCard key={i} img={t.img} name={t.name} title={t.title} link={t.link} setImgLoaded={props.setImgLoaded} imgsCount={allTeamRowOne.length}/>
+        )}
+      </div>
+      <div className="team-row">
+        {allTeamRowTwo.map((t,i) => 
+          <TeamCard key={i} img={t.img} name={t.name} title={t.title} link={t.link} setImgLoaded={props.setImgLoaded} imgsCount={allTeamRowTwo.length}/>
+        )}
+      </div>
     </div>
     </section>
   )
@@ -50,7 +59,10 @@ const TeamCard = props => {
       <a href={props.link} target="_blank" rel="noopener" data-pointer>
         <h4 className="name" data-pointer>{props.name}</h4>
       </a>
-      <p className="title small">{props.title}</p>
+      {props.title.map((t,i) =>
+        <p key={i} className="title small">{t}</p>
+      )}
+      
     </div>
   )
 }

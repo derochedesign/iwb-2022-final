@@ -13,25 +13,26 @@ const ProjectsSequence = ({seqStart, scrollDist, dimensions, projectsRef, getScr
   const [prevMap, setPrevMap] = useState();
   const [beginScroll, setBeginScroll] = useState(window.scrollY);
   const [currData, setCurrData] = useState([]);
+  const [fadeOut, setFadeOut] = useState(false);
   const [refTop, setRefTop] = useState(30000);
   const [mapLocations, setMapLocations] = useState([]);
-  const {ref: projRef, inView: startInView} = useInView();
-  const {ref: projOneRef, inView: oneInView} = useInView({threshold:0.5});
-  const {ref: projTwoRef, inView: twoInView} = useInView({threshold:0.5});
-  const {ref: projThreeRef, inView: threeInView} = useInView({threshold:0.5});
-  const [wasInView, setWasInView] = useState(false);
   
   const mapRef = useRef(null);
   
   const mapData = ["MXp", "CAp", "PHp"];
   const mapScales = [4,2.5,6];
   
+  const {ref: projRef, inView: startInView} = useInView();
+  const {ref: initRef, inView: initInView} = useInView();
+  const {ref: projOneRef, inView: oneInView} = useInView({threshold:0.5});
+  const {ref: projTwoRef, inView: twoInView} = useInView({threshold:0.5});
+  const {ref: projThreeRef, inView: threeInView} = useInView({threshold:0.5});
+  const [wasInView, setWasInView] = useState(false);
+  
   const litMap = map => {
     //light map based on map data
-    console.log(map);
     if (map === -1) {
       if (prevMap) {
-        console.log(prevMap);
         let el = document.getElementById(prevMap)
         if (el) el.style.fill = "unset";
         mapRef.current.style.transform = "unset";
@@ -41,10 +42,7 @@ const ProjectsSequence = ({seqStart, scrollDist, dimensions, projectsRef, getScr
     }
     let currMap = mapData[map];
     const el = document.getElementById(mapData[map]);
-    console.log("prev: ",prevMap);
-    console.log("curr: ",currMap);
     if (prevMap && prevMap !== currMap) {
-      console.log(prevMap);
       document.getElementById(prevMap).style.fill = "unset";
       setPrevMap(currMap);
     }
@@ -70,7 +68,7 @@ const ProjectsSequence = ({seqStart, scrollDist, dimensions, projectsRef, getScr
   }
   
   useEffect(() => {
-    if (startInView && !wasInView) {
+    if (startInView) {
       setBeginScroll(window.scrollY);
       setRefTop(window.scrollY+500);
       // setWasInView(true);
@@ -94,16 +92,32 @@ const ProjectsSequence = ({seqStart, scrollDist, dimensions, projectsRef, getScr
     else if (twoInView && !threeInView) {
       _currSeq = 2;
       _currMap = 1;
+      mapRef.current.style.transition = "transform 1s ease";
     }
     else if (threeInView) {
       _currSeq = 3;
       _currMap = 2;
+      mapRef.current.style.transition = "transform 1s ease, opacity 0.5s ease";
+      setFadeOut(false);
+    }
+    else if (!initInView && !oneInView && !twoInView && !threeInView) {
+      _currSeq = 4;
     }
     mapRef?.current && litMap(_currMap);
+    
+    if (_currSeq > currSeq) {
+      //moving down
+      if (!threeInView && currSeq === 3) {
+        setFadeOut(true);
+      }
+    }
+    else {
+      //moving up
+    }
     setCurrSeq(_currSeq);
     setCurrMap(_currMap);
     
-  }, [oneInView, twoInView, threeInView]);
+  }, [initInView, oneInView, twoInView, threeInView]);
   
   useEffect(() => {
     
@@ -118,8 +132,8 @@ const ProjectsSequence = ({seqStart, scrollDist, dimensions, projectsRef, getScr
     <section ref={projRef} className="center-title projects-preview">
       <div ref={projectsRef} className="center-title-inner">
       {(startInView) && 
-        <Parallax opacity={[0,1]} startScroll={refTop} endScroll={refTop + 300} className="map no-interact fixed-map">
-          <div ref={mapRef} className="map no-interact fixed-map">
+        <Parallax opacity={[0,1]} startScroll={refTop} endScroll={refTop+300} className="map fixed-map">
+          <div ref={mapRef} className={`map no-interact fixed-map ${fadeOut ? "inactive" : ""}`}>
             <div className="actual-map">
               <TheWorldMapProjects />
             </div>
@@ -127,6 +141,7 @@ const ProjectsSequence = ({seqStart, scrollDist, dimensions, projectsRef, getScr
         </Parallax>
       }
       <ProjectsIntro />
+      <div ref={initRef} className="i-o-check"/>
       {(projects.map((p,i) => 
         <section key={i} ref={i === 0 ? projOneRef : (i === 2 ? projThreeRef : projTwoRef)} className="preview" data-active={i === 0 ? oneInView : (i === 2 ? threeInView : twoInView)}>
           <div className="item-list">
@@ -163,10 +178,10 @@ const ProjectsSequence = ({seqStart, scrollDist, dimensions, projectsRef, getScr
                 <div className="item-row center">
                   {s.icon()}
                   <div className="item-list-small stats-display">
-                  {s.value.map((v,iii) =>
-                    (<>
-                      {(iii === 0 && (v.length < 5) ) ? <h2 key={iii}>{v}</h2> : <h6 key={iii}>{v}</h6>}
-                    </>)
+                  {s.value.map((v,j) =>
+                    <span key={j}>
+                      {(j === 0 && (v.length < 5) ) ? <h2>{v}</h2> : <h6>{v}</h6>}
+                    </span>
                   )}
                   </div>
                 </div>
@@ -175,9 +190,7 @@ const ProjectsSequence = ({seqStart, scrollDist, dimensions, projectsRef, getScr
             )}
           </div>
         </section>
-      ))
-        
-      }
+      ))}
       </div>
     </section>
     </ParallaxProvider>

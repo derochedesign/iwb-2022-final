@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { isMobile } from "react-device-detect";
 import { ArrowHeadIcon } from "./Icons";
 
@@ -15,27 +15,26 @@ const OtherProjectCard = props => {
 
   const definePosition = () => {
     let _left = props.left;
-    let _top = props.top;
+    let _top = props.dimensions.height / 2 - cardRef.current.offsetHeight / 2;
     
     if (cardRef.current.offsetWidth + props.left > props.dimensions.width - leftOffsetAllowed) {
       let el = document.getElementById(props.data[0].regionId);
       _left = props.left - el.getBoundingClientRect().width - cardRef.current.offsetWidth;
     }
-
-    if (cardRef.current.offsetHeight + props.top > props.dimensions.height - topOffsetAllowed) {
-      _top = props.dimensions.height / 2 - cardRef.current.offsetHeight / 2;
-    }
     setLeft(_left);
     setTop(_top);
-  }
-  
-  const handleExit = () => {
-    props.setCountryClicked("");
   }
   
   const handleProject = ind => {
     setCurrProject(props.data[ind]);
   }
+  
+  useEffect(() => {
+    if (!currProject) {
+      definePosition();
+    }
+  },[currProject])
+  
 
   useEffect(() => {
     definePosition();
@@ -44,18 +43,27 @@ const OtherProjectCard = props => {
   useEffect(() => {
     setAnim(true);
     definePosition();
+    document.body.style.overflowY = "hidden";
+    if (props.data.length === 1) {
+      handleProject(0);
+    }
+  }, []);
+  
+  useEffect(() => () => {
+    document.body.style.overflowY = "auto";
   }, []);
 
 
   return (
-    <div ref={cardRef} className="card list" data-active={anim} style={{ left: left, top: top-5 }}>
-      {currProject && <InnerCard data={currProject} setCurrProject={setCurrProject} handleExit={handleExit} set />}
+    <div ref={cardRef} className={`card wide ${!currProject ? "list" : ""}`} data-active={anim} style={{ left: left, top: top-5 }}>
+      {currProject && <InnerCard solo={props.data.length === 1} updatePos={definePosition} data={currProject} setCurrProject={setCurrProject} handleExit={() => props.closeCard()} set />}
       {!currProject &&
+        <>
         <div className="body">
           <ul style={{gridTemplateRows: `repeat(${props.data.length}, 1fr)`}}>
             {(props.data.map((d,i) => 
               <li key={i}>
-                <button className="project-list-item right-item-layout" 
+                <button data-pointer className="project-list-item right-item-layout" 
                   onClick={() => handleProject(i)}
                 > 
                   <div className="item-list-small">
@@ -71,7 +79,10 @@ const OtherProjectCard = props => {
               </li>
             ))}
           </ul>
+          
         </div>
+        <button data-pointer className="abs" onClick={() => props.closeCard()}><h3>&#10005;</h3></button>
+        </>
       }
     </div>
   )
@@ -83,24 +94,44 @@ const InnerCard = props => {
     props.setCurrProject(null);
   }
   
+  useEffect(() => {
+    props.updatePos();
+    setTimeout(() => {
+      props.updatePos();
+    },100);
+  }, []);
+  
   return (
     <>
-      <div className="hero-image" onClick={props.handleExit}>
+      <div className="hero-image">
         <img src={`/images/otherProjects/${props.data.id}/image.jpg`} alt={props.data.title} />
       </div>
-      <div className="header-bar item-row">
+      <div className="title-bar item-list-small">
+        <h3>{props.data.title}</h3>
+        <div className="item-row">
+          <p>{props.data.location}</p>
+          <p> | </p>
+          <p>{props.data.year}</p>
+        </div>
+      </div>
+      <div className="header-bar item-row wrap">
         {props.data.principles.map(p =>
-          <p key={p.id}>{p.name}</p>
+          <div title={p.name} key={p.id}>
+            {p.icon(false)}
+          </div>
         )}
       </div>
-      <div className="body item-list-small">
-        <button className="text" onClick={handleBack}>Back</button>
+      <div className="body item-list">
         <p>{props.data.body[0]}</p>
-        {/* TODO: actually close card when clicking on Close*/}
-        {/* FIXME: For now, this trivially works because tapping anywhere closes the card */}
-        {isMobile &&
-          <button style={{ backgroundColor: 'black' }}>Close</button>
-        }
+        <a className="text" href={props.data.link} target="_blank" rel="noopener">Learn More</a>
+        {!props.solo
+        ?
+        <div className="button-row">
+          <button onClick={handleBack}>&#8592; Back</button>
+          <button className="secondary" onClick={props.handleExit}><h3>&#10005;</h3></button>
+        </div>
+        :
+        <button className="secondary" onClick={props.handleExit}><h3>&#10005;</h3></button> }
       </div>
     </>
   )

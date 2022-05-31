@@ -114,7 +114,8 @@ export const heal = {
         name:"case-image2.jpg",
         label: "Prototypical service design in action - floor plans of CARE4U tents"
       }
-    ]
+    ],
+    prototype:"https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FxJllGiBoT8IsyTtdWprLi2%2FCare4U%3Fnode-id%3D94%253A1708%26source%3Demail_invite%26starting-point-node-id%3D94%253A1708%26scaling%3Dscale-down"
   },
   sources:[
     {
