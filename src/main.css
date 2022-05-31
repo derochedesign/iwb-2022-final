@@ -636,7 +636,7 @@ footer {
   opacity: 0;
   transform: scale(0.7);
   transition: opacity 0.4s ease, transform 0.4s ease;
-  height: fit-content;
+  height: auto;
   max-height: 95vh;
   overflow-y: auto;
 }
