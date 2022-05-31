@@ -12,6 +12,7 @@ import OtherProjectCard from "components/OtherProjectCard";
 import Principles from "components/Principles";
 import DefinitionCard from "components/DefinitionCard";
 import { definitions } from "data/definitions";
+import { isMobile } from "react-device-detect";
 
 const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimensions, setReadyForSetSections, readyForSetSections, setSectionsPos, scrollToStart, setScrollDistMain}) => {
   
@@ -255,8 +256,10 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
       console.log(def);
       let elVals = e.target.getBoundingClientRect();
       setCurrDefinition(def);
+      
       setDefLeft(elVals.x + elVals.width);
       setDefTop(elVals.y);
+      
       setDefWidth(elVals.width);
     }
     else {

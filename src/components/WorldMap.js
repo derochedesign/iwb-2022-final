@@ -22,7 +22,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   
   const handleHover = e => {
     // Do nothing if on mobile
-    if (isMobile) return;
+    //if (isMobile) return;
 
     let code = e.target.id;
     if (code !== currCountry) {
@@ -70,7 +70,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
 
   const handleHoverMarker = e => {
     // Do nothing if on mobile
-    if (isMobile) return;
+    //if (isMobile) return;
 
     let code = e.currentTarget.dataset.country;
     let uID = e.currentTarget.dataset.uid;
@@ -271,8 +271,7 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
   // TODO: Wrap map in Draggable
   return(
     <>
-      {!isMobile 
-        ? <Parallax className="actual-map-outer" 
+      <Parallax className="actual-map-outer" 
           scale={[zoom?.startVal || 1, zoom?.endVal || 1]} 
           translateX={[zoom?.startValTrans || 0, zoom?.endValTrans || 0]}
           startScroll={zoom?.start || 0} endScroll={zoom?.end || 0}
@@ -296,24 +295,6 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
             </div>
           )}
         </Parallax>
-         : <Draggable axis="x">
-          <div className="mobile-map-div" >
-            <Map />
-            {targets && !lock && targetsPos.map((t,i) => 
-              <div className="marker" data-active={markerAnim} data-hover 
-                role="button" onMouseEnter={handleHoverMarker} 
-                onMouseLeave={() => setCountry && setCountry({regionId:null,id: null})} 
-                onClick={handleTapMarker}
-                data-country={t.regionId} data-uid={t.id} key={i}
-                style={{left: t.left, top: t.top}}
-              >
-                <MarkerIcon hover/>
-                {/* {(t.regionId === "US") && <DisasterCard data={disasters[0]} />} */}
-              </div>
-            )}
-          </div>
-          </Draggable>
-      }
     </>
   )
 }

@@ -52,7 +52,7 @@ const ConnectionCard = props => {
         {/* TODO: actually close card when clicking on Close*/}
         {/* FIXME: For now, this trivially works because tapping anywhere closes the card */}
         { isMobile &&
-          <button style={{backgroundColor:'black'}}>Close</button>
+          <button><h3>&#10005;</h3></button>
         }
       </div>
     </div>

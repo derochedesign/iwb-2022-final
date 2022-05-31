@@ -12,14 +12,20 @@ const DefinitionCard = props => {
   const topOffsetAllowed = 24;
   
   const definePosition = () => {
-    if (cardRef.current.offsetWidth + props.left > (props.dimensions?.width || document.body.offsetWidth) - leftOffsetAllowed) {
-      setLeft(props.left - (props.width * 2.5));
-    }
-    if (cardRef.current.offsetHeight + (props.top - cardRef.current.offsetHeight/2) > (props.dimensions?.height || document.body.offsetHeight) - topOffsetAllowed) {
-      setTop((props.dimensions?.height || document.body.offsetHeight)/2 - cardRef.current.offsetHeight/2);
+    if (!isMobile) {
+      if (cardRef.current.offsetWidth + props.left > (props.dimensions?.width || document.body.offsetWidth) - leftOffsetAllowed) {
+        setLeft(props.left - (props.width * 2.5));
+      }
+      if (cardRef.current.offsetHeight + (props.top - cardRef.current.offsetHeight/2) > (props.dimensions?.width || document.body.offsetWidth) - topOffsetAllowed) {
+        setTop((props.dimensions?.height || document.body.offsetHeight)/2 - cardRef.current.offsetHeight/2);
+      }
+      else {
+        setTop(props.top - cardRef.current.offsetHeight/2)
+      }
     }
     else {
-      setTop(props.top - cardRef.current.offsetHeight/2)
+      setLeft("unset");
+      setTop("unset")
     }
   }
   
@@ -36,12 +42,12 @@ const DefinitionCard = props => {
   
 
   return (
-    <div ref={cardRef} className="tooltip solid light" data-active={anim} style={{left:left, top:top}}>
+    <div ref={cardRef} className="tooltip solid light" data-active={anim} style={isMobile ? {transform:"translateX(-50%) translateY(-50%)",left:left, top:top} : {left:left, top:top} }>
       <div className="body item-list">
         <img src={props.data.img} alt="definition" />
         <p>{props.data.body}</p>
         { isMobile &&
-          <button style={{backgroundColor:'black'}}>Close</button>
+          <button><h3>&#10005;</h3></button>
         }
       </div>
     </div>

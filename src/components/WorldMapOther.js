@@ -207,7 +207,7 @@ const WorldMapOther = ({setCountry, preLit, targets, colours, setHoverPos, setCo
     <>
       <div ref={mapContRef} className="actual-map-outer" >
         <div className="actual-map" onMouseOver={handleHover}
-          onClick={!isMobile ? handleClick : handleTap} 
+          onClick={handleClick} 
           data-active={true}
         >
           <Map/>

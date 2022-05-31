@@ -17,9 +17,15 @@ const OtherProjectCard = props => {
     let _left = props.left;
     let _top = props.dimensions.height / 2 - cardRef.current.offsetHeight / 2;
     
-    if (cardRef.current.offsetWidth + props.left > (props.dimensions?.width || document.body.offsetWidth) - leftOffsetAllowed) {
-      let el = document.getElementById(props.data[0].regionId);
-      _left = props.left - el.getBoundingClientRect().width - cardRef.current.offsetWidth;
+    if (!isMobile) {
+      if (cardRef.current.offsetWidth + props.left > (props.dimensions?.width || document.body.offsetWidth) - leftOffsetAllowed) {
+        let el = document.getElementById(props.data[0].regionId);
+        _left = props.left - el.getBoundingClientRect().width - cardRef.current.offsetWidth;
+      }
+    }
+    else {
+      _left = "unset";
+      _top = "unset";
     }
     setLeft(_left);
     setTop(_top);
@@ -55,7 +61,7 @@ const OtherProjectCard = props => {
 
 
   return (
-    <div ref={cardRef} className={`card wide ${!currProject ? "list" : ""}`} data-active={anim} style={{ left: left, top: top-5 }}>
+    <div ref={cardRef} className={`card wide ${!currProject ? "list" : ""}`} data-active={anim} style={isMobile ? {transform:"translateX(-50%) translateY(-50%)",left:left, top:top} : {left:left, top:top} }>
       {currProject && <InnerCard solo={props.data.length === 1} updatePos={definePosition} data={currProject} setCurrProject={setCurrProject} handleExit={() => props.closeCard()} set />}
       {!currProject &&
         <>

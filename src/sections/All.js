@@ -13,6 +13,7 @@ import Principles from "components/Principles";
 import ProjectsIntro from "./ProjectsIntro";
 import ProjectsSequence from "./ProjectsSequence";
 import OtherProjectsSequence from "./OtherProjectsSequence";
+import { isMobile } from "react-device-detect";
 
 const All = props => {
   
@@ -92,6 +93,8 @@ const All = props => {
   
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    
+    isMobile && ScrollTrigger.config({autoRefreshEvents: "DOMContentLoaded,load,visibilitychange"});
     
     if (introRef.current && mapRef.current) {
       

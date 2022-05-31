@@ -789,6 +789,10 @@ footer {
 .card.list button.abs:hover > * {
   color: var(--colour-body);
 }
+.card button, .tooltip button {
+  background-color: var(--colour-lightgrey);
+  color: var(--colour-white);
+}
 .card.list .body ul {
   padding-bottom: calc( var(--padding) * 2.5);
 }
@@ -989,6 +993,12 @@ footer {
   max-width: 70em;
   margin: 0 auto;
   padding-top: 8em;
+}
+
+.project-pop button{
+  /* border-radius: unset; */
+  background-color: rgba(255,255,255,0.6);
+  box-shadow: 0 0 10px 8px rgba(255,255,255,0.6);
 }
 
 .project-pop h1, 
@@ -1398,6 +1408,18 @@ footer {
     transform: translateX(-50%) translateY(-50%);
     pointer-events: none;
   }
+  
+  .img-info-list {
+    grid-template-columns: unset;
+  }
+  .img-info-list svg {
+    height: unset;
+    width: 5em;
+  }
+  
+  .project-pop .three-col {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media screen and (max-width: 52em) {
@@ -1426,6 +1448,9 @@ footer {
   .center-title .three-col {
     grid-template-columns: unset;
   }
+  .project-pop .three-col {
+    grid-template-columns: unset;
+  }
   .project-intro-stack {
     grid-template-rows: max-content max-content max-content;
   }
@@ -1436,6 +1461,10 @@ footer {
   .center-title-inner {
     gap: calc(var(--padding) * 2);
   }
+  .project-inner .header svg {
+    width: 6em;
+  }
+  
 }
 
 @media screen and (max-width: 40em) {
