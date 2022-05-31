@@ -338,7 +338,8 @@ const WorldMap = ({map, setCountry, preLit, targets, lock, colours, zoom, connec
             </div>
           )}
           { isMobile && !lock && 
-            <div className="slider-container">
+            <div className="slider-container item-list-small">
+              <h5>Slide to explore map</h5>
               <Slider value={sliderValue} onChange={setSliderValue} max={mapWidth}/>
             </div>
           }

@@ -92,6 +92,16 @@ const All = props => {
   }, [props.screenDimension]);
   
   useEffect(() => {
+    console.log(sectionsPos);
+    if (sectionsPos.length === 6) {
+      let _s = [...sectionsPos];
+      _s.push(projectsRef.current.getBoundingClientRect().top + window.scrollY,
+      otherProjectsRef.current.getBoundingClientRect().top + window.scrollY);
+      setSectionsPos(_s);
+    }
+  }, [sectionsPos]);
+  
+  useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     
     isMobile && ScrollTrigger.config({autoRefreshEvents: "DOMContentLoaded,load,visibilitychange"});
