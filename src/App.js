@@ -5,10 +5,12 @@ import Cursor from 'components/Cursor';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import Project from 'sections/Project';
+import Interactive from 'sections/Interactive';
 
 function App() {
   
   const root = document.documentElement;
+  const [cursor, setCursor] = useState(true);
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
     width: document.body.clientWidth
@@ -50,11 +52,12 @@ function App() {
     <BrowserRouter>
       <div className='App'>
         { !isMobile &&
-          <Cursor dimensions={dimensions} />
+          <Cursor dimensions={dimensions} cursor={cursor} />
         }
         <Routes>
           <Route path="/" element={<All screenDimension={dimensions} />}>
             <Route path=":projId" element={<Project />} />
+            <Route path="exhibit" element={<Interactive setCursor={setCursor} />}/>
           </Route>
         </Routes>
       </div>

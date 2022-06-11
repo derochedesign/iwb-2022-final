@@ -13,21 +13,26 @@ const Cursor = (props) => {
       let offsetY = cursorRef.current.offsetHeight / 2 + 10;
       cursorRef.current.style.transform = `translate3d(${cursorX-offsetX}px,${cursorY-offsetY}px,0)`;
       
-      let isText = !!(["H1","H2","H3","H4","H5","H6","P","SPAN"].find(t => t === e.target.tagName));
-      
-      if (e.target.dataset.hover) {
-        cursorRef.current.dataset.hover=true;
-      }
-      else if (e.target.dataset.pointer) {
-        cursorRef.current.dataset.pointer=true;
-      }
-      else if (e.target.dataset.text || isText) {
-        cursorRef.current.dataset.text=true;
-      }
-      else {
-        cursorRef.current.dataset.pointer=false;
-        cursorRef.current.dataset.text=false;
-        cursorRef.current.dataset.hover=false;
+      //a bit of optimizing -- dont do all those checks for tagName unless it isnt div or section
+      if (e.target.tagName !== "DIV" && e.target.tagName !== "SECTION") {
+        console.log("CURSOR CHECK");
+        let isText = !!(["H1","H2","H3","H4","H5","H6","P","SPAN"].find(t => t === e.target.tagName));
+        let isBtn = !!(["BUTTON", "A"].find(t => t === e.target.tagName));
+        
+        if (e.target.dataset.hover) {
+          cursorRef.current.dataset.hover=true;
+        }
+        else if (e.target.dataset.pointer || isBtn) {
+          cursorRef.current.dataset.pointer=true;
+        }
+        else if (e.target.dataset.text || isText) {
+          cursorRef.current.dataset.text=true;
+        }
+        else {
+          cursorRef.current.dataset.pointer=false;
+          cursorRef.current.dataset.text=false;
+          cursorRef.current.dataset.hover=false;
+        }
       }
     }
 
@@ -39,9 +44,11 @@ const Cursor = (props) => {
   }, [props.dimensions])
 
   return (
-    <div className='cursor-area'>
-      <div ref={cursorRef} className='cursor' />
-    </div>
+    <>
+      {props.cursor && <div className='cursor-area'>
+        <div ref={cursorRef} className='cursor' />
+      </div>}
+    </>
   );
 };
 

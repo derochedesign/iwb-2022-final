@@ -512,7 +512,8 @@ footer {
   margin-right: 0;
 }
 
-.item-row.wrap {
+.item-row.wrap,
+.item-row-large.wrap {
   flex-wrap: wrap;
 }
 
@@ -549,6 +550,7 @@ footer {
 .item-row-med.center,
 .item-row-large.center {
   align-items: center;
+  text-align: left;
 }
 
 .item-list > button {
@@ -617,6 +619,10 @@ footer {
   padding-bottom: var(--gap);
 }
 
+footer .bottom-links > * {
+  margin-bottom: var(--gap);
+}
+
 /* ________________CARD__________________ */
 
 /* disaster */
@@ -637,7 +643,7 @@ footer {
   transform: scale(0.7);
   transition: opacity 0.4s ease, transform 0.4s ease;
   height: auto;
-  max-height: 95vh;
+  max-height: 90vh;
   overflow-y: auto;
 }
 
@@ -731,6 +737,7 @@ footer {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-color: var(--colour-darkgrey);
 }
 .card .hero-image img {
   object-fit: cover;
@@ -760,6 +767,7 @@ footer {
 .card .body .button-row > :first-child{
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  background-color: var(--colour-darkgrey);
 }
 .card .body .button-row > :last-child{
   border-top-left-radius: 0;
@@ -967,6 +975,7 @@ footer {
   z-index: var(--z-project);
   width: 100%;
   height: var(--real-vh);
+  height: 100vh;
   background-color: var(--colour-white);
   top: 0;
   left: 0;
@@ -1045,10 +1054,20 @@ footer {
   font-weight: var(--regular);
   font-style: italic;
 }
-.project-pop iframe {
+.project-pop .project-inner iframe {
   width: 100%;
   height: 90vh;
   border: none;
+}
+
+.interactive button {
+  position: fixed;
+  z-index: calc(var(--z-project) + 1);
+  top: var(--inner-padding);
+  right: var(--inner-padding);
+  box-shadow: unset;
+  background-color: unset;
+  color: var(--colour-white);
 }
 
 /* ________________PROJECT INNERS__________________ */
@@ -1360,6 +1379,9 @@ footer {
     background-color: unset;
     color: var(--colour-black);
   }
+  .interactive button:hover {
+    color: inherit;
+  }
   
   
   a.text:hover {
@@ -1438,7 +1460,7 @@ footer {
     left: 50% !important;
     top: 50% !important;
     transform: translateX(-50%) translateY(-50%);
-    pointer-events: none;
+    /* pointer-events: none; */
   }
   
   .img-info-list {

@@ -267,6 +267,15 @@ const MainSequence = ({currPos, mainSeqStart, projectSeqStart, scrollDist, dimen
     setCurrDefinition();
   }
   
+  useEffect(() => {
+    if (currDisaster || currConnection || currDefinition) {
+      document.body.style.overflowY = "hidden";
+    }
+    else {
+      document.body.style.overflowY = "auto";
+    }
+  }, [currDisaster, currConnection, currDefinition]);
+  
   return (
     <section className="center-title center map-inner">
       {(currDisaster) && 
